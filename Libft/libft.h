@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 20:30:49 by youjeong          #+#    #+#             */
-/*   Updated: 2022/12/21 15:56:18 by youjeong         ###   ########.fr       */
+/*   Updated: 2022/12/26 17:14:12 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # include <stddef.h>
+# include <stdlib.h>
 
 typedef struct s_list
 {

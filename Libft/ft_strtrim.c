@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/21 19:42:57 by youjeong          #+#    #+#             */
-/*   Updated: 2022/12/26 16:46:37 by youjeong         ###   ########.fr       */
+/*   Created: 2022/12/26 18:43:37 by youjeong          #+#    #+#             */
+/*   Updated: 2022/12/26 19:24:02 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t	destl;
+	size_t	start;
+	size_t	end;
 
-	destl = ft_strlen(dst);
-	if (destl >= dstsize)
-		return (ft_strlen(src) + dstsize);
-	while (*dst)
-		dst++;
-	while (destl < dstsize - 1 && *src)
+	start = 0;
+	end = ft_strlen(s1);
+	if (end == 0)
+		return (ft_strdup(s1));
+	end--;
+	while ((s1[start]) && (ft_strchr(set, s1[start]) != 0))
+		start++;
+	while (ft_strchr(set, s1[end]) != 0)
 	{
-		*dst = *src;
-		dst++;
-		src++;
-		dstsize--;
+		end--;
+		if (start > end)
+			return (ft_strdup(""));
 	}
-	*dst = '\0';
-	return (destl + ft_strlen(src));
+	if (start <= end)
+		return (ft_substr(s1, start, end - start + 1));
+	else
+		return (ft_strdup(""));
 }
