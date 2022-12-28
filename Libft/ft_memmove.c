@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 21:33:54 by youjeong          #+#    #+#             */
-/*   Updated: 2022/12/26 16:46:41 by youjeong         ###   ########.fr       */
+/*   Updated: 2022/12/28 20:18:23 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	char		*tmp;
 	const char	*s;
 
+	if (dst == 0 && src == 0)
+		return (0);
 	if (dst <= src)
 	{
 		tmp = dst;
