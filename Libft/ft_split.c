@@ -6,29 +6,29 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 22:51:28 by youjeong          #+#    #+#             */
-/*   Updated: 2022/12/28 16:34:34 by youjeong         ###   ########.fr       */
+/*   Updated: 2022/12/28 17:09:02 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
 
-static int	str_cnt(char *str, char charset)
+static int	string_cnt(const char *s, char c)
 {
 	int		str_cnt;
 	char	*p;
 
 	str_cnt = 0;
-	p = (char *)str;
+	p = (char *)s;
 	while (*p)
 	{
-		if (*p == charset)
+		if (*p == c)
 		{
-			while ((*p == charset) && (*p))
+			while ((*p == c) && (*p))
 				p++;
 		}
 		else
 		{
-			while ((*p != charset) && (*p))
+			while ((*p != c) && (*p))
 				p++;
 			str_cnt++;
 		}
@@ -36,7 +36,7 @@ static int	str_cnt(char *str, char charset)
 	return (str_cnt);
 }
 
-static int	mk_strs(char const *str, char charset, char **p, int str_cnt)
+static int	mk_strs(char const *s, char c, char **p, int str_cnt)
 {
 	int	i;
 	int	j;
@@ -46,12 +46,12 @@ static int	mk_strs(char const *str, char charset, char **p, int str_cnt)
 	j = 0;
 	while (i < str_cnt)
 	{
-		while (str[j] == charset && str[j])
+		while ((s[j] == c) && s[j])
 			j++;
 		start = j;
-		while (str[j] != charset && str[j])
+		while ((s[j] != c) && s[j])
 			j++;
-		p[i] = ft_substr(str, start, j - start);
+		p[i] = ft_substr(s, start, j - start);
 		if (p[i] == 0)
 		{
 			j = 0;
@@ -65,16 +65,16 @@ static int	mk_strs(char const *str, char charset, char **p, int str_cnt)
 	return (1);
 }
 
-char	**ft_split(char *str, char *charset)
+char	**ft_split(char const *s, char c)
 {
 	int		str_cnt;
 	char	**res;
 
-	str_cnt = get_strcnt(str, charset);
+	str_cnt = string_cnt(s, c);
 	res = (char **)malloc((str_cnt + 1) * sizeof(char *));
 	if (res == 0)
 		return (0);
-	if (mk_strs(str, charset, res, str_cnt) == 0)
+	if (mk_strs(s, c, res, str_cnt) == 0)
 		return (0);
 	res[str_cnt] = 0;
 	return (res);
