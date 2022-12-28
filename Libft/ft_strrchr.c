@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 20:43:46 by youjeong          #+#    #+#             */
-/*   Updated: 2022/12/28 18:11:10 by youjeong         ###   ########.fr       */
+/*   Updated: 2022/12/28 22:18:05 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strrchr(const char *s, int c)
 	ps = s + ft_strlen(s);
 	while (ps >= s)
 	{
-		if (*ps == c)
+		if (*ps == (char)c)
 			return ((char *)ps);
 		ps--;
 	}

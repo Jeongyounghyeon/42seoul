@@ -6,7 +6,7 @@
 #    By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/21 14:11:47 by youjeong          #+#    #+#              #
-#    Updated: 2022/12/26 15:57:47 by youjeong         ###   ########.fr        #
+#    Updated: 2022/12/28 23:52:05 by youjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,18 +59,18 @@ SRCS_BONUS = ft_lstnew.c \
 			ft_lstiter.c \
 			ft_lstmap.c
 OBJS = ${SRCS:.c=.o}
-OBJS_BONUS = ${BONUS_SRCS:.c=.o}
+OBJS_BONUS = ${SRCS_BONUS:.c=.o}
 INCS = libft.h
 
 ifdef INPUT_BONUS
-	OBJS_FILES = ${OBJS} ${BONUS_OBJS}
+	OBJS_FILES = ${OBJS} ${OBJS_BONUS}
 else
 	OBJS_FILES = ${OBJS}
 endif
 
 all : $(NAME)
 
-$(NAME) : $(OBJS)
+$(NAME) : $(OBJS_FILES)
 	ar -rcus $@ $^
 
 %.o: %.c
@@ -80,7 +80,7 @@ bonus:
 	make INPUT_BONUS=1 all
 
 clean:
-	rm -f $(OBJS) $(BONUS_OBJS)
+	rm -f $(OBJS) $(OBJS_BONUS)
 
 fclean: clean
 	rm -f $(NAME)
