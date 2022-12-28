@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 22:07:21 by youjeong          #+#    #+#             */
-/*   Updated: 2022/12/26 16:46:36 by youjeong         ###   ########.fr       */
+/*   Updated: 2022/12/28 16:33:30 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 		i++;
 	}
 	if (dstsize > 0)
-		dst[i] = '\0';
+		dst[i] = 0;
 	return (srcsize);
 }

@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/12 16:23:25 by youjeong          #+#    #+#             */
-/*   Updated: 2022/12/28 16:32:18 by youjeong         ###   ########.fr       */
+/*   Created: 2022/12/27 18:58:05 by youjeong          #+#    #+#             */
+/*   Updated: 2022/12/28 16:37:23 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isdigit(int c)
+#include "libft.h"
+
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	else
-		return (0);
+	size_t	len;
+	size_t	i;
+
+	len = ft_strlen(s);
+	i = 0;
+	while (i < len)
+	{
+		f((unsigned int)i, s + i);
+		i++;
+	}
 }

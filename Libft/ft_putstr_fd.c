@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/12 16:23:25 by youjeong          #+#    #+#             */
-/*   Updated: 2022/12/28 16:32:18 by youjeong         ###   ########.fr       */
+/*   Created: 2022/12/28 16:41:51 by youjeong          #+#    #+#             */
+/*   Updated: 2022/12/28 16:44:14 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isdigit(int c)
+#include"libft.h"
+
+void	ft_putstr_fd(char *s, int fd)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	else
-		return (0);
+	if (s == 0)
+		return ;
+	write(fd, s, ft_strlen(s));
 }
