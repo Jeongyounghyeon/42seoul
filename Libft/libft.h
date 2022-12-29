@@ -6,14 +6,13 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 20:30:49 by youjeong          #+#    #+#             */
-/*   Updated: 2022/12/28 17:47:04 by youjeong         ###   ########.fr       */
+/*   Updated: 2022/12/29 13:53:57 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
 
