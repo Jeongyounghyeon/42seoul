@@ -6,11 +6,11 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 17:48:31 by youjeong          #+#    #+#             */
-/*   Updated: 2022/12/26 17:52:12 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/01/07 15:18:54 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../headers/libft.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {	

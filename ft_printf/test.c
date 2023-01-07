@@ -1,3 +1,4 @@
+#include<unistd.h>
 #include<stdio.h>
 #include <limits.h>
 #include <math.h>
@@ -54,6 +55,8 @@ void main (void)
     printf("%-7 d\n", 123);
     printf("% % \n", 123);
     printf("% d\n", -12345);
+    printf("% .d\n", -12345);
+    write(1, "kdddd", 1);
 }
 
 /*

@@ -6,11 +6,11 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 22:51:28 by youjeong          #+#    #+#             */
-/*   Updated: 2022/12/28 17:09:02 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/01/07 15:18:27 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "../headers/libft.h"
 
 static int	string_cnt(const char *s, char c)
 {

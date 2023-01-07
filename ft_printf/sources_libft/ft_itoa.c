@@ -6,11 +6,11 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:45:09 by youjeong          #+#    #+#             */
-/*   Updated: 2022/12/28 18:56:38 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/01/07 15:17:25 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../headers/libft.h"
 
 static int	len_digit(long long num)
 {

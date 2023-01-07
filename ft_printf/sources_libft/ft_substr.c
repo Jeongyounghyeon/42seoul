@@ -6,11 +6,11 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:23:38 by youjeong          #+#    #+#             */
-/*   Updated: 2022/12/28 23:13:41 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/01/07 15:19:02 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../headers/libft.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {

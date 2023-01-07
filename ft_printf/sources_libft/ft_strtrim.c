@@ -6,11 +6,11 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:43:37 by youjeong          #+#    #+#             */
-/*   Updated: 2022/12/26 19:24:02 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/01/07 15:19:00 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../headers/libft.h"
 
 char	*ft_strtrim(char const *s1, char const *set)
 {

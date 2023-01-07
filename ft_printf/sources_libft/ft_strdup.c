@@ -6,11 +6,11 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 17:20:56 by youjeong          #+#    #+#             */
-/*   Updated: 2022/12/26 17:39:49 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/01/07 15:18:34 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../headers/libft.h"
 
 char	*ft_strdup(const char *s1)
 {

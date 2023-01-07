@@ -6,11 +6,11 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:15:44 by youjeong          #+#    #+#             */
-/*   Updated: 2022/12/26 16:46:40 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/01/07 15:18:08 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../headers/libft.h"
 
 void	*ft_memset(void *b, int c, size_t len)
 {

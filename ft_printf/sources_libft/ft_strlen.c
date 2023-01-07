@@ -6,11 +6,11 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:01:56 by youjeong          #+#    #+#             */
-/*   Updated: 2022/12/26 16:46:34 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/01/07 15:18:49 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../headers/libft.h"
 
 size_t	ft_strlen(const char *s)
 {

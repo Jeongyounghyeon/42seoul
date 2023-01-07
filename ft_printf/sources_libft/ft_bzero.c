@@ -6,11 +6,11 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 18:46:49 by youjeong          #+#    #+#             */
-/*   Updated: 2022/12/26 16:46:49 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/01/07 15:17:11 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../headers/libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {

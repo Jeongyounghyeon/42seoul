@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:06:17 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/04 20:22:48 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/01/07 21:45:42 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,14 @@ int	ft_printf(const char *format, ...)
 static void	print_fm(const char *format, va_list ap)
 {
 	unsigned char	*pfm;
-	unsigned char	tmp;
+	t_rescon		res_con;
 
 	pfm = (unsigned char *)format;
 	while (pfm)
 	{
 		if (*pfm == '%')
 		{
-			tmp = ft_conversion((const char *)(pfm + 1));
-			if (!tmp)
-				return (0);
-			while (*pfm != tmp)
-				pfm++;
+			pfm = ft_conversion((const char *)(pfm + 1), &ap, res_con);
 		}
 		else
 			ft_putchar_fd(*pfm, 1);

@@ -6,11 +6,11 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:31:44 by youjeong          #+#    #+#             */
-/*   Updated: 2022/12/26 18:37:25 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/01/07 15:18:39 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../headers/libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

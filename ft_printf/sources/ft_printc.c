@@ -1,26 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_printc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/28 20:53:02 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/07 15:17:29 by youjeong         ###   ########.fr       */
+/*   Created: 2023/01/07 12:20:58 by youjeong          #+#    #+#             */
+/*   Updated: 2023/01/07 18:44:20 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/libft.h"
+#include "../headers/printf.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_printc(va_list ap, t_conversion *conv)
 {
-	t_list	*lastlst;
+	char	c;
+	int		reslen;
+	int		prtl;
 
-	lastlst = ft_lstlast(*lst);
-	if (lastlst == 0)
+	if (conv->wp.width >= 0)
+		reslen = conv->wp.width;
+	else
+		reslen = 1;
+	c = (char)va_arg(ap, int);
+	if (conv->flag.minus == 1)
+		ft_putchar_fd(c, 1);
+	prtl = reslen;
+	while ((reslen - 1) > 0)
 	{
-		*lst = new;
-		return ;
+		ft_putchar_fd(' ', 1);
+		prtl;
 	}
-	lastlst->next = new;
+	if (conv->flag.minus == 0)
+		ft_putchar_fd(c, 1);
+	conv->rescon.length = reslen;
+	conv->rescon.res = 1;
 }

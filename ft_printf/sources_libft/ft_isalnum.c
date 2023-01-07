@@ -6,11 +6,11 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 16:29:25 by youjeong          #+#    #+#             */
-/*   Updated: 2022/12/28 16:32:48 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/01/07 15:17:16 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../headers/libft.h"
 
 int	ft_isalnum(int c)
 {

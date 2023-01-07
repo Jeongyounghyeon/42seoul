@@ -6,11 +6,11 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 21:04:33 by youjeong          #+#    #+#             */
-/*   Updated: 2022/12/28 21:49:50 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/01/07 15:17:34 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../headers/libft.h"
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
