@@ -13,7 +13,7 @@
 #include "../headers/libft.h"
 #include "../headers/printf.h"
 
-static int	preflag(long long num, t_conversion *conv, int *numl)
+static int	preflag(int num, t_conversion *conv, int *numl)
 {
 	int	resl = 0;
 	if ((conv->flag.plus) || (conv->flag.blank))
@@ -56,16 +56,23 @@ static int	print_num(int num, t_conversion *conv)
 	free(str_num);
 }
 
-void	print_blank(t_conversion *conv, int dlen)
+static int	print_blank(t_conversion *conv, int dlen)
 {
 	int	prtl;
+	int reslen;
 
+	prtl = (conv->wp.width) - dlen;
+	reslen = (conv->wp.width) - dlen;
 	if ((conv->wp.precision < 0) && (conv->flag.zero))
-	{
-		prtl = (conv->wp.width) - dlen;
 		while (prtl-- > 0)
 			ft_putchar_fd('0', 1);
-	}
+	else
+		while (prtl-- > 0)
+			ft_putchar_fd(' ', 1);
+	if (reslen > 0)
+		return (reslen);
+	else
+		return (0);
 }
 
 void	ft_printd(va_list ap, t_conversion *conv)
@@ -88,7 +95,9 @@ void	ft_printd(va_list ap, t_conversion *conv)
 		conv->flag.blank = 0;
 	if (conv->flag.minus)
 		print_num(d, conv);
-	print_blank(conv, dlen);
+	reslen += print_blank(conv, dlen);
 	if (!(conv->flag.minus))
 		print_num(d, conv);
+	conv->rescon.length = reslen;
+	conv->rescon.res = 1;
 }
