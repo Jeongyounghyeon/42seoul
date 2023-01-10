@@ -32,45 +32,64 @@ static int	preflag(int num, t_conversion *conv, int *numl)
 	return resl;
 }
 
+static int	print_num_ver_isprc(int numl, int prflag, t_conversion *conv)
+{
+	int	resl;
+
+	resl = 0;
+	if (conv->wp.precision > numl)
+	{
+		prtl = (conv->wp.precision) - numl;
+		resl += prtl
+	}
+	else
+		prtl = 0;
+	while (prtl > 0)
+		ft_putchar_fd('0', 1);
+	ft_putstr_fd((str_num + prflag), 1);
+	resl += numl;
+	return (resl);
+}
+
 static int	print_num(int num, t_conversion *conv)
 {
+	char	*str_num;
 	int		numl;
 	int		prtl;
-	char	*str_num;
 	int		prflag;
+	int		resl;
 
-	prflag = 0;
+	resl = 0;
 	str_num = itoa(num);
 	numl = ft_strlen(str_num);
 	prflag = preflag(num, conv, &numl);
+	resl += prflag
 	if (conv->wp.precision >= 0)
+		resl += print_num_ver_isprc(numl, prflag, conv);
+	else
 	{
-		if (conv->wp.precision > numl)
-			prtl = (conv->wp.precision) - (numl - prflag);
-		else
-			prtl = 0;
-		while (prtl > 0)
-			ft_putchar_fd('0', 1);
-		putstr_fd(str_num + (ft_strlen(str_num) - numl));
+		ft_putstr_fd((str_num + prflag), 1);
+		resl += numl;
 	}
 	free(str_num);
+	return (resl);
 }
 
 static int	print_blank(t_conversion *conv, int dlen)
 {
 	int	prtl;
-	int reslen;
+	int resl;
 
 	prtl = (conv->wp.width) - dlen;
-	reslen = (conv->wp.width) - dlen;
+	resl = (conv->wp.width) - dlen;
 	if ((conv->wp.precision < 0) && (conv->flag.zero))
 		while (prtl-- > 0)
 			ft_putchar_fd('0', 1);
 	else
 		while (prtl-- > 0)
 			ft_putchar_fd(' ', 1);
-	if (reslen > 0)
-		return (reslen);
+	if (resl > 0)
+		return (resl);
 	else
 		return (0);
 }
@@ -85,8 +104,6 @@ void	ft_printd(va_list ap, t_conversion *conv)
 	dlen = ft_strlen(ft_itoa(d));
 	if ((conv->flag.plus) || (conv->flag.blank))
 		dlen++;
-	if ((conv->wp.precision) > dlen)
-		reslen = conv->wp.precision;
 	if ((conv->wp.width) > reslen)
 		reslen = conv->wp.width;
 	if ((conv->wp.precision >= 0) || (conv->flag.minus))
@@ -94,10 +111,10 @@ void	ft_printd(va_list ap, t_conversion *conv)
 	if (conv->flag.plus)
 		conv->flag.blank = 0;
 	if (conv->flag.minus)
-		print_num(d, conv);
+		reslen += print_num(d, conv);
 	reslen += print_blank(conv, dlen);
 	if (!(conv->flag.minus))
-		print_num(d, conv);
+		reslen += print_num(d, conv);
 	conv->rescon.length = reslen;
 	conv->rescon.res = 1;
 }
