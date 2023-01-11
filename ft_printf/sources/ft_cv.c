@@ -6,11 +6,11 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 11:24:05 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/07 18:48:45 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/01/11 20:05:29 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/libft.h"
+#include "../libft/libft.h"
 #include "../headers/printf.h"
 
 static void	printpc(t_conversion *conv)

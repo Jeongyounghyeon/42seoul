@@ -6,16 +6,18 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 17:40:45 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/07 21:45:28 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/01/11 20:05:49 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/libft.h"
+#include "../libft/libft.h"
 #include "../headers/printf.h"
 
 static int	preflag(int num, t_conversion *conv, int *numl)
 {
-	int	resl = 0;
+	int	resl;
+
+	resl = 0;
 	if ((conv->flag.plus) || (conv->flag.blank))
 	{
 		if (num < 0)
@@ -29,18 +31,19 @@ static int	preflag(int num, t_conversion *conv, int *numl)
 			ft_putchar_fd(' ', 1);
 		resl++;
 	}
-	return resl;
+	return (resl);
 }
 
-static int	print_num_ver_isprc(int numl, int prflag, t_conversion *conv)
+static int	prtn_prc(char *str_num, int numl, int prflag, t_conversion *conv)
 {
 	int	resl;
+	int	prtl;
 
 	resl = 0;
 	if (conv->wp.precision > numl)
 	{
 		prtl = (conv->wp.precision) - numl;
-		resl += prtl
+		resl += prtl;
 	}
 	else
 		prtl = 0;
@@ -63,9 +66,9 @@ static int	print_num(int num, t_conversion *conv)
 	str_num = itoa(num);
 	numl = ft_strlen(str_num);
 	prflag = preflag(num, conv, &numl);
-	resl += prflag
+	resl += prflag;
 	if (conv->wp.precision >= 0)
-		resl += print_num_ver_isprc(numl, prflag, conv);
+		resl += prtn_prc(str_num, numl, prflag, conv);
 	else
 	{
 		ft_putstr_fd((str_num + prflag), 1);
@@ -78,7 +81,7 @@ static int	print_num(int num, t_conversion *conv)
 static int	print_blank(t_conversion *conv, int dlen)
 {
 	int	prtl;
-	int resl;
+	int	resl;
 
 	prtl = (conv->wp.width) - dlen;
 	resl = (conv->wp.width) - dlen;
@@ -104,8 +107,6 @@ void	ft_printd(va_list ap, t_conversion *conv)
 	dlen = ft_strlen(ft_itoa(d));
 	if ((conv->flag.plus) || (conv->flag.blank))
 		dlen++;
-	if ((conv->wp.width) > reslen)
-		reslen = conv->wp.width;
 	if ((conv->wp.precision >= 0) || (conv->flag.minus))
 		conv->flag.zero = 0;
 	if (conv->flag.plus)

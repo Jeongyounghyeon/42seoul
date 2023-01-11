@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:08:01 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/07 19:10:36 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/01/11 17:09:30 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,13 @@ typedef struct s_conversion
 	t_wp		wp;
 	t_rescon	rescon;
 }t_conversion;
+
+typedef struct s_dinfo
+{
+	int	d;
+	int	lpre;
+	int	lnum;
+	int	lblank;
+}t_dinfo;
 
 #endif
