@@ -1,24 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf.h                                           :+:      :+:    :+:   */
+/*   ft_utoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 16:08:01 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/12 18:55:52 by youjeong         ###   ########.fr       */
+/*   Created: 2023/01/12 16:22:26 by youjeong          #+#    #+#             */
+/*   Updated: 2023/01/12 18:19:43 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTF_H
-# define PRINTF_H
+#include "../libft/headers/libft.h"
 
-# include <stdarg.h>
+static int	len_digit(unsigned int u)
+{
+	int	res;
 
-int ft_printf(const char *format, ...);
-int ft_print_c1(const char c, va_list ap);
-int ft_print_c2(const char c, va_list ap);
-char	*ft_utoa(unsigned int u);
-char	*ft_utohex(unsigned int u, int upc);
+	res = 1;
+	while (u / 10)
+	{
+		res++;
+		u /= 10;
+	}
+	return (res);
+}
 
-#endif
+char	*ft_utoa(unsigned int u)
+{
+	char		*res;
+	int			len;
+
+	len = len_digit(u);
+	res = (char *)malloc((len + 1) * sizeof(char));
+	if (res == 0)
+		return (0);
+	res[len] = 0;
+	while (u)
+	{
+		res[idx--] = (u % 10) + '0';
+		u /= 10;
+	}
+	return (res);
+}
