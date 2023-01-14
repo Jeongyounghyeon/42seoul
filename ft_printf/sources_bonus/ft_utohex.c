@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utoa.c                                          :+:      :+:    :+:   */
+/*   ft_utohex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 16:22:26 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/14 17:17:48 by youjeong         ###   ########.fr       */
+/*   Created: 2023/01/13 17:59:52 by youjeong          #+#    #+#             */
+/*   Updated: 2023/01/14 17:17:50 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ static int	len_digit(unsigned int u)
 	int	res;
 
 	res = 1;
-	while (u / 10)
+	while (u / 16)
 	{
 		res++;
-		u /= 10;
+		u /= 16;
 	}
 	return (res);
 }
 
-char	*ft_utoa(unsigned int u)
+char	*ft_utohex(unsigned int u, int upc)
 {
 	char		*res;
 	int			len;
@@ -37,8 +37,11 @@ char	*ft_utoa(unsigned int u)
 	res[len] = 0;
 	while (len--)
 	{
-		res[len] = (u % 10) + '0';
-		u /= 10;
+		if (upc)
+			res[len] = "0123456789ABCDEF"[u % 16];
+		else
+			res[len] = "0123456789abcdef"[u % 16];
+		u /= 16;
 	}
 	return (res);
 }

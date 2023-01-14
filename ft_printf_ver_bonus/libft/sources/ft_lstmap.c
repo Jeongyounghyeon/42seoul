@@ -1,44 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utoa.c                                          :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 16:22:26 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/14 17:17:48 by youjeong         ###   ########.fr       */
+/*   Created: 2022/12/28 21:13:11 by youjeong          #+#    #+#             */
+/*   Updated: 2023/01/12 14:52:17 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/ft_printf_bonus.h"
+#include "../headers/libft.h"
 
-static int	len_digit(unsigned int u)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	int	res;
+	t_list	*res;
+	t_list	*temp;
+	void	*tmp;
 
-	res = 1;
-	while (u / 10)
-	{
-		res++;
-		u /= 10;
-	}
-	return (res);
-}
-
-char	*ft_utoa(unsigned int u)
-{
-	char		*res;
-	int			len;
-
-	len = len_digit(u);
-	res = (char *)malloc((len + 1) * sizeof(char));
-	if (res == 0)
+	if (!lst || !f || !del)
 		return (0);
-	res[len] = 0;
-	while (len--)
+	res = 0;
+	while (lst)
 	{
-		res[len] = (u % 10) + '0';
-		u /= 10;
+		tmp = f(lst->content);
+		temp = ft_lstnew(tmp);
+		if (!temp)
+		{
+			del(tmp);
+			ft_lstclear(&res, del);
+			return (0);
+		}
+		ft_lstadd_back(&res, temp);
+		lst = lst->next;
 	}
 	return (res);
 }

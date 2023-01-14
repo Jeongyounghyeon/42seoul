@@ -1,44 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utoa.c                                          :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 16:22:26 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/14 17:17:48 by youjeong         ###   ########.fr       */
+/*   Created: 2022/11/12 16:32:01 by youjeong          #+#    #+#             */
+/*   Updated: 2022/12/26 16:46:46 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/ft_printf_bonus.h"
-
-static int	len_digit(unsigned int u)
+int	ft_isascii(int c)
 {
-	int	res;
-
-	res = 1;
-	while (u / 10)
-	{
-		res++;
-		u /= 10;
-	}
-	return (res);
-}
-
-char	*ft_utoa(unsigned int u)
-{
-	char		*res;
-	int			len;
-
-	len = len_digit(u);
-	res = (char *)malloc((len + 1) * sizeof(char));
-	if (res == 0)
+	if (c >= 0 && c <= 127)
+		return (1);
+	else
 		return (0);
-	res[len] = 0;
-	while (len--)
-	{
-		res[len] = (u % 10) + '0';
-		u /= 10;
-	}
-	return (res);
 }

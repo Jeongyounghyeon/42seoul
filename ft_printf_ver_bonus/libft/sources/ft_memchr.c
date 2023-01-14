@@ -1,44 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utoa.c                                          :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 16:22:26 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/14 17:17:48 by youjeong         ###   ########.fr       */
+/*   Created: 2022/12/26 17:54:52 by youjeong          #+#    #+#             */
+/*   Updated: 2023/01/12 14:52:24 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/ft_printf_bonus.h"
+#include "../headers/libft.h"
 
-static int	len_digit(unsigned int u)
-{
-	int	res;
+void	*ft_memchr(const void *s, int c, size_t n)
+{	
+	size_t			i;
+	unsigned char	*s_tmp;
 
-	res = 1;
-	while (u / 10)
+	s_tmp = (unsigned char *)s;
+	i = 0;
+	while (i < n)
 	{
-		res++;
-		u /= 10;
+		if (s_tmp[i] == (unsigned char)c)
+			return (s_tmp + i);
+		i++;
 	}
-	return (res);
-}
-
-char	*ft_utoa(unsigned int u)
-{
-	char		*res;
-	int			len;
-
-	len = len_digit(u);
-	res = (char *)malloc((len + 1) * sizeof(char));
-	if (res == 0)
-		return (0);
-	res[len] = 0;
-	while (len--)
-	{
-		res[len] = (u % 10) + '0';
-		u /= 10;
-	}
-	return (res);
+	return (0);
 }

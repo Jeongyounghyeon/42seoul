@@ -6,11 +6,11 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:22:26 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/12 18:19:43 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/01/14 17:05:56 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/headers/libft.h"
+#include "../headers/ft_printf.h"
 
 static int	len_digit(unsigned int u)
 {
@@ -35,9 +35,9 @@ char	*ft_utoa(unsigned int u)
 	if (res == 0)
 		return (0);
 	res[len] = 0;
-	while (u)
+	while (len--)
 	{
-		res[idx--] = (u % 10) + '0';
+		res[len] = (u % 10) + '0';
 		u /= 10;
 	}
 	return (res);

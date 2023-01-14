@@ -1,44 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utoa.c                                          :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 16:22:26 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/14 17:17:48 by youjeong         ###   ########.fr       */
+/*   Created: 2022/12/26 17:48:31 by youjeong          #+#    #+#             */
+/*   Updated: 2023/01/12 14:53:14 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/ft_printf_bonus.h"
+#include "../headers/libft.h"
 
-static int	len_digit(unsigned int u)
-{
-	int	res;
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{	
+	size_t			i;	
+	unsigned char	*c1;	
+	unsigned char	*c2;
 
-	res = 1;
-	while (u / 10)
+	i = 0;
+	c1 = (unsigned char *)s1;
+	c2 = (unsigned char *)s2;
+	while (i < n)
 	{
-		res++;
-		u /= 10;
+		if (c1[i] != c2[i])
+			return (c1[i] - c2[i]);
+		if ((c1[i] == 0) || (c2[i] == 0))
+			return (c1[i] - c2[i]);
+		i++;
 	}
-	return (res);
-}
-
-char	*ft_utoa(unsigned int u)
-{
-	char		*res;
-	int			len;
-
-	len = len_digit(u);
-	res = (char *)malloc((len + 1) * sizeof(char));
-	if (res == 0)
-		return (0);
-	res[len] = 0;
-	while (len--)
-	{
-		res[len] = (u % 10) + '0';
-		u /= 10;
-	}
-	return (res);
+	return (0);
 }

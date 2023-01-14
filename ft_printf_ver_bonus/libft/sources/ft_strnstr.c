@@ -1,44 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utoa.c                                          :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 16:22:26 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/14 17:17:48 by youjeong         ###   ########.fr       */
+/*   Created: 2022/12/26 18:15:13 by youjeong          #+#    #+#             */
+/*   Updated: 2023/01/12 14:53:16 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/ft_printf_bonus.h"
+#include "../headers/libft.h"
 
-static int	len_digit(unsigned int u)
-{
-	int	res;
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+{	
+	size_t	i;
+	size_t	size_needle;
 
-	res = 1;
-	while (u / 10)
+	size_needle = ft_strlen(needle);
+	if (!size_needle)
+		return ((char *)haystack);
+	i = 0;
+	while ((haystack[i] != 0) && (i + size_needle <= len))
 	{
-		res++;
-		u /= 10;
+		if (ft_strncmp(haystack + i, needle, size_needle) == 0)
+			return ((char *)(haystack + i));
+		i++;
 	}
-	return (res);
-}
-
-char	*ft_utoa(unsigned int u)
-{
-	char		*res;
-	int			len;
-
-	len = len_digit(u);
-	res = (char *)malloc((len + 1) * sizeof(char));
-	if (res == 0)
-		return (0);
-	res[len] = 0;
-	while (len--)
-	{
-		res[len] = (u % 10) + '0';
-		u /= 10;
-	}
-	return (res);
+	return (0);
 }

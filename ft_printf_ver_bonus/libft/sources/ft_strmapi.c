@@ -1,44 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utoa.c                                          :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 16:22:26 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/14 17:17:48 by youjeong         ###   ########.fr       */
+/*   Created: 2022/12/27 17:54:35 by youjeong          #+#    #+#             */
+/*   Updated: 2023/01/12 14:53:11 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/ft_printf_bonus.h"
+#include "../headers/libft.h"
 
-static int	len_digit(unsigned int u)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	int	res;
+	char	*res;
+	size_t	i;
+	size_t	len;
 
-	res = 1;
-	while (u / 10)
-	{
-		res++;
-		u /= 10;
-	}
-	return (res);
-}
-
-char	*ft_utoa(unsigned int u)
-{
-	char		*res;
-	int			len;
-
-	len = len_digit(u);
+	len = ft_strlen(s);
+	res = 0;
 	res = (char *)malloc((len + 1) * sizeof(char));
 	if (res == 0)
 		return (0);
-	res[len] = 0;
-	while (len--)
+	i = 0;
+	while (i < len)
 	{
-		res[len] = (u % 10) + '0';
-		u /= 10;
+		res[i] = f((unsigned int)i, s[i]);
+		i++;
 	}
+	res[len] = 0;
 	return (res);
 }

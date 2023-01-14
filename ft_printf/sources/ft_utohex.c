@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utop.c                                          :+:      :+:    :+:   */
+/*   ft_utohex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:59:52 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/13 17:59:52 by youjeong         ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 17:03:11 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/printf_bonus.h"
-#include "../libft/headers/libft.h"
+#include "../headers/ft_printf.h"
 
 static int	len_digit(unsigned int u)
 {
@@ -36,14 +35,13 @@ char	*ft_utohex(unsigned int u, int upc)
 	if (res == 0)
 		return (0);
 	res[len] = 0;
-    while (u)
+	while (len--)
 	{
 		if (upc)
-			res[idx--] = "0123456789ABCDEF"[u % 16];
+			res[len] = "0123456789ABCDEF"[u % 16];
 		else
-			res[idx--] = "0123456789abcdef"[u % 16];
+			res[len] = "0123456789abcdef"[u % 16];
 		u /= 16;
 	}
 	return (res);
 }
-

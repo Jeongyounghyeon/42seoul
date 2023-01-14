@@ -6,39 +6,57 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:22:26 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/14 17:17:48 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/01/12 18:19:43 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/ft_printf_bonus.h"
+#include "../libft/headers/libft.h"
 
-static int	len_digit(unsigned int u)
+static int	len_digit(long long num)
 {
 	int	res;
 
 	res = 1;
-	while (u / 10)
+	while (num / 10)
 	{
 		res++;
-		u /= 10;
+		num /= 10;
 	}
 	return (res);
 }
 
-char	*ft_utoa(unsigned int u)
+static void	mk_str(long long num, char *res, size_t idx)
+{
+	while (num / 10)
+	{
+		res[idx] = (num % 10) + '0';
+		idx--;
+		num /= 10;
+	}
+	res[idx] = num + '0';
+}
+
+char	*ft_utoa(unsigned int n)
 {
 	char		*res;
+	long long	num;
+	int			isminus;
 	int			len;
 
-	len = len_digit(u);
-	res = (char *)malloc((len + 1) * sizeof(char));
+	isminus = 0;
+	num = (long long)n;
+	if (n < 0)
+	{
+		isminus = 1;
+		num = -num;
+	}
+	len = len_digit(num);
+	res = (char *)malloc((isminus + len + 1) * sizeof(char));
 	if (res == 0)
 		return (0);
-	res[len] = 0;
-	while (len--)
-	{
-		res[len] = (u % 10) + '0';
-		u /= 10;
-	}
+	res[isminus + len] = 0;
+	mk_str(num, res, (size_t)(isminus + len - 1));
+	if (isminus)
+		res[0] = '-';
 	return (res);
 }

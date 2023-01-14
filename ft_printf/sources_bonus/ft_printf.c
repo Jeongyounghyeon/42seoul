@@ -5,38 +5,69 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 16:06:17 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/12 18:19:25 by youjeong         ###   ########.fr       */
+/*   Created: 2023/01/13 16:03:25 by youjeong          #+#    #+#             */
+/*   Updated: 2023/01/14 17:17:47 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/printf_bonus.h"
-#include "../libft/headers/libft.h"
+#include "../headers/ft_printf_bonus.h"
+
+static int	print_conversion(const char **ppf, va_list ap)
+{
+	(*ppf)++;
+	if (**ppf == '%')
+	{
+		ft_putchar_fd('%', 1);
+		return (1);
+	}
+	else if (**ppf == 'c')
+		return (ft_print_c1(**ppf, ap));
+	else if (**ppf == 's')
+		return (ft_print_c1(**ppf, ap));
+	else if (**ppf == 'd')
+		return (ft_print_c1(**ppf, ap));
+	else if (**ppf == 'i')
+		return (ft_print_c1(**ppf, ap));
+	else if (**ppf == 'u')
+		return (ft_print_c2(**ppf, ap));
+	else if (**ppf == 'p')
+		return (ft_print_c2(**ppf, ap));
+	else if (**ppf == 'x')
+		return (ft_print_c2(**ppf, ap));
+	else if (**ppf == 'X')
+		return (ft_print_c2(**ppf, ap));
+	(*ppf)--;
+	return (0);
+}
+
+static int	print_format(const char *format, va_list ap)
+{
+	const char	*pf;
+	int			res;
+
+	pf = format;
+	res = 0;
+	while (*pf)
+	{
+		if (*pf == '%')
+			res += print_conversion(&pf, ap);
+		else
+		{
+			ft_putchar_fd(*pf, 1);
+			res++;
+		}
+		pf++;
+	}
+	return (res);
+}
 
 int	ft_printf(const char *format, ...)
 {
 	va_list	ap;
+	int		res;
 
 	va_start(ap, format);
-	print_fm(format, ap);
+	res = print_format(format, ap);
 	va_end(ap);
-	return (0);
-}
-
-static void	print_fm(const char *format, va_list ap)
-{
-	unsigned char	*pfm;
-	t_rescon		res_con;
-
-	pfm = (unsigned char *)format;
-	while (pfm)
-	{
-		if (*pfm == '%')
-		{
-			pfm = ft_conversion((const char *)(pfm + 1), &ap, res_con);
-		}
-		else
-			ft_putchar_fd(*pfm, 1);
-		pfm++;
-	}
+	return (res);
 }

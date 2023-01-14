@@ -6,11 +6,11 @@
 #    By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/04 16:00:16 by youjeong          #+#    #+#              #
-#    Updated: 2023/01/14 16:20:08 by youjeong         ###   ########.fr        #
+#    Updated: 2023/01/12 18:56:29 by youjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
+NAME = printf.a
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -24,26 +24,15 @@ FD_OBJ_BONUS = objs_bonus
 FD_HEADER = headers
 FD_LIBFT = libft
 
-SRCS_BASIC = ft_printf.c \
-			ft_print_c1.c \
-			ft_print_c2.c \
-			ft_utoa.c \
-			ft_utop.c\
-			ft_utohex.c\
-			
-			
-SRCS_BONUS = ft_printf.c \
-			ft_print_c1.c \
-			ft_print_c2.c \
-			ft_utoa.c \
-			ft_utop.c\
-			ft_utohex.c\
+SRCS_BASIC = ft_utoa.c
+SRCS_BONUS = ft_init.c \
+			ft_utoa.c
 
 OBJS_BASIC = ${SRCS_BASIC:.c=.o}
-OBJS_BONUS = ${SRCS_BONUS:.c=.o}
+OBJS_BONUS = ${SRCS_BONUS.c=.o}
 
-INCS_BASIC = ft_printf.h
-INCS_BONUS = ft_printf_bonus.h
+INCS_BASIC = printf.h
+INCS_BONUS = printf_bonus.h
 
 ifdef INPUT_BONUS
 	FD_SOURCE = $(FD_SOURCE_BONUS)
@@ -62,16 +51,16 @@ endif
 
 all : $(FD_OBJ) $(NAME)
 
-$(NAME) : ${addprefix $(FD_OBJ)/, $(OBJS)} 
+$(NAME) : $(OBJS) 
 	make -C $(FD_LIBFT)
 	cp $(FD_LIBFT)/libft.a $(NAME)
-	ar -rcus $@ $^
+	ar -rcus $@ ${addprefix $(FD_OBJ)/, $^}
 
 $(FD_OBJ):
 	mkdir $@
 
-$(FD_OBJ)/%.o: ${FD_SOURCE}/%.c
-	$(CC) $(CFLAGS) -c $^ -o $@ -I ${FD_HEADER} 
+%.o: ${FD_SOURCE}/%.c
+	$(CC) $(CFLAGS) -c $^ -o $(FD_OBJ)/$@ -I ${FD_HEADER} 
 
 bonus:
 	make INPUT_BONUS=1 all
@@ -81,13 +70,10 @@ clean:
 	rm -rf $(FD_OBJ_BONUS)
 	make clean -C $(FD_LIBFT)
 
-fclean: 
-	make clean
+fclean: clean
 	rm -f $(NAME)
 	make fclean -C $(FD_LIBFT)
 
-re: 
-	make fclean 
-	make all
+re: fclean all
 
 .PHONY: clean fclean re all bonus

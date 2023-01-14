@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/12 17:01:56 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/14 16:54:39 by youjeong         ###   ########.fr       */
+/*   Created: 2022/12/26 18:43:37 by youjeong          #+#    #+#             */
+/*   Updated: 2023/01/12 14:53:21 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/libft.h"
 
-size_t	ft_strlen(const char *s)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	int		res;
+	size_t	start;
+	size_t	end;
 
-	res = 0;
-	if (!s)
-		return (0);
-	while (*s)
+	start = 0;
+	end = ft_strlen(s1);
+	if (end == 0)
+		return (ft_strdup(s1));
+	end--;
+	while ((s1[start]) && (ft_strchr(set, s1[start]) != 0))
+		start++;
+	while (ft_strchr(set, s1[end]) != 0)
 	{
-		res++;
-		s++;
+		end--;
+		if (start > end)
+			return (ft_strdup(""));
 	}
-	return (res);
+	if (start <= end)
+		return (ft_substr(s1, start, end - start + 1));
+	else
+		return (ft_strdup(""));
 }

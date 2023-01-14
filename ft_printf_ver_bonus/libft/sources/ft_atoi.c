@@ -1,28 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/12 17:01:56 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/14 16:54:39 by youjeong         ###   ########.fr       */
+/*   Created: 2022/12/26 16:45:21 by youjeong          #+#    #+#             */
+/*   Updated: 2023/01/12 14:51:27 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/libft.h"
 
-size_t	ft_strlen(const char *s)
+static int	ft_isspace(char c)
 {
-	int		res;
-
-	res = 0;
-	if (!s)
+	if (c == '\t' || c == '\n' || c == '\v'
+		|| c == '\f' || c == '\r' || c == ' ')
+		return (1);
+	else
 		return (0);
-	while (*s)
+}
+
+int	ft_atoi(const char *str)
+{
+	int	sign;
+	int	i;
+	int	res;
+
+	sign = 1;
+	i = 0;
+	while (ft_isspace(str[i]))
+		i++;
+	res = 0;
+	if (str[i] == '-' || str[i] == '+')
 	{
-		res++;
-		s++;
-	}
-	return (res);
+		if (str[i++] == '-')
+			sign = -1;
+		else
+			sign = 1;
+	}	
+	while (ft_isdigit(str[i]))
+		res = (res * 10) + (str[i++] - '0');
+	return (sign * res);
 }

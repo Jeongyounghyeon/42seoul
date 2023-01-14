@@ -1,44 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utoa.c                                          :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 16:22:26 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/14 17:17:48 by youjeong         ###   ########.fr       */
+/*   Created: 2022/11/23 21:33:54 by youjeong          #+#    #+#             */
+/*   Updated: 2023/01/12 14:52:31 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/ft_printf_bonus.h"
+#include "../headers/libft.h"
 
-static int	len_digit(unsigned int u)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	int	res;
+	char		*tmp;
+	const char	*s;
 
-	res = 1;
-	while (u / 10)
-	{
-		res++;
-		u /= 10;
-	}
-	return (res);
-}
-
-char	*ft_utoa(unsigned int u)
-{
-	char		*res;
-	int			len;
-
-	len = len_digit(u);
-	res = (char *)malloc((len + 1) * sizeof(char));
-	if (res == 0)
+	if (dst == 0 && src == 0)
 		return (0);
-	res[len] = 0;
-	while (len--)
+	if (dst <= src)
 	{
-		res[len] = (u % 10) + '0';
-		u /= 10;
+		tmp = dst;
+		s = src;
+		while (len--)
+			*tmp++ = *s++;
 	}
-	return (res);
+	else
+	{
+		tmp = dst;
+		tmp += len;
+		s = src;
+		s += len;
+		while (len--)
+			*--tmp = *--s;
+	}
+	return (dst);
 }
