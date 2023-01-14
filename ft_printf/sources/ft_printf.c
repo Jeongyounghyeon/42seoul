@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 16:03:25 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/14 16:21:21 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/01/14 20:50:29 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static int	print_conversion(const char **ppf, va_list ap)
 	(*ppf)++;
 	if (**ppf == '%')
 	{
-		ft_putchar_fd('%', 1);
+		if (ft_putchar_fd('%', 1) == -1)
+			return (-1);
 		return (1);
 	}
 	else if (**ppf == 'c')
@@ -44,16 +45,23 @@ static int	print_format(const char *format, va_list ap)
 {
 	const char	*pf;
 	int			res;
+	int			res_c;
 
 	pf = format;
 	res = 0;
 	while (*pf)
 	{
 		if (*pf == '%')
-			res += print_conversion(&pf, ap);
+		{
+			res_c = print_conversion(&pf, ap);
+			if (res_c == -1)
+				return (-1);
+			res += res_c;
+		}
 		else
 		{
-			ft_putchar_fd(*pf, 1);
+			if (ft_putchar_fd(*pf, 1) == -1)
+				return (-1);
 			res++;
 		}
 		pf++;
