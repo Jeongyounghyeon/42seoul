@@ -39,22 +39,22 @@ SRCS_BONUS = ft_printf.c \
 			ft_utop.c\
 			ft_utohex.c\
 
-OBJS_BASIC = ${SRCS_BASIC:.c=.o}
-OBJS_BONUS = ${SRCS_BONUS:.c=.o}
+OBJS_BASIC = $(SRCS_BASIC:.c=.o)
+OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
 INCS_BASIC = ft_printf.h
 INCS_BONUS = ft_printf_bonus.h
 
 ifdef INPUT_BONUS
 	FD_SOURCE = $(FD_SOURCE_BONUS)
-	FD_OBJ = ${FD_OBJ_BONUS}
-	SRCS = ${SRCS_BONUS}
+	FD_OBJ = $(FD_OBJ_BONUS)
+	SRCS = $(SRCS_BONUS)
 	OBJS = $(OBJS_BONUS)
 	INCS = $(INCS_BONUS)
 else
 	FD_SOURCE = $(FD_SOURCE_BASIC)
-	FD_OBJ = ${FD_OBJ_BASIC}
-	SRCS = ${SRCS_BASIC}
+	FD_OBJ = $(FD_OBJ_BASIC)
+	SRCS = $(SRCS_BASIC)
 	OBJS = $(OBJS_BASIC)
 	INCS = $(INCS_BASIC)
 endif
@@ -70,8 +70,8 @@ $(NAME) : ${addprefix $(FD_OBJ)/, $(OBJS)}
 $(FD_OBJ):
 	mkdir $@
 
-$(FD_OBJ)/%.o: ${FD_SOURCE}/%.c
-	$(CC) $(CFLAGS) -c $^ -o $@ -I ${FD_HEADER} 
+$(FD_OBJ)/%.o: $(FD_SOURCE)/%.c
+	$(CC) $(CFLAGS) -c $^ -o $@ -I $(FD_HEADER) 
 
 bonus:
 	make INPUT_BONUS=1 all

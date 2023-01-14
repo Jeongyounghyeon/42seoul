@@ -62,18 +62,18 @@ SRCS = ft_isalpha.c \
 		ft_lstclear.c \
 		ft_lstiter.c \
 		ft_lstmap.c
-OBJS = ${SRCS:.c=.o}
+OBJS = $(SRCS:.c=.o)
 
 all : $(FD_OBJ) $(NAME)
 
-$(NAME) : $(OBJS)
-	ar -rcus $@ ${addprefix $(FD_OBJ)/, $^}
+$(NAME) : ${addprefix $(FD_OBJ)/, $(OBJS)}
+	ar -rcus $@ $^
 
 $(FD_OBJ):
 	mkdir $@
 
-%.o: ${FD_SOURCE}/%.c
-	$(CC) $(CFLAGS) -c $^ -o $(FD_OBJ)/$@ -I ${FD_HEADER} 
+%.o: $(FD_SOURCE)/%.c
+	$(CC) $(CFLAGS) -c $^ -o $(FD_OBJ)/$@ -I $(FD_HEADER) 
 
 clean:
 	rm -rf $(FD_OBJ)
