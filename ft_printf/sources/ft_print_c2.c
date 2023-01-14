@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:09:45 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/14 16:35:12 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/01/14 20:54:59 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,13 @@ static int	print_u(va_list ap)
 
 	ui = va_arg(ap, unsigned int);
 	str_u = ft_utoa(ui);
-	ft_putstr_fd(str_u, 1);
+	if (str_u == 0)
+		return (-1);
+	if (ft_putstr_fd(str_u, 1) == -1)
+	{
+		free(str_u);
+		return (-1);
+	}
 	res = ft_strlen(str_u);
 	free(str_u);
 	return (res);
@@ -34,8 +40,18 @@ static int	print_p(va_list ap)
 
 	p = (size_t)va_arg(ap, void *);
 	str_p = ft_utop(p);
-	ft_putstr_fd("0x", 1);
-	ft_putstr_fd(str_p, 1);
+	if (str_p == 0)
+		return (-1);
+	if (ft_putstr_fd("0x", 1) == -1)
+	{
+		free(str_p);
+		return (-1);
+	}
+	if (ft_putstr_fd(str_p, 1) == -1)
+	{
+		free(str_p);
+		return (-1);
+	}
 	res = ft_strlen("0x") + ft_strlen(str_p);
 	free(str_p);
 	return (res);
@@ -49,7 +65,13 @@ static int	print_x(va_list ap)
 
 	x = va_arg(ap, unsigned int);
 	str_x = ft_utohex(x, 0);
-	ft_putstr_fd(str_x, 1);
+	if (str_x == 0)
+		return (-1);
+	if (ft_putstr_fd(str_x, 1) == -1)
+	{
+		free(str_x);
+		return (-1);
+	}
 	res = ft_strlen(str_x);
 	free(str_x);
 	return (res);
@@ -63,7 +85,13 @@ static int	print_x_up(va_list ap)
 
 	x_up = va_arg(ap, unsigned int);
 	str_x_up = ft_utohex(x_up, 1);
-	ft_putstr_fd(str_x_up, 1);
+	if (str_x_up == 0)
+		return (-1);
+	if (ft_putstr_fd(str_x_up, 1) == -1)
+	{
+		free(str_x_up);
+		return (-1);
+	}
 	res = ft_strlen(str_x_up);
 	free(str_x_up);
 	return (res);

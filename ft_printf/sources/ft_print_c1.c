@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:09:04 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/14 17:02:30 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/01/14 21:00:55 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static int	print_c(va_list ap)
 	char	c;
 
 	c = (char)va_arg(ap, int);
-	ft_putchar_fd(c, 1);
+	if (ft_putchar_fd(c, 1) == -1)
+		return (-1);
 	return (1);
 }
 
@@ -29,12 +30,14 @@ static int	print_s(va_list ap)
 	s = va_arg(ap, char *);
 	if (!s)
 	{
-		ft_putstr_fd("(null)", 1);
+		if (ft_putstr_fd("(null)", 1) == -1)
+			return (-1);
 		res = 6;
 	}
 	else
 	{
-		ft_putstr_fd(s, 1);
+		if (ft_putstr_fd(s, 1) == -1)
+			return (-1);
 		res = ft_strlen(s);
 	}
 	return (res);
@@ -48,7 +51,13 @@ static int	print_d(va_list ap)
 
 	d = va_arg(ap, int);
 	str_d = ft_itoa(d);
-	ft_putstr_fd(str_d, 1);
+	if (str_d == 0)
+		return (-1);
+	if (ft_putstr_fd(str_d, 1) == -1)
+	{
+		free (str_d);
+		return (-1);
+	}
 	res = ft_strlen(str_d);
 	free(str_d);
 	return (res);
@@ -62,7 +71,13 @@ static int	print_i(va_list ap)
 
 	i = va_arg(ap, int);
 	str_i = ft_itoa(i);
-	ft_putstr_fd(str_i, 1);
+	if (str_i == 0)
+		return (-1);
+	if (ft_putstr_fd(str_i, 1) == -1)
+	{
+		free (str_i);
+		return (-1);
+	}
 	res = ft_strlen(str_i);
 	free(str_i);
 	return (res);
