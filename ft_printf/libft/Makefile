@@ -6,7 +6,7 @@
 #    By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/21 14:11:47 by youjeong          #+#    #+#              #
-#    Updated: 2023/01/12 14:50:59 by youjeong         ###   ########.fr        #
+#    Updated: 2023/01/15 14:26:35 by youjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,8 +72,8 @@ $(NAME) : ${addprefix $(FD_OBJ)/, $(OBJS)}
 $(FD_OBJ):
 	mkdir $@
 
-%.o: $(FD_SOURCE)/%.c
-	$(CC) $(CFLAGS) -c $^ -o $(FD_OBJ)/$@ -I $(FD_HEADER) 
+$(FD_OBJ)/%.o: $(FD_SOURCE)/%.c
+	$(CC) $(CFLAGS) -c $^ -o $@ -I $(FD_HEADER) 
 
 clean:
 	rm -rf $(FD_OBJ)
