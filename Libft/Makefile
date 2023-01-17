@@ -6,7 +6,7 @@
 #    By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/21 14:11:47 by youjeong          #+#    #+#              #
-#    Updated: 2022/12/28 23:52:05 by youjeong         ###   ########.fr        #
+#    Updated: 2023/01/15 14:26:35 by youjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,10 @@ NAME = libft.a
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
+
+FD_SOURCE = sources
+FD_HEADER = headers
+FD_OBJ = objs
 
 SRCS = ft_isalpha.c \
 		ft_isdigit.c \
@@ -48,43 +52,35 @@ SRCS = ft_isalpha.c \
 		ft_putchar_fd.c \
 		ft_putstr_fd.c \
 		ft_putendl_fd.c \
-		ft_putnbr_fd.c
-SRCS_BONUS = ft_lstnew.c \
-			ft_lstadd_front.c \
-			ft_lstsize.c \
-			ft_lstlast.c \
-			ft_lstadd_back.c \
-			ft_lstdelone.c \
-			ft_lstclear.c \
-			ft_lstiter.c \
-			ft_lstmap.c
-OBJS = ${SRCS:.c=.o}
-OBJS_BONUS = ${SRCS_BONUS:.c=.o}
-INCS = libft.h
+		ft_putnbr_fd.c \
+		ft_lstnew.c \
+		ft_lstadd_front.c \
+		ft_lstsize.c \
+		ft_lstlast.c \
+		ft_lstadd_back.c \
+		ft_lstdelone.c \
+		ft_lstclear.c \
+		ft_lstiter.c \
+		ft_lstmap.c
+OBJS = $(SRCS:.c=.o)
 
-ifdef INPUT_BONUS
-	OBJS_FILES = ${OBJS} ${OBJS_BONUS}
-else
-	OBJS_FILES = ${OBJS}
-endif
+all : $(FD_OBJ) $(NAME)
 
-all : $(NAME)
-
-$(NAME) : $(OBJS_FILES)
+$(NAME) : ${addprefix $(FD_OBJ)/, $(OBJS)}
 	ar -rcus $@ $^
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@ -include $(INCS)
+$(FD_OBJ):
+	mkdir $@
 
-bonus:
-	make INPUT_BONUS=1 all
+$(FD_OBJ)/%.o: $(FD_SOURCE)/%.c
+	$(CC) $(CFLAGS) -c $^ -o $@ -I $(FD_HEADER) 
 
 clean:
-	rm -f $(OBJS) $(OBJS_BONUS)
+	rm -rf $(FD_OBJ)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: clean fclean re all bonus
+.PHONY: clean fclean re all

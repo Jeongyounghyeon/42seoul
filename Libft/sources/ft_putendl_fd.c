@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/26 18:31:44 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/17 16:14:39 by youjeong         ###   ########.fr       */
+/*   Created: 2022/12/27 19:36:43 by youjeong          #+#    #+#             */
+/*   Updated: 2023/01/14 20:21:44 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+int	ft_putendl_fd(char *s, int fd)
 {
-	char	*res;
-	size_t	s1_len;
-	size_t	s2_len;
+	int	res;
 
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	res = (char *)malloc((s1_len + s2_len + 1) * sizeof(char));
-	if (res == 0)
-		return (0);
-	ft_strlcpy(res, s1, s1_len + 1);
-	ft_strlcat(res, s2, s1_len + s2_len + 1);
-	res[s1_len + s2_len] = 0;
+	res = 0;
+	res += write(fd, s, ft_strlen(s));
+	if (res == -1)
+		return (res);
+	res += write(fd, "\n", 1);
 	return (res);
 }
