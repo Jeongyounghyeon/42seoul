@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 16:25:57 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/25 15:24:45 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/01/29 17:06:36 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,17 @@
 # define BUFFER_SIZE 1024
 #endif
 
-char	*get_next_line(int fd);
-size_t	update_str_gnl(char *res, char c);
+typedef struct s_backup
+{
+	int			fd;
+	char		*buffer;
+	t_backup	*next;
+}t_backup;
+
+size_t		ft_strlen(const char *s);
+int			find_nl(char *buffer);
+char		*strjoin_endc(char *str1, char *str2, char c);
+t_backup	*add_backup(t_backup **lst_backup, t_backup *backup, int fd);
+t_backup	*pop_backup(t_backup **lst_backup, int fd);
 
 #endif
