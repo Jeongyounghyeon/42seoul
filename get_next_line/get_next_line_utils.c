@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 20:02:27 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/29 21:41:49 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/01/30 23:31:25 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,119 +16,93 @@ size_t	ft_strlen(const char *s)
 {
 	int		res;
 
+	if (!s)
+		return (0);
 	res = 0;
-	while (*s)
-	{
+	while (*s++)
 		res++;
-		s++;
-	}
 	return (res);
 }
 
-int	find_nl(char *buffer)
-{
-	int	ind;
-
-	ind = 0;
-	while (buffer[ind])
-	{
-		if (buffer[ind] == '\n')
-			return (ind);
-		ind++;
-	}
-	return (-1);	
-}
-
-char	*strjoin_endc(char *str1, char *str2, char c)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*res;
-	char	*plstr;
-	char	*pres;
-	int		len;
+	size_t	s1_len;
+	size_t	s2_len;
+	size_t	i;
 
-	len = 0;
-	plstr = str1;
-	while (plstr && *plstr && (*plstr++ != c))
-		len++;
-	plstr = str2;
-	while (plstr && *plstr && (*plstr++ != c))
-		len++;
-	res = (char *)malloc((len + 1) * sizeof(char));
-	if (!res)
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	res = (char *)malloc((s1_len + s2_len + 1) * sizeof(char));
+	if (res == 0)
 		return (0);
-	pres = res;
-	plstr = str1;
-	while (plstr && *plstr && (*plstr != c))
-		*pres++ = plstr++;
-	plstr = str2;
-	while (plstr && *plstr && (*plstr != c))
-		*pres++ = plstr++;
+	i = 0;
+	while (s1 && *s1)
+	{
+		res[i] = *s1++;
+		i++;
+	}
+	while (s2 && *s2)
+	{
+		res[i] = *s2++;
+		i++;
+	}
+	res[i] = 0;
 	return (res);
 }
 
-t_backup	*add_backup(t_backup **lst_backup, t_backup *backup, int fd)
+t_backup	*add_backup(t_backup **lst_backup, int fd)
 {
 	t_backup	*new_backup;
-	
-	if (!backup)
-		new_backup = backup;
-	else
-	{
-		new_backup = (t_backup *)malloc(1 * sizeof(t_backup));
-		if (!new_backup)
-			return (0);
-		new_backup->buffer = 0;
-		new_backup->buffer = (char *)malloc((BUFFER_SIZE * 1) * sizeof(char));
-		if (!(new_backup->buffer))
-		{
-			free (new_backup);
-			return (0);
-		}
-		(new_backup->buffer)[0] = 0;
-	}
+
+	new_backup = (t_backup *)malloc(1 * sizeof(t_backup));
+	if (!new_backup)
+		return (0);
 	new_backup->fd = fd;
+	new_backup->buffer = 0;
 	new_backup->next = *lst_backup;
 	*lst_backup = new_backup;
 	return (new_backup);
 }
 
-t_backup	*pop_backup(t_backup **lst_backup, int fd)
+void	remove_backup(t_backup **lst_backup, int fd)
 {
-	t_backup	*pop_backup;
-	t_backup	*qoq_backup;
+	t_backup	*pbackup;
+	t_backup	*qbackup;
 
-	pop_backup = *lst_backup;
-	qoq_backup = *lst_backup;
-	while (pop_backup)
+	pbackup = *lst_backup;
+	while (pbackup)
 	{
-		qoq_backup = pop_backup;
-		if (pop_backup->fd == fd)
+		if (pbackup->fd == fd)
 		{
-			if (pop_backup == *lst_backup)
-			{
-				*lst_backup = pop_backup->next;
-				return (pop_backup);
-			}
+			if (pbackup == *lst_backup)
+				*lst_backup = (*lst_backup)->next;
 			else
-			{
-				qoq_backup->next = pop_backup->next;
-				return (pop_backup);
-			}
+				qbackup->next = pbackup->next;
+			if (pbackup->buffer)
+				free(pbackup->buffer);
+			free(pbackup);
+			break;
 		}
-		pop_backup = pop_backup->next;
+		qbackup = pbackup;
+		pbackup = pbackup->next;
 	}
-	return (0);
 }
 
-t_backup	*pop_backup2(t_backup **lst_backup, int fd)
+t_backup	*find_add_backup(t_backup **lst_backup, int fd)
 {
 	t_backup	*pbackup;
 
 	if (!(*lst_backup))
-		return (0);
+		return (add_backup(lst_backup, fd));
 	pbackup = *lst_backup;
-	while ((pbackup->next) && (pbackup->fd != fd))
+	while (pbackup->next)
+	{
+		if (pbackup->fd == fd)
+			return (pbackup);
 		pbackup = pbackup->next;
+	}
 	if (pbackup->fd == fd)
-		
+		return (pbackup);
+	return (add_backup(lst_backup, fd));
 }

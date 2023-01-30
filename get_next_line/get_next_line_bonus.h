@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:55:45 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/27 21:04:29 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:27:06 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,21 @@
 # include <stdlib.h>
 
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1024
+# define BUFFER_SIZE 42
 #endif
 
 typedef struct s_backup
 {
-	int			fd;
-	char		*buffer;
-	t_backup	*next;
+	int				fd;
+	char			*buffer;
+	struct s_backup	*next;
 }t_backup;
 
-size_t	ft_strlen(const char *s);
-char	*update_buffer(char const *s1, char const *s2);
+char	*get_next_line(int fd);
+size_t		ft_strlen(const char *s);
+char	*ft_strjoin(char const *s1, char const *s2);
+t_backup	*add_backup(t_backup **lst_backup, int fd);
+void	remove_backup(t_backup **lst_backup, int fd);
+t_backup	*find_add_backup(t_backup **lst_backup, int fd);
 
 #endif
