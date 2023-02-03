@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 20:02:27 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/30 23:31:25 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/02/03 15:54:18 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,24 @@ size_t	ft_strlen(const char *s)
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*res;
-	size_t	s1_len;
-	size_t	s2_len;
 	size_t	i;
 
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	res = (char *)malloc((s1_len + s2_len + 1) * sizeof(char));
+	res = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (res == 0)
 		return (0);
 	i = 0;
-	while (s1 && *s1)
-	{
-		res[i] = *s1++;
-		i++;
-	}
-	while (s2 && *s2)
-	{
-		res[i] = *s2++;
-		i++;
-	}
+	if (s1)
+		while (*s1)
+		{
+			res[i] = *s1++;
+			i++;
+		}
+	if (s2)
+		while (*s2)
+		{
+			res[i] = *s2++;
+			i++;
+		}
 	res[i] = 0;
 	return (res);
 }

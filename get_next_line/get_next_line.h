@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 16:25:57 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/30 21:26:53 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/02/03 18:20:07 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 42
+# define BUFFER_SIZE 8
 #endif
 
 typedef struct s_backup

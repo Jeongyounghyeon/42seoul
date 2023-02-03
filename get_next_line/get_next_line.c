@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 16:27:31 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/30 23:21:47 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/02/03 18:37:44 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_strldup(char *str, size_t size)
 	if (!res)
 		return (0);
 	i = 0;
-	while (*str && (i < size))
+	while (str[i] && (i < size))
 	{
 		res[i] = str[i];
 		i++;
@@ -68,12 +68,12 @@ static int	read_nl(t_backup *backup, int fd)
 		rm_buffer = backup->buffer;
 		backup->buffer = ft_strjoin(backup->buffer, buffer);
 		free(rm_buffer);
-		if (ft_strlen(backup->buffer) == 0)
+		if ((backup->buffer) == 0)
 			break ;
 		rd = read(fd, buffer, BUFFER_SIZE);
 	}
 	free(buffer);
-	if (rd == -1)
+	if (rd == -1 || (backup->buffer) == 0)
 		return (0);
 	return (1);
 }
@@ -117,7 +117,72 @@ char	*get_next_line(int fd)
 	if (!backup)
 		return (0);
 	line = get_line(backup, fd);
+	if (!line)
+		remove_backup(&lst_backup, fd);
 	if (ft_strlen(backup->buffer) == 0)
 		remove_backup(&lst_backup, fd);
 	return (line);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include <stdio.h>
+#include <fcntl.h> 
+
+int main()
+{
+	char  	buff[BUFFER_SIZE];
+	int   	fd;
+	int		res_rd;
+	char 	*res;
+	char	c;
+
+	/*
+	fd = open( "test.txt", O_RDONLY);
+	while (0 != (res = get_next_line(fd))){
+		printf("%s", res);
+	}
+	*/
+
+	buff[2] = 0;
+	fd = open( "test.txt", O_RDONLY);
+	while ((res = get_next_line(fd))){
+		printf("%s", res);
+	}
+
+	return 0;
+}
+

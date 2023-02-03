@@ -34,7 +34,8 @@ int main()
 {
 	char  	buff[BUFFER_SIZE];
 	int   	fd;
-	char 	res[12];
+	int		res_rd;
+	char 	*res;
 	char	c;
 
 	/*
@@ -46,7 +47,7 @@ int main()
 
 	buff[2] = 0;
 	fd = open( "test.txt", O_RDONLY);
-	while (0 < (read(fd, res, 4))){
+	while (!(res = get_next_line(fd))){
 		printf("%s", res);
 	}
 
