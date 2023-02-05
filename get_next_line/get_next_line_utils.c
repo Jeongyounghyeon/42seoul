@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 20:02:27 by youjeong          #+#    #+#             */
-/*   Updated: 2023/02/03 15:54:18 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/02/05 14:22:21 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_strlen(const char *s)
 {
-	int		res;
+	size_t		res;
 
 	if (!s)
 		return (0);
@@ -34,17 +34,21 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (0);
 	i = 0;
 	if (s1)
+	{
 		while (*s1)
 		{
 			res[i] = *s1++;
 			i++;
 		}
+	}
 	if (s2)
+	{
 		while (*s2)
 		{
 			res[i] = *s2++;
 			i++;
 		}
+	}
 	res[i] = 0;
 	return (res);
 }
@@ -80,7 +84,7 @@ void	remove_backup(t_backup **lst_backup, int fd)
 			if (pbackup->buffer)
 				free(pbackup->buffer);
 			free(pbackup);
-			break;
+			break ;
 		}
 		qbackup = pbackup;
 		pbackup = pbackup->next;

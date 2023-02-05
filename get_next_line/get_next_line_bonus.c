@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 14:13:46 by youjeong          #+#    #+#             */
-/*   Updated: 2023/01/30 23:09:09 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/02/05 14:53:07 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	find_nl(char *buffer)
 			return (ind);
 		ind++;
 	}
-	return (-1);	
+	return (-1);
 }
 
 char	*ft_strldup(char *str, size_t size)
@@ -40,7 +40,7 @@ char	*ft_strldup(char *str, size_t size)
 	if (!res)
 		return (0);
 	i = 0;
-	while (*str && (i < size))
+	while (str[i] && (i < size))
 	{
 		res[i] = str[i];
 		i++;
@@ -61,19 +61,19 @@ static int	read_nl(t_backup *backup, int fd)
 		return (0);
 	rd = read(fd, buffer, BUFFER_SIZE);
 	ind_nl = -1;
-	while ((rd > 0) && (ind_nl == -1))
+	while (rd > 0)
 	{
 		buffer[rd] = 0;
 		ind_nl = find_nl(buffer);
 		rm_buffer = backup->buffer;
 		backup->buffer = ft_strjoin(backup->buffer, buffer);
 		free(rm_buffer);
-		if (ft_strlen(backup->buffer) == 0)
+		if ((backup->buffer) == 0 || (ind_nl != -1))
 			break ;
 		rd = read(fd, buffer, BUFFER_SIZE);
 	}
 	free(buffer);
-	if (rd == -1)
+	if (rd == -1 || (backup->buffer) == 0)
 		return (0);
 	return (1);
 }
@@ -91,6 +91,7 @@ static char	*get_line(t_backup *backup, int fd)
 		{
 			if (backup->buffer)
 				free(backup->buffer);
+				backup->buffer = 0;
 			return (0);
 		}
 		ind_nl = find_nl(backup->buffer);
@@ -112,13 +113,17 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-	line = 0;	
+	line = 0;
 	backup = find_add_backup(&lst_backup, fd);
 	if (!backup)
 		return (0);
 	line = get_line(backup, fd);
-	if (ft_strlen(backup->buffer) == 0)
+	if (!line)
+	{
+		remove_backup(&lst_backup, fd);
+		backup = 0;
+	}
+	if (backup && ft_strlen(backup->buffer) == 0)
 		remove_backup(&lst_backup, fd);
 	return (line);
 }
-
