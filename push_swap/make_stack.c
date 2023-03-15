@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 14:31:10 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/15 20:22:39 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/03/15 21:30:20 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,29 @@ static char	*strarr_join(char **strs_in)
 	return (res);
 }
 
-static int	*strstoi(char **strs)
+static t_stack	*strstostack(char **strs)
 {
-	int 	*res;
-	char	*str_num;
+	t_stack *stack;
+	char	**str_num;
+	int		data;
 	
+	stack = initstack();
+	if (!stack)
+		return (0);
 	str_num = strs;
-	while (str_num)
+	while (*str_num)
 	{
-		// str_num을 int로 바꿔서 res에 넣기
-		
+		// str_num을 node로 바꿔서 stack에 넣기
+		if (!isint(str_num))
+		{
+			free_stack(stack);
+			return (0);
+		}
+		data = atoi(str_num);
+		push(stack, data);
 		str_num++;
 	}
-
-	return (res);
+	return (stack);
 }
 
 static int	*pretreat_strs(char **strs_in)
