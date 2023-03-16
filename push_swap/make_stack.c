@@ -26,10 +26,7 @@ static char	*strarr_join(char **strs_in)
 	{
 		res = strjoin_sep(res, *pinstr, ' ');
 		if (!res)
-		{
-			free(res);
 			return (0);
-		}
 		pinstr++;
 	}
 	return (res);
@@ -47,59 +44,31 @@ static t_stack	*strstostack(char **strs)
 	str_num = strs;
 	while (*str_num)
 	{
-		// str_num을 node로 바꿔서 stack에 넣기
-		if (!isint(str_num))
+		if (!isint(str_num) || (push(stack, atoi(str_num)) == ERROR))
 		{
 			free_stack(stack);
 			return (0);
 		}
-		data = atoi(str_num);
-		push(stack, data);
 		str_num++;
 	}
 	return (stack);
 }
 
-static int	*pretreat_strs(char **strs_in)
-{
-	int		*data_stack;
-	char	**strs;
-	char	*str_join;
-
-	str_join = strarr_join(strs_in);
-	if (!str_join)
-		return (0);
-	strs = ft_split(str_join, ' ');
-	if (!strs)
-	{
-		free (str_join);
-		return (0);
-	}
-	data_stack = strstoi(strs);
-	free (str_join);
-	free_char2 (strs);
-	return (data_stack);
-}
-
 t_stack	*make_stack(char **strs_in)
 {
 	t_stack	*stack;
-	int		*data_stack;
+	char	*str_join;
+	char	**strs;
 
-	data_stack = pretreat_strs(strs_in);
-	if (!data_stack)
+	str_join = strarr_join(strs_in);
+	free (strs_in);
+	if (!str_join)
 		return (0);
-	stack = initstack();
-	if (!stack)
-	{
-		free (data_stack);
+	strs = ft_split(str_join, ' ');
+	free (str_join);
+	if (!strs)
 		return (0);
-	}
-	if (push_arr(stack, data_stack) == ERROR)
-	{
-		free(data_stack);
-		free_stack(stack);
-		return (0);
-	}
+	stack = strstostack(strs);
+	free (strs);
 	return (stack);
 }

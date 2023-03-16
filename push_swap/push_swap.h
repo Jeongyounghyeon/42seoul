@@ -32,10 +32,21 @@ typedef struct s_stack {
 }t_stack;
 
 
-
-
 t_stack	*make_stack(char **strs_in);
 char	**ft_split(char const *s, char c);
+
+// free_type
+void	free_char2(char **strs);
+void	free_stack(stack *stack);
+
+// stack & stack_func
+t_node	*getnode();
+void	initstack(t_stack *stack);
+int emptystack(t_stack *stack);
+int	push(t_stack *stack, int data);
+int	push_bottom(t_stack *stack, int data);
+int pop(t_stack *stack);
+int pop_bottom(t_stack *stack);
 
 // valid
 int		isint(char *str);

@@ -12,11 +12,34 @@
 
 #include "push_swap.h"
 
+int	push_swap(char **argv)
+{
+	t_stack	*stack_a;
+	
+	stack_a = make_stack(argv);
+	if (!stack_a)
+		return (ERROR);
+
+	// start_test
+	write (1, "--------------------------------------------------<Input Test>--------------------------------------------------\n", 113);
+	write (1, "Input:\n", 7)
+	while (emptystack(stack_a))
+	{
+		write(1, " ", 1);
+		write(1, )
+	}
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
+	int	res;
+
 	if (argc == 1)
 		return (0);
-	// make_stack
-	// stack 처리
-	/**/
+	
+	res = push_swap(argv + 1);
+	if (res == ERROR)
+		write(1, "Error\n", 6);
+	return (0);
 }

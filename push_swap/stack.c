@@ -10,4 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <>
+#include "push_swap.h"
+
+t_node	*getnode()
+{
+    t_node	*new_node;
+
+    new_node = (t_node *)malloc(1 * sizeof(t_node));
+    if (!new_node)
+        return (0);
+    new_node->data = 0;
+    new_node->next = 0;
+    new_node->prev = 0;
+    return (new_node);
+}
+
+void	initstack(t_stack *stack)
+{
+    stack->top = 0;
+    stack->bottom = 0;
+}

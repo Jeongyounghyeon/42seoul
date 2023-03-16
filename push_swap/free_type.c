@@ -10,7 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#incldue "push_swap.h"
+#include "push_swap.h"
 
-void	free_char2(char **strs);
-void	free_stack(stack *stack);
+void	free_char2(char **strs)
+{
+    char    **pstrs;
+
+    pstrs = strs;
+    while (!(*pstrs))
+    {
+        free(*pstrs);
+        pstrs++;
+    }
+    free(strs);
+}
+void	free_stack(stack *stack)
+{
+    t_node  *pnode;
+
+    while (!empty_stack(stack))
+    {
+        pop(stack);
+    }
+    free (stack);
+}
