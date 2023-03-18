@@ -39,12 +39,12 @@ static t_stack	*strstostack(char **strs)
 	int		data;
 	
 	stack = initstack();
-	if (!stack)
+	if (!stack) =
 		return (0);
 	str_num = strs;
 	while (*str_num)
 	{
-		if (!isint(str_num) || (push(stack, atoi(str_num)) == ERROR))
+		if (!isint(str_num) || (push(stack, ft_atoi(str_num)) == ERROR))
 		{
 			free_stack(stack);
 			return (0);
@@ -61,7 +61,6 @@ t_stack	*make_stack(char **strs_in)
 	char	**strs;
 
 	str_join = strarr_join(strs_in);
-	free (strs_in);
 	if (!str_join)
 		return (0);
 	strs = ft_split(str_join, ' ');
@@ -69,6 +68,6 @@ t_stack	*make_stack(char **strs_in)
 	if (!strs)
 		return (0);
 	stack = strstostack(strs);
-	free (strs);
+	free_char2(strs);
 	return (stack);
 }

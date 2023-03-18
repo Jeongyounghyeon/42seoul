@@ -19,15 +19,6 @@ int	push_swap(char **argv)
 	stack_a = make_stack(argv);
 	if (!stack_a)
 		return (ERROR);
-
-	// start_test
-	write (1, "--------------------------------------------------<Input Test>--------------------------------------------------\n", 113);
-	write (1, "Input:\n", 7)
-	while (emptystack(stack_a))
-	{
-		write(1, " ", 1);
-		write(1, )
-	}
 	return (0);
 }
 

@@ -53,12 +53,14 @@ int		isint(char *str);
 
 // utils1
 int		ft_isdigit(int c);
+static int	ft_isspace(char c);
 int		ft_strlen(char *str);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char	*ft_strdup(const char *s1);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 // utils2
+int	ft_atoi(const char *str);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*strjoin_sep(char *str0, char *str1, char sep);
 
 

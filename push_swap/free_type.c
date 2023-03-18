@@ -16,6 +16,8 @@ void	free_char2(char **strs)
 {
     char    **pstrs;
 
+    if (!strs)
+        exit (1);
     pstrs = strs;
     while (!(*pstrs))
     {
@@ -26,11 +28,9 @@ void	free_char2(char **strs)
 }
 void	free_stack(stack *stack)
 {
-    t_node  *pnode;
-
+    if (!stack)
+        exit (1);
     while (!empty_stack(stack))
-    {
         pop(stack);
-    }
     free (stack);
 }

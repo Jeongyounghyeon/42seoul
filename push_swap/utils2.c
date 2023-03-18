@@ -12,6 +12,47 @@
 
 #include "push_swap.h"
 
+int	ft_atoi(const char *str)
+{
+	int	sign;
+	int	i;
+	int	res;
+
+	sign = 1;
+	i = 0;
+	while (ft_isspace(str[i]))
+		i++;
+	res = 0;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i++] == '-')
+			sign = -1;
+		else
+			sign = 1;
+	}	
+	while (ft_isdigit(str[i]))
+		res = (res * 10) + (str[i++] - '0');
+	return (sign * res);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*sub;
+	size_t	sl;
+
+	sub = 0;
+	sl = ft_strlen(s);
+	if (len > (sl - start))
+		len = sl - start;
+	if (start > sl)
+		return (ft_strdup(""));
+	sub = (char *)malloc((len + 1) * sizeof(char));
+	if (sub == 0)
+		return (0);
+	ft_strlcpy(sub, s + start, len + 1);
+	return (sub);
+}
+
 char	*strjoin_sep(char *str0, char *str1, char sep)
 {
 	char	*res;
@@ -29,14 +70,10 @@ char	*strjoin_sep(char *str0, char *str1, char sep)
 	if (!res)
 		return (0);
 	pres = res;
-	if (str0)
-		while (*str0)
-			*pres++ = *str0++;
+	pres = pres + ft_strlcpy(pres, str0, str_len[0]);
 	if ((str_len[0] > 0) && (str_len[1] > 0))
 		*pres++ = sep;
-	if (str1)
-		while (*str1)
-			*pres++ = *str1++;
+	pres = pres + ft_strlcpy(pres, str1, str_len[1]);
 	*pres = 0;
 	return (res);
 }
