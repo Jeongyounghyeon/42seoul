@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 21:17:28 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/20 15:59:03 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/03/20 19:50:00 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct s_stack {
 	t_node	*bottom;
 }t_stack;
 
-
 t_stack	*make_stack(char **strs_in);
 char	**ft_split(char const *s, char c);
 
@@ -40,15 +39,27 @@ void	free_char2(char **strs);
 void	free_stack(t_stack *stack);
 
 // stack & stack_func
-t_node	*getnode();
+t_node	*getnode(void);
 void	initstack(t_stack *stack);
-int emptystack(t_stack *stack);
-int	push(t_stack *stack, int data);
-int	push_bottom(t_stack *stack, int data);
-int pop(t_stack *stack);
-int pop_bottom(t_stack *stack);
-int isinstack(t_stack *stack, int data);
+int		emptystack(t_stack *stack);
+int		push(t_stack *stack, int data);
+int		push_bottom(t_stack *stack, int data);
+int		pop(t_stack *stack);
+int		pop_bottom(t_stack *stack);
+int		isinstack(t_stack *stack, int data);
 
+// cmd
+int		sa(t_stack *stack);
+int		pa(t_stack *stack_a, t_stack *stack_b);
+int		ra(t_stack *stack);
+int		rra(t_stack *stack);
+int		sb(t_stack *stack);
+int		pb(t_stack *stack_b, t_stack *stack_a);
+int		rb(t_stack *stack);
+int		rrb(t_stack *stack);
+int		ss(t_stack *stack_b, t_stack *stack_a);
+int		rr(t_stack *stack_b, t_stack *stack_a);
+int		rrr(t_stack *stack_b, t_stack *stack_a);
 
 // valid
 int		isint(char *str);
@@ -61,11 +72,9 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char	*ft_strdup(const char *s1);
 
 // utils2
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_atoi(const char *str);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*strjoin_sep(char *str0, char *str1, char sep);
-
-
-
 
 #endif

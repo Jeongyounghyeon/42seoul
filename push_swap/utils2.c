@@ -6,11 +6,31 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 21:09:47 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/20 17:00:37 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/03/20 18:59:39 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t			i;
+	unsigned char	*c1;
+	unsigned char	*c2;
+
+	i = 0;
+	c1 = (unsigned char *)s1;
+	c2 = (unsigned char *)s2;
+	while (i < n)
+	{
+		if (c1[i] != c2[i])
+			return (c1[i] - c2[i]);
+		if ((c1[i] == 0) || (c2[i] == 0))
+			return (c1[i] - c2[i]);
+		i++;
+	}
+	return (0);
+}
 
 int	ft_atoi(const char *str)
 {

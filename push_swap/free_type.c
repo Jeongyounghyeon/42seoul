@@ -14,23 +14,24 @@
 
 void	free_char2(char **strs)
 {
-    char    **pstrs;
+	char	**pstrs;
 
-    if (!strs)
-        exit (1);
-    pstrs = strs;
-    while (*pstrs)
-    {
-        free(*pstrs);
-        pstrs++;
-    }
-    free(strs);
+	if (!strs)
+		exit (1);
+	pstrs = strs;
+	while (*pstrs)
+	{
+		free(*pstrs);
+		pstrs++;
+	}
+	free(strs);
 }
+
 void	free_stack(t_stack *stack)
 {
-    if (!stack)
-        exit (1);
-    while (!emptystack(stack))
-        pop(stack);
-    free (stack);
+	if (!stack)
+		exit (1);
+	while (!emptystack(stack))
+		pop(stack);
+	free (stack);
 }

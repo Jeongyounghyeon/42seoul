@@ -15,8 +15,6 @@
 int	isint(char *str)
 {
 	char	*absol_value;
-	int		len_str;
-	int		len_absol;
 
 	if (!str)
 		return (ERROR);
@@ -26,15 +24,13 @@ int	isint(char *str)
 		absol_value = "2147483648";
 		str++;
 	}
-	len_str = ft_strlen(str);
-	len_absol = ft_strlen(absol_value);
-	if (len_str < len_absol)
+	if (ft_strlen(str) < ft_strlen(absol_value))
 	{
 		while (*str)
 			if (!ft_isdigit(*str++))
 				return (FALSE);
 	}
-	else if (len_str > len_absol)
+	else if (ft_strlen(str) > ft_strlen(absol_value))
 		return (FALSE);
 	else
 		while (*str)

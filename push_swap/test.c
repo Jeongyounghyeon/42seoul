@@ -4,7 +4,8 @@
 int	push_swap(char **argv)
 {
 	t_stack	*stack_a;
-	
+	int i;
+
 	stack_a = make_stack(argv);
 	if (!stack_a)
 		return (ERROR);
@@ -16,6 +17,31 @@ int	push_swap(char **argv)
 		printf(" %d,", pop_bottom(stack_a));
 	printf("\n");
 	printf("-----------------------------------------------<Input Test Close>-----------------------------------------------\n");
+	stack_a = make_stack(argv);
+	printf("Stack:\n");
+	while (!emptystack(stack_a))
+		printf(" %d,", pop(stack_a));
+	printf("\n");
+	printf("-------------------------------------------------<commend Test>-------------------------------------------------\n");
+	stack_a = make_stack(argv);
+	printf("sa test:\n");
+	sa(stack_a);
+	while (!emptystack(stack_a))
+		printf(" %d,", pop(stack_a));
+	printf("\n");
+	stack_a = make_stack(argv);
+	printf("ra test:\n");
+	ra(stack_a);
+	while (!emptystack(stack_a))
+		printf(" %d,", pop(stack_a));
+	printf("\n");
+	stack_a = make_stack(argv);
+	printf("rra test:\n");
+	rra(stack_a);
+	while (!emptystack(stack_a))
+		printf(" %d,", pop(stack_a));
+	printf("\n");
+	printf("----------------------------------------------<commend Test Close>----------------------------------------------\n");
 	return (0);
 }
 

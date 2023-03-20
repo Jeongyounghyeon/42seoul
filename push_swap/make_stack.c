@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 14:31:10 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/20 16:59:28 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/03/20 19:26:07 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static char	*strarr_join(char **strs_in)
 {
 	char	*res;
-	char	*pstr;
 	char	**pinstr;
 
 	if (!strs_in)
@@ -37,7 +36,7 @@ static t_stack	*strstostack(char **strs)
 	t_stack	*stack;
 	char	**str_num;
 	int		data;
-	
+
 	stack = (t_stack *)malloc(1 * sizeof(stack));
 	if (!stack)
 		return (0);
