@@ -6,9 +6,11 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 14:37:21 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/15 21:09:44 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/03/20 16:03:25 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "push_swap.h"
 
 int	ft_isdigit(int c)
 {
@@ -18,7 +20,7 @@ int	ft_isdigit(int c)
 		return (0);
 }
 
-int	ft_isspace(char c)
+int	ft_isspace(const char c)
 {
 	if (c == '\t' || c == '\n' || c == '\v'
 		|| c == '\f' || c == '\r' || c == ' ')
@@ -27,7 +29,7 @@ int	ft_isspace(char c)
 		return (0);
 }
 
-int	ft_strlen(char *str)
+int	ft_strlen(const char *str)
 {
 	int	res;
 
@@ -69,22 +71,4 @@ char	*ft_strdup(const char *s1)
 		return (0);
 	ft_strlcpy(res, s1, size + 1);
 	return (res);
-}
-
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	char	*sub;
-	size_t	sl;
-
-	sub = 0;
-	sl = ft_strlen(s);
-	if (len > (sl - start))
-		len = sl - start;
-	if (start > sl)
-		return (ft_strdup(""));
-	sub = (char *)malloc((len + 1) * sizeof(char));
-	if (sub == 0)
-		return (0);
-	ft_strlcpy(sub, s + start, len + 1);
-	return (sub);
 }

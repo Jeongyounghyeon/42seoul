@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 21:17:28 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/15 21:20:36 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/03/20 15:59:03 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	**ft_split(char const *s, char c);
 
 // free_type
 void	free_char2(char **strs);
-void	free_stack(stack *stack);
+void	free_stack(t_stack *stack);
 
 // stack & stack_func
 t_node	*getnode();
@@ -55,13 +55,13 @@ int		isint(char *str);
 
 // utils1
 int		ft_isdigit(int c);
-static int	ft_isspace(char c);
-int		ft_strlen(char *str);
+int		ft_isspace(const char c);
+int		ft_strlen(const char *str);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char	*ft_strdup(const char *s1);
 
 // utils2
-int	ft_atoi(const char *str);
+int		ft_atoi(const char *str);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*strjoin_sep(char *str0, char *str1, char sep);
 

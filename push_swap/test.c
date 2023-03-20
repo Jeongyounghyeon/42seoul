@@ -9,11 +9,11 @@ int	push_swap(char **argv)
 	if (!stack_a)
 		return (ERROR);
 
-	// start_test
+	// start_stest
 	printf("--------------------------------------------------<Input Test>--------------------------------------------------\n");
-	printf("Input:\n")
-	while (emptystack(stack_a))
-		printf(" %d," pop_bottom(stack_a));
+	printf("Input:\n");
+	while (!emptystack(stack_a))
+		printf(" %d,", pop_bottom(stack_a));
 	printf("\n");
 	printf("-----------------------------------------------<Input Test Close>-----------------------------------------------\n");
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 21:09:47 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/15 21:10:05 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/03/20 17:00:37 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ char	*strjoin_sep(char *str0, char *str1, char sep)
 	if (!res)
 		return (0);
 	pres = res;
-	pres = pres + ft_strlcpy(pres, str0, str_len[0]);
+	pres = pres + ft_strlcpy(pres, str0, str_len[0] + 1);
 	if ((str_len[0] > 0) && (str_len[1] > 0))
 		*pres++ = sep;
-	pres = pres + ft_strlcpy(pres, str1, str_len[1]);
+	pres = pres + ft_strlcpy(pres, str1, str_len[1] + 1);
 	*pres = 0;
 	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 14:31:10 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/15 21:30:20 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/03/20 16:59:28 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,24 @@ static char	*strarr_join(char **strs_in)
 
 static t_stack	*strstostack(char **strs)
 {
-	t_stack *stack;
+	t_stack	*stack;
 	char	**str_num;
 	int		data;
 	
-	stack = initstack();
+	stack = (t_stack *)malloc(1 * sizeof(stack));
 	if (!stack)
 		return (0);
+	initstack(stack);
 	str_num = strs;
 	while (*str_num)
 	{
-		data = ft_atoi(str_num);
-		if (!isint(str_num) || isinstack(stack, data)
-			|| (push(stack, data) == ERROR))
+		data = ft_atoi(*str_num);
+		if (!isint(*str_num) || isinstack(stack, data))
 		{
 			free_stack(stack);
 			return (0);
 		}
-		(push(stack, data) == ERROR)
+		if (push(stack, data) == ERROR)
 		{
 			free_stack(stack);
 			return (0);
