@@ -47,6 +47,8 @@ int	push(t_stack *stack, int data);
 int	push_bottom(t_stack *stack, int data);
 int pop(t_stack *stack);
 int pop_bottom(t_stack *stack);
+int isinstack(t_stack *stack, int data);
+
 
 // valid
 int		isint(char *str);

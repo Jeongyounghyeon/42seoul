@@ -39,12 +39,19 @@ static t_stack	*strstostack(char **strs)
 	int		data;
 	
 	stack = initstack();
-	if (!stack) =
+	if (!stack)
 		return (0);
 	str_num = strs;
 	while (*str_num)
 	{
-		if (!isint(str_num) || (push(stack, ft_atoi(str_num)) == ERROR))
+		data = ft_atoi(str_num);
+		if (!isint(str_num) || isinstack(stack, data)
+			|| (push(stack, data) == ERROR))
+		{
+			free_stack(stack);
+			return (0);
+		}
+		(push(stack, data) == ERROR)
 		{
 			free_stack(stack);
 			return (0);
