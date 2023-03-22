@@ -6,13 +6,13 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:46:03 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/20 19:46:04 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:46:04 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	sb(t_stack *stack)
+int	execute_sb(t_stack *stack)
 {
 	int	data1;
 	int	data2;
@@ -28,7 +28,7 @@ int	sb(t_stack *stack)
 	return (0);
 }
 
-int	pb(t_stack *stack_b, t_stack *stack_a)
+int	execute_pb(t_stack *stack_b, t_stack *stack_a)
 {
 	if (emptystack(stack_a))
 		return (0);
@@ -37,7 +37,7 @@ int	pb(t_stack *stack_b, t_stack *stack_a)
 	return (0);
 }
 
-int	rb(t_stack *stack)
+int	execute_rb(t_stack *stack)
 {
 	int	data;
 
@@ -47,7 +47,7 @@ int	rb(t_stack *stack)
 	return (push_bottom(stack, data));
 }
 
-int	rrb(t_stack *stack)
+int	execute_rrb(t_stack *stack)
 {
 	int	data;
 

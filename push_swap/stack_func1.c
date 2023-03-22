@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 20:05:25 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/20 19:35:40 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:22:02 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	push(t_stack *stack, int data)
 {
 	t_node	*new_node;
 
-	new_node = (t_node *)malloc(1 * sizeof(t_node));
+	new_node = getnode();
 	if (!new_node)
 		return (ERROR);
 	new_node->data = data;
@@ -41,7 +41,7 @@ int	push_bottom(t_stack *stack, int data)
 {
 	t_node	*new_node;
 
-	new_node = (t_node *)malloc(1 * sizeof(t_node));
+	new_node = getnode();
 	if (!new_node)
 		return (ERROR);
 	new_node->data = data;
@@ -81,7 +81,7 @@ int	pop_bottom(t_stack *stack)
 		exit (1);
 	pop_node = stack->bottom;
 	stack->bottom = stack->bottom->prev;
-	if (!(stack->bottom))
+	if (stack->bottom == 0)
 		stack->top = 0;
 	else
 		stack->bottom->next = 0;

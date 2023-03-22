@@ -1,34 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_sim.c                                          :+:      :+:    :+:   */
+/*   sort_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/20 19:45:59 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/22 16:47:01 by youjeong         ###   ########.fr       */
+/*   Created: 2023/03/21 20:31:38 by youjeong          #+#    #+#             */
+/*   Updated: 2023/03/22 17:16:25 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	execute_ss(t_stack *stack_b, t_stack *stack_a)
+int	partition(t_sort_params sprms)
 {
-	if ((sa(stack_a) == ERROR) || (sb(stack_b) == ERROR))
-		return (ERROR);
 	return (0);
 }
 
-int	execute_rr(t_stack *stack_b, t_stack *stack_a)
+int	sort_stack_a(t_sort_params *sprms)
 {
-	if ((ra(stack_a) == ERROR) || (rb(stack_b) == ERROR))
-		return (ERROR);
-	return (0);
-}
+	int	pivot1;
+	int	pivot2;
+	int	cnt_pb;
+	int	cnt_prb;
 
-int	execute_rrr(t_stack *stack_b, t_stack *stack_a)
-{
-	if ((rra(stack_a) == ERROR) || (rrb(stack_b) == ERROR))
-		return (ERROR);
+	//partition(&cnt_pb, &cnt_prb);
+	sort_stack_a(sprms);
+	while (!cnt_pb--)
+		execute_pb(sprms->stack_b, sprms->stack_a);
+	sort_stack_a(sprms);
+	while (!cnt_prb--)
+	{
+		execute_rrb(sprms->stack_b);
+		execute_pa(sprms->stack_b, sprms->stack_a);
+	}
+	sort_stack_a(sprms);
 	return (0);
 }
