@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack.c                                            :+:      :+:    :+:   */
+/*   deque.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/15 14:23:39 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/20 19:35:52 by youjeong         ###   ########.fr       */
+/*   Created: 2023/03/24 10:21:41 by youjeong          #+#    #+#             */
+/*   Updated: 2023/03/24 10:21:41 by youjeong         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,32 @@ t_node	*getnode(void)
 	return (new_node);
 }
 
-void	initstack(t_stack *stack)
+void	initdeque(t_deque *deque)
 {
-	stack->top = 0;
-	stack->bottom = 0;
-	stack->cnt = 0;
+	deque->front = 0;
+	deque->rear = 0;
+	deque->cnt = 0;
 }
+
+int	emptydeque(t_deque *deque)
+{
+	if (deque->cnt == 0)
+		return (TRUE);
+	else
+		return (FALSE);
+}
+
+int	isindeque(t_deque *deque, int data)
+{
+	t_node	*pnode;
+
+	pnode = deque->front;
+	while (pnode)
+	{
+		if (pnode->data == data)
+			return (TRUE);
+		pnode = pnode->next;
+	}
+	return (FALSE);
+}
+

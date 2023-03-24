@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/14 21:17:31 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/22 17:11:00 by youjeong         ###   ########.fr       */
+/*   Created: 2023/03/24 10:45:30 by youjeong          #+#    #+#             */
+/*   Updated: 2023/03/24 10:45:30 by youjeong         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,15 @@
 
 int	push_swap(char **argv)
 {
-	t_stack			*stack_a;
-	t_stack			stack_b;
-	t_sort_params	*sprms;
+	t_deque			*deque_a;
+	t_deque			deque_b;
 
-	stack_a = make_stack(argv);
-	initstack(&stack_b);
-	if (!stack_a)
+	deque_a = make_deque(argv);
+	initdeque(&deque_b);
+	if (!deque_a)
 		return (ERROR);
-	sprms = (t_sort_params *)malloc(1 * sizeof(t_sort_params));
-	if (!sprms)
-		return (ERROR);
-	initsprms(&sprms);
-	sprms->left = stack_a->top->data;
-	sprms->right = stack_a->bottom->data;
-	if (sort_stack(stack_a, &stack_b) == ERROR)
-		reutrn (ERROR);
+	// if (sort_deque(deque_a, &deque_b) == ERROR)
+	// 	reutrn (ERROR);
 	return (0);
 }
 
@@ -43,14 +36,4 @@ int	main(int argc, char **argv)
 	if (res == ERROR)
 		write(1, "Error\n", 6);
 	return (0);
-}
-
-void	initsprms(t_sort_params *sprms)
-{
-	sprms->stack_a = 0;
-	sprms->stack_b = 0;
-	sprms->pivot1 = 0;
-	sprms->pivot2 = 0;
-	sprms->left = 0;
-	sprms->right = 0;
 }

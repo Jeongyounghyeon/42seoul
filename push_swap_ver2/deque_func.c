@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_func1.c                                      :+:      :+:    :+:   */
+/*   deque_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/16 20:05:25 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/21 19:22:02 by youjeong         ###   ########.fr       */
+/*   Created: 2023/03/24 10:25:09 by youjeong          #+#    #+#             */
+/*   Updated: 2023/03/24 10:25:09 by youjeong         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	emptystack(t_stack *stack)
-{
-	if (stack->cnt == 0)
-		return (TRUE);
-	else
-		return (FALSE);
-}
-
-int	push(t_stack *stack, int data)
+int	push_front(t_deque *deque, int data)
 {
 	t_node	*new_node;
 
@@ -28,17 +20,17 @@ int	push(t_stack *stack, int data)
 	if (!new_node)
 		return (ERROR);
 	new_node->data = data;
-	new_node->next = stack->top;
-	if (emptystack(stack))
-		stack->bottom = new_node;
+	new_node->next = deque->front;
+	if (emptydeque(deque))
+		deque->rear = new_node;
 	else
 		new_node->next->prev = new_node;
-	stack->top = new_node;
-	(stack->cnt)++;
+	deque->front = new_node;
+	(deque->cnt)++;
 	return (0);
 }
 
-int	push_bottom(t_stack *stack, int data)
+int	push_rear(t_deque *deque, int data)
 {
 	t_node	*new_node;
 
@@ -46,50 +38,50 @@ int	push_bottom(t_stack *stack, int data)
 	if (!new_node)
 		return (ERROR);
 	new_node->data = data;
-	new_node->prev = stack->bottom;
-	if (emptystack(stack))
-		stack->top = new_node;
+	new_node->prev = deque->rear;
+	if (emptydeque(deque))
+		deque->front = new_node;
 	else
 		new_node->prev->next = new_node;
-	stack->bottom = new_node;
-	(stack->cnt)++;
+	deque->rear = new_node;
+	(deque->cnt)++;
 	return (0);
 }
 
-int	pop(t_stack *stack)
+int	pop_front(t_deque *deque)
 {
 	t_node	*pop_node;
 	int		pop_data;
 
-	if (emptystack(stack))
+	if (emptydeque(deque))
 		exit (1);
-	pop_node = stack->top;
-	stack->top = stack->top->next;
-	if (emptystack(stack))
-		stack->bottom = 0;
+	pop_node = deque->front;
+	deque->front = deque->front->next;
+	(deque->cnt)--;
+	if (emptydeque(deque))
+		deque->rear = 0;
 	else
-		stack->top->prev = 0;
+		deque->front->prev = 0;
 	pop_data = pop_node->data;
 	free(pop_node);
-	(stack->cnt)--;
 	return (pop_data);
 }
 
-int	pop_bottom(t_stack *stack)
+int	pop_rear(t_deque *deque)
 {
 	t_node	*pop_node;
 	int		pop_data;
 
-	if (emptystack(stack))
+	if (emptydeque(deque))
 		exit (1);
-	pop_node = stack->bottom;
-	stack->bottom = stack->bottom->prev;
-	if (stack->bottom == 0)
-		stack->top = 0;
+	pop_node = deque->rear;
+	deque->rear = deque->rear->prev;
+	(deque->cnt)--;
+	if (emptydeque(deque))
+		deque->front = 0;
 	else
-		stack->bottom->next = 0;
+		deque->rear->next = 0;
 	pop_data = pop_node->data;
 	free(pop_node);
-	(stack->cnt)--;
 	return (pop_data);
 }

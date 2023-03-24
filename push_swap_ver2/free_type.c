@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack.c                                            :+:      :+:    :+:   */
+/*   free_type.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/15 14:23:39 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/20 19:35:52 by youjeong         ###   ########.fr       */
+/*   Created: 2023/03/15 19:58:56 by youjeong          #+#    #+#             */
+/*   Updated: 2023/03/20 17:01:13 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_node	*getnode(void)
+void	free_2p(void **ptr)
 {
-	t_node	*new_node;
+	char	*pptr;
 
-	new_node = (t_node *)malloc(1 * sizeof(t_node));
-	if (!new_node)
-		return (0);
-	new_node->data = 0;
-	new_node->next = 0;
-	new_node->prev = 0;
-	return (new_node);
+	if (!ptr)
+		return ;
+	pptr = ptr;
+	while (*pptr)
+	{
+		free(*pptr);
+		pptr++;
+	}
+	free(pptr);
 }
 
-void	initstack(t_stack *stack)
+void	free_deque(t_deque *deque)
 {
-	stack->top = 0;
-	stack->bottom = 0;
-	stack->cnt = 0;
+	if (!deque)
+		return ;
+	while (!emptydeque(deque))
+		pop_front(deque);
+	free (deque);
 }

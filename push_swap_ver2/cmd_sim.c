@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack.c                                            :+:      :+:    :+:   */
+/*   cmd_sim.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/15 14:23:39 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/20 19:35:52 by youjeong         ###   ########.fr       */
+/*   Created: 2023/03/20 19:45:59 by youjeong          #+#    #+#             */
+/*   Updated: 2023/03/22 16:47:01 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_node	*getnode(void)
+int	cmd_ss(t_deque *deque_b, t_deque *deque_a)
 {
-	t_node	*new_node;
-
-	new_node = (t_node *)malloc(1 * sizeof(t_node));
-	if (!new_node)
-		return (0);
-	new_node->data = 0;
-	new_node->next = 0;
-	new_node->prev = 0;
-	return (new_node);
+	if ((cmd_sa(deque_a) == ERROR) || (cmd_sb(deque_b) == ERROR))
+		return (ERROR);
+	return (0);
 }
 
-void	initstack(t_stack *stack)
+int	cmd_rr(t_deque *deque_b, t_deque *deque_a)
 {
-	stack->top = 0;
-	stack->bottom = 0;
-	stack->cnt = 0;
+	if ((cmd_ra(deque_a) == ERROR) || (cmd_rb(deque_b) == ERROR))
+		return (ERROR);
+	return (0);
+}
+
+int	cmd_rrr(t_deque *deque_b, t_deque *deque_a)
+{
+	if ((cmd_rra(deque_a) == ERROR) || (cmd_rrb(deque_b) == ERROR))
+		return (ERROR);
+	return (0);
 }

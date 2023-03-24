@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/14 21:17:28 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/22 16:51:23 by youjeong         ###   ########.fr       */
+/*   Created: 2023/03/24 09:32:35 by youjeong          #+#    #+#             */
+/*   Updated: 2023/03/24 09:32:35 by youjeong         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,76 +23,77 @@
 typedef enum cmd {sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr}t_cmd;
 
 typedef struct s_node {
-	int				data;
-	struct s_node	*next;
+    int				data;
+    struct s_node	*next;
 	struct s_node	*prev;
 }t_node;
 
-typedef struct s_stack {
-	t_node	*top;
-	t_node	*bottom;
+typedef struct s_deque {
+	t_node	*front;
+	t_node	*rear;
 	int		cnt;
-}t_stack;
+}t_deque;
 
-typedef struct s_sort_params {
-	t_stack	*stack_a;
-	t_stack	*stack_b;
+typedef struct s_sprms {
+	t_deque	*deque_a;
+	t_deque	*deque_b;
+	int		*arr;
 	int		pivot1;
 	int		pivot2;
 	int		left;
 	int		right;
-}t_sort_params;
+}t_sprms;
 
-t_stack	*make_stack(char **strs_in);
-char	**ft_split(char const *s, char c);
+int		push_swap(char **argv);
+t_deque	*make_deque(char **strs_in);
 
-// free_type
-void	free_char2(char **strs);
-void	free_stack(t_stack *stack);
-
-// stack & stack_func
+// deque & deque_func
 t_node	*getnode(void);
-void	initstack(t_stack *stack);
-int		emptystack(t_stack *stack);
-int		push(t_stack *stack, int data);
-int		push_bottom(t_stack *stack, int data);
-int		pop(t_stack *stack);
-int		pop_bottom(t_stack *stack);
-int		isinstack(t_stack *stack, int data);
-int		*stacktoarr(t_stack *stack);
-
-// sort
-int		sort_stack(t_stack *stack_a, t_stack *stack_b);
-int		sort_stack_a(t_sort_params *sprms);
-int		sort_array(int arr[], int cnt);
+void	initdeque(t_deque *deque);
+int		emptydeque(t_deque *deque);
+int		isindeque(t_deque *deque, int data);
+int		push_front(t_deque *deque, int data);
+int		push_rear(t_deque *deque, int data);
+int		pop_front(t_deque *deque);
+int		pop_rear(t_deque *deque);
 
 // cmd
-int		execute_sa(t_stack *stack);
-int		execute_pa(t_stack *stack_a, t_stack *stack_b);
-int		execute_ra(t_stack *stack);
-int		execute_rra(t_stack *stack);
-int		execute_sb(t_stack *stack);
-int		execute_pb(t_stack *stack_b, t_stack *stack_a);
-int		execute_rb(t_stack *stack);
-int		execute_rrb(t_stack *stack);
-int		execute_ss(t_stack *stack_b, t_stack *stack_a);
-int		execute_rr(t_stack *stack_b, t_stack *stack_a);
-int		execute_rrr(t_stack *stack_b, t_stack *stack_a);
+int		cmd_sa(t_deque *deque);
+int		cmd_pa(t_deque *deque_a, t_deque *deque_b);
+int		cmd_ra(t_deque *deque);
+int		cmd_rra(t_deque *deque);
+int		cmd_sb(t_deque *deque);
+int		cmd_pb(t_deque *deque_a, t_deque *deque_b);
+int		cmd_rb(t_deque *deque);
+int		cmd_rrb(t_deque *deque);
+int		cmd_ss(t_deque *deque_b, t_deque *deque_a);
+int		cmd_rr(t_deque *deque_b, t_deque *deque_a);
+int		cmd_rrr(t_deque *deque_b, t_deque *deque_a);
 
-// valid
-int		isint(char *str);
+// merge_sort
+void	merge_sort(int *arr, int left, int right);
 
-// utils1
+// free_type
+void	free_2p(void **ptr);
+void	free_deque(t_deque *deque);
+
+// change_type
+int		ft_atoi(const char *str);
+int		*dequetoarr(t_deque *deque);
+
+// utils
 int		ft_isdigit(int c);
 int		ft_isspace(const char c);
 int		ft_strlen(const char *str);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char	*ft_strdup(const char *s1);
-
-// utils2
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_atoi(const char *str);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*strjoin_sep(char *str0, char *str1, char sep);
+int		isrange_int(char *str);
+
+// additional file
+char	**ft_split(char const *s, char c);
 
 #endif
