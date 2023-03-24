@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 10:36:40 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/24 10:36:40 by youjeong         ###   ########seoul.kr  */
+/*   Updated: 2023/03/24 18:05:37 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,18 @@ int	ft_atoi(const char *str)
 	return (sign * res);
 }
 
-int	*dequetoarr(t_deque *deque)
+int	*stacktoarr(t_stack *stack)
 {
 	int		*res;
 	int		i;
 	t_node	*pnode;
 
-	res = (int *)malloc((deque->cnt) * sizeof(int));
+	res = (int *)malloc((len_stack(stack)) * sizeof(int));
 	if (!res)
 		return (0);
-	pnode = deque->top;
+	pnode = stack->top;
 	i = 0;
-	while (i < (deque->cnt))
+	while (i < (len_stack(stack)))
 	{
 		res[i++] = pnode->data;
 		pnode = pnode->next;

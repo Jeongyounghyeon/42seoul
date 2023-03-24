@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   deque.c                                            :+:      :+:    :+:   */
+/*   stack.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 10:21:41 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/24 10:21:41 by youjeong         ###   ########seoul.kr  */
+/*   Updated: 2023/03/24 21:29:50 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,26 +25,25 @@ t_node	*getnode(void)
 	return (new_node);
 }
 
-void	initdeque(t_deque *deque)
+void	initstack(t_stack *stack)
 {
-	deque->front = 0;
-	deque->rear = 0;
-	deque->cnt = 0;
+	stack->top = 0;
+	stack->bottom = 0;
 }
 
-int	emptydeque(t_deque *deque)
+int	emptystack(t_stack *stack)
 {
-	if (deque->cnt == 0)
+	if ((stack->top) == 0)
 		return (TRUE);
 	else
 		return (FALSE);
 }
 
-int	isindeque(t_deque *deque, int data)
+int	isinstack(t_stack *stack, int data)
 {
 	t_node	*pnode;
 
-	pnode = deque->front;
+	pnode = stack->top;
 	while (pnode)
 	{
 		if (pnode->data == data)
@@ -54,3 +53,17 @@ int	isindeque(t_deque *deque, int data)
 	return (FALSE);
 }
 
+int	len_stack(t_stack *stack)
+{
+	int		res;
+	t_node	*pnode;
+
+	res = 0;
+	pnode = stack->top;
+	while (pnode)
+	{
+		res++;
+		pnode = pnode->next;
+	}
+	return (res);
+}

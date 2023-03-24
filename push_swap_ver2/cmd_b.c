@@ -6,53 +6,65 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 10:33:44 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/24 10:33:44 by youjeong         ###   ########seoul.kr  */
+/*   Updated: 2023/03/24 22:26:50 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	cmd_sb(t_deque *deque)
+int	cmd_sb(t_stack *stack, t_stack *cmd_res)
 {
 	int	data1;
 	int	data2;
 
-	if (emptydeque(deque) || (deque->front->next == 0))
+	if (emptystack(stack) || (stack->top->next == 0))
 		return (0);
-	data1 = pop_front(deque);
-	data2 = pop_front(deque);
-	if (push_front(deque, data1) == ERROR)
+	data1 = pop_top(stack);
+	data2 = pop_top(stack);
+	if (push_top(stack, data1) == ERROR)
 		return (ERROR);
-	if (push_front(deque, data2) == ERROR)
+	if (push_top(stack, data2) == ERROR)
 		return (ERROR);
-	return (0);
-}
-
-int	cmd_pb(t_deque *deque_b, t_deque *deque_a)
-{
-	if (emptydeque(deque_b))
-		return (0);
-	if (push_front(deque_b, pop_front(deque_a)) == ERROR)
+	if (push_top(cmd_res, sb))
 		return (ERROR);
 	return (0);
 }
 
-int	cmd_rb(t_deque *deque)
+int	cmd_pb(t_stack *stack_b, t_stack *stack_a, t_stack *cmd_res)
 {
-	int	data;
-
-	if (emptydeque(deque) || (deque->front->next == 0))
+	if (emptystack(stack_b))
 		return (0);
-	data = pop_front(deque);
-	return (push_rear(deque, data));
+	if (push_top(stack_a, pop_top(stack_b)) == ERROR)
+		return (ERROR);
+	if (push_top(cmd_res, pb))
+		return (ERROR);
+	return (0);
 }
 
-int	cmd_rrb(t_deque *deque)
+int	cmd_rb(t_stack *stack, t_stack *cmd_res)
 {
 	int	data;
 
-	if (emptydeque(deque) || (deque->front->next == 0))
+	if (emptystack(stack) || (stack->top->next == 0))
 		return (0);
-	data = pop_rear(deque);
-	return (push_front(deque, data));
+	data = pop_top(stack);
+	if (push_bottom(stack, data))
+		return (ERROR);
+	if (push_top(cmd_res, rb))
+		return (ERROR);
+	return (0);
+}
+
+int	cmd_rrb(t_stack *stack, t_stack *cmd_res)
+{
+	int	data;
+
+	if (emptystack(stack) || (stack->top->next == 0))
+		return (0);
+	data = pop_bottom(stack);
+	if (push_top(stack, data))
+		return (ERROR);
+	if (push_top(cmd_res, rrb))
+		return (ERROR);
+	return (push_top(stack, data));
 }

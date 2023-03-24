@@ -29,5 +29,4 @@ void	initstack(t_stack *stack)
 {
 	stack->top = 0;
 	stack->bottom = 0;
-	stack->cnt = 0;
 }

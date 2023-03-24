@@ -14,7 +14,7 @@
 
 int	emptystack(t_stack *stack)
 {
-	if (stack->cnt == 0)
+	if (stack->top == 0)
 		return (TRUE);
 	else
 		return (FALSE);
@@ -34,7 +34,6 @@ int	push(t_stack *stack, int data)
 	else
 		new_node->next->prev = new_node;
 	stack->top = new_node;
-	(stack->cnt)++;
 	return (0);
 }
 
@@ -52,7 +51,6 @@ int	push_bottom(t_stack *stack, int data)
 	else
 		new_node->prev->next = new_node;
 	stack->bottom = new_node;
-	(stack->cnt)++;
 	return (0);
 }
 
@@ -71,7 +69,6 @@ int	pop(t_stack *stack)
 		stack->top->prev = 0;
 	pop_data = pop_node->data;
 	free(pop_node);
-	(stack->cnt)--;
 	return (pop_data);
 }
 
@@ -90,6 +87,5 @@ int	pop_bottom(t_stack *stack)
 		stack->bottom->next = 0;
 	pop_data = pop_node->data;
 	free(pop_node);
-	(stack->cnt)--;
 	return (pop_data);
 }

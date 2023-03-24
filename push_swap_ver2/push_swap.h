@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 09:32:35 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/24 09:32:35 by youjeong         ###   ########seoul.kr  */
+/*   Updated: 2023/03/24 21:37:31 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,20 @@
 typedef enum cmd {sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr}t_cmd;
 
 typedef struct s_node {
-    int				data;
-    struct s_node	*next;
+	int				data;
+	struct s_node	*next;
 	struct s_node	*prev;
 }t_node;
 
-typedef struct s_deque {
-	t_node	*front;
-	t_node	*rear;
-	int		cnt;
-}t_deque;
+typedef struct s_stack {
+	t_node	*top;
+	t_node	*bottom;
+}t_stack;
 
 typedef struct s_sprms {
-	t_deque	*deque_a;
-	t_deque	*deque_b;
+	t_stack	*stack_cmd;
+	t_stack	*stack_a;
+	t_stack	*stack_b;
 	int		*arr;
 	int		pivot1;
 	int		pivot2;
@@ -45,41 +45,44 @@ typedef struct s_sprms {
 }t_sprms;
 
 int		push_swap(char **argv);
-t_deque	*make_deque(char **strs_in);
+t_stack	*make_stack(char **strs_in);
+int		sort_stack(t_stack *stack_a, t_stack *stack_b);
+void	print_cmds(t_stack *stack);
 
-// deque & deque_func
+// stack & stack_func
 t_node	*getnode(void);
-void	initdeque(t_deque *deque);
-int		emptydeque(t_deque *deque);
-int		isindeque(t_deque *deque, int data);
-int		push_front(t_deque *deque, int data);
-int		push_rear(t_deque *deque, int data);
-int		pop_front(t_deque *deque);
-int		pop_rear(t_deque *deque);
+void	initstack(t_stack *stack);
+int		emptystack(t_stack *stack);
+int		isinstack(t_stack *stack, int data);
+int		len_stack(t_stack *stack);
+int		push_top(t_stack *stack, int data);
+int		push_bottom(t_stack *stack, int data);
+int		pop_top(t_stack *stack);
+int		pop_bottom(t_stack *stack);
 
 // cmd
-int		cmd_sa(t_deque *deque);
-int		cmd_pa(t_deque *deque_a, t_deque *deque_b);
-int		cmd_ra(t_deque *deque);
-int		cmd_rra(t_deque *deque);
-int		cmd_sb(t_deque *deque);
-int		cmd_pb(t_deque *deque_a, t_deque *deque_b);
-int		cmd_rb(t_deque *deque);
-int		cmd_rrb(t_deque *deque);
-int		cmd_ss(t_deque *deque_b, t_deque *deque_a);
-int		cmd_rr(t_deque *deque_b, t_deque *deque_a);
-int		cmd_rrr(t_deque *deque_b, t_deque *deque_a);
+int		cmd_sa(t_stack *stack, t_stack *cmd_res);
+int		cmd_pa(t_stack *stack_a, t_stack *stack_b, t_stack *cmd_res);
+int		cmd_ra(t_stack *stack, t_stack *cmd_res);
+int		cmd_rra(t_stack *stack, t_stack *cmd_res);
+int		cmd_sb(t_stack *stack, t_stack *cmd_res);
+int		cmd_pb(t_stack *stack_a, t_stack *stack_b, t_stack *cmd_res);
+int		cmd_rb(t_stack *stack, t_stack *cmd_res);
+int		cmd_rrb(t_stack *stack, t_stack *cmd_res);
+int		cmd_ss(t_stack *stack_b, t_stack *stack_a, t_stack *cmd_res);
+int		cmd_rr(t_stack *stack_b, t_stack *stack_a, t_stack *cmd_res);
+int		cmd_rrr(t_stack *stack_b, t_stack *stack_a, t_stack *cmd_res);
 
 // merge_sort
-void	merge_sort(int *arr, int left, int right);
+int		merge_sort(int *arr, int left, int right);
 
 // free_type
-void	free_2p(void **ptr);
-void	free_deque(t_deque *deque);
+void	free_2p_ch(char **ptr);
+void	free_stack(t_stack *stack);
 
 // change_type
 int		ft_atoi(const char *str);
-int		*dequetoarr(t_deque *deque);
+int		*stacktoarr(t_stack *stack);
 
 // utils
 int		ft_isdigit(int c);

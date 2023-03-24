@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 21:09:47 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/20 18:59:39 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/03/24 17:29:31 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,6 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		i++;
 	}
 	return (0);
-}
-
-int	ft_atoi(const char *str)
-{
-	int	sign;
-	int	i;
-	int	res;
-
-	sign = 1;
-	i = 0;
-	while (ft_isspace(str[i]))
-		i++;
-	res = 0;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i++] == '-')
-			sign = -1;
-		else
-			sign = 1;
-	}	
-	while (ft_isdigit(str[i]))
-		res = (res * 10) + (str[i++] - '0');
-	return (sign * res);
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)

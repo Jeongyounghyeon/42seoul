@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_deque.c                                       :+:      :+:    :+:   */
+/*   make_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 10:47:19 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/24 10:47:19 by youjeong         ###   ########seoul.kr  */
+/*   Updated: 2023/03/24 17:28:32 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,38 +31,38 @@ static char	*strarr_join(char **strs_in)
 	return (res);
 }
 
-static t_deque	*strstodeque(char **strs)
+static t_stack	*strstostack(char **strs)
 {
-	t_deque	*deque;
+	t_stack	*stack;
 	char	**str_num;
 	int		data;
 
-	deque = (t_deque *)malloc(1 * sizeof(deque));
-	if (!deque)
+	stack = (t_stack *)malloc(1 * sizeof(stack));
+	if (!stack)
 		return (0);
-	initdeque(deque);
+	initstack(stack);
 	str_num = strs;
 	while (*str_num)
 	{
 		data = ft_atoi(*str_num);
-		if (!isrange_int(*str_num) || isindeque(deque, data))
+		if (!isrange_int(*str_num) || isinstack(stack, data))
 		{
-			free_deque(deque);
+			free_stack(stack);
 			return (0);
 		}
-		if (push_front(deque, data) == ERROR)
+		if (push_top(stack, data) == ERROR)
 		{
-			free_deque(deque);
+			free_stack(stack);
 			return (0);
 		}
 		str_num++;
 	}
-	return (deque);
+	return (stack);
 }
 
-t_deque	*make_deque(char **strs_in)
+t_stack	*make_stack(char **strs_in)
 {
-	t_deque	*deque;
+	t_stack	*stack;
 	char	*str_join;
 	char	**strs;
 
@@ -73,7 +73,7 @@ t_deque	*make_deque(char **strs_in)
 	free (str_join);
 	if (!strs)
 		return (0);
-	deque = strstodeque(strs);
-	free_char2(strs);
-	return (deque);
+	stack = strstostack(strs);
+	free_2p_ch(strs);
+	return (stack);
 }

@@ -28,8 +28,7 @@ int	push_swap(char **argv)
 	initsprms(&sprms);
 	sprms->left = stack_a->top->data;
 	sprms->right = stack_a->bottom->data;
-	if (sort_stack(stack_a, &stack_b) == ERROR)
-		reutrn (ERROR);
+	sort_stack_a(sprms);
 	return (0);
 }
 

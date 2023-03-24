@@ -25,22 +25,3 @@ int	isinstack(t_stack *stack, int data)
 	}
 	return (FALSE);
 }
-
-int	*stacktoarr(t_stack *stack)
-{
-	int		*res;
-	int		i;
-	t_node	*pnode;
-
-	res = (int *)malloc((stack->cnt) * sizeof(int));
-	if (!res)
-		return (0);
-	pnode = stack->top;
-	i = 0;
-	while (i < (stack->cnt))
-	{
-		res[i++] = pnode->data;
-		pnode = pnode->next;
-	}
-	return (res);
-}

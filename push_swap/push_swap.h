@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 21:17:28 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/22 16:51:23 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/03/24 17:15:42 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-typedef enum cmd {sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr}t_cmd;
-
 typedef struct s_node {
 	int				data;
 	struct s_node	*next;
@@ -31,7 +29,6 @@ typedef struct s_node {
 typedef struct s_stack {
 	t_node	*top;
 	t_node	*bottom;
-	int		cnt;
 }t_stack;
 
 typedef struct s_sort_params {
@@ -59,25 +56,23 @@ int		push_bottom(t_stack *stack, int data);
 int		pop(t_stack *stack);
 int		pop_bottom(t_stack *stack);
 int		isinstack(t_stack *stack, int data);
-int		*stacktoarr(t_stack *stack);
 
 // sort
-int		sort_stack(t_stack *stack_a, t_stack *stack_b);
 int		sort_stack_a(t_sort_params *sprms);
 int		sort_array(int arr[], int cnt);
 
 // cmd
-int		execute_sa(t_stack *stack);
-int		execute_pa(t_stack *stack_a, t_stack *stack_b);
-int		execute_ra(t_stack *stack);
-int		execute_rra(t_stack *stack);
-int		execute_sb(t_stack *stack);
-int		execute_pb(t_stack *stack_b, t_stack *stack_a);
-int		execute_rb(t_stack *stack);
-int		execute_rrb(t_stack *stack);
-int		execute_ss(t_stack *stack_b, t_stack *stack_a);
-int		execute_rr(t_stack *stack_b, t_stack *stack_a);
-int		execute_rrr(t_stack *stack_b, t_stack *stack_a);
+int		sa(t_stack *stack);
+int		pa(t_stack *stack_a, t_stack *stack_b);
+int		ra(t_stack *stack);
+int		rra(t_stack *stack);
+int		sb(t_stack *stack);
+int		pb(t_stack *stack_b, t_stack *stack_a);
+int		rb(t_stack *stack);
+int		rrb(t_stack *stack);
+int		ss(t_stack *stack_b, t_stack *stack_a);
+int		rr(t_stack *stack_b, t_stack *stack_a);
+int		rrr(t_stack *stack_b, t_stack *stack_a);
 
 // valid
 int		isint(char *str);

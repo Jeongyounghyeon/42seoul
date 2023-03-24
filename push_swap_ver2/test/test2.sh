@@ -1,4 +1,4 @@
-cc -g3 test.c \
+cc -g3 test2.c \
 		../stack_func.c \
 		../change_type.c \
 		../free_type.c \
@@ -10,3 +10,6 @@ cc -g3 test.c \
 		../utils2.c \
 		../cmd_sim.c \
 		../stack.c \
+		../merge_sort.c \
+		../sort_stack.c \
+		../sort_stack2.c \

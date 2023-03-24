@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 10:45:30 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/24 10:45:30 by youjeong         ###   ########seoul.kr  */
+/*   Updated: 2023/03/24 18:08:01 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 int	push_swap(char **argv)
 {
-	t_deque			*deque_a;
-	t_deque			deque_b;
+	t_stack			*stack_a;
+	t_stack			stack_b;
 
-	deque_a = make_deque(argv);
-	initdeque(&deque_b);
-	if (!deque_a)
+	stack_a = make_stack(argv);
+	initstack(&stack_b);
+	if (!stack_a)
 		return (ERROR);
-	// if (sort_deque(deque_a, &deque_b) == ERROR)
-	// 	reutrn (ERROR);
+	if (sort_stack(stack_a, &stack_b) == ERROR)
+		return (ERROR);
 	return (0);
 }
 
