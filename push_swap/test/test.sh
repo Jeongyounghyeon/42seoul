@@ -1,4 +1,4 @@
-cc -g3 test2.c \
+cc -g3 test.c \
 		../free_type.c \
 		../utils1.c \
 		../ft_split.c \
