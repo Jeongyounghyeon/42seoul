@@ -6,14 +6,11 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 12:21:33 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/26 19:42:04 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/03/26 19:48:34 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-// test
-#include <stdio.h>
 
 int	push_swap(char **argv)
 {
@@ -24,7 +21,8 @@ int	push_swap(char **argv)
 	if (!stack_a)
 		return (ERROR);
 	initstack(&stack_b);
-	show_sorting_stack(stack_a, &stack_b);
+	//if (show_sorting_stack(stack_a, &stack_b) == ERROR)
+	//	return (ERROR);
 	return (0);
 }
 
