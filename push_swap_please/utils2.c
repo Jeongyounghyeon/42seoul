@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 17:51:03 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/26 19:00:35 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/03/27 16:22:23 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,24 @@ char	*strjoin_sep(char *str0, char *str1, char sep)
 		*pres++ = sep;
 	pres = pres + ft_strlcpy(pres, str1, str_len[1] + 1);
 	*pres = 0;
+	return (res);
+}
+
+int	*stacktoarr(t_stack *stack)
+{
+	int		*res;
+	int		i;
+	t_node	*pnode;
+
+	res = (int *)malloc((len_stack(stack)) * sizeof(int));
+	if (!res)
+		return (0);
+	pnode = stack->top;
+	i = 0;
+	while (i < (len_stack(stack)))
+	{
+		res[i++] = pnode->data;
+		pnode = pnode->next;
+	}
 	return (res);
 }

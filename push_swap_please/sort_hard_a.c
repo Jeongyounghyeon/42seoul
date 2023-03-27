@@ -1,41 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   sort_hard_a.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/25 12:21:33 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/27 21:50:26 by youjeong         ###   ########.fr       */
+/*   Created: 2023/03/27 19:29:27 by youjeong          #+#    #+#             */
+/*   Updated: 2023/03/27 21:51:46 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	push_swap(char **argv)
+int	sort_hard_a(t_quick_params qprms, t_stack *stack_cmd, \
+				int i_left, int total_len)
 {
-	t_stack	*stack_a;
-	t_stack	stack_b;
-	int		res;
-
-	stack_a = input_to_stack(argv);
-	if (!stack_a)
-		return (ERROR);
-	initstack(&stack_b);
-	res = show_sorting_stack(stack_a, &stack_b);
-	free_stack(stack_a);
-	free_stack_values(&stack_b);
-	return (res);
-}
-
-int	main(int argc, char **argv)
-{
-	int	res;
-
-	if (argc == 1)
+	if (total_len == 1)
 		return (0);
-	res = push_swap(argv + 1);
-	if (res == ERROR)
-		write(1, "Error\n", 6);
 	return (0);
 }

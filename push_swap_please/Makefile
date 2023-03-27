@@ -14,25 +14,36 @@
 NAME = push_swap
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+#CFLAGS = -Wall -Wextra -Werror
 
 FD_OBJ = objs
 
 SRCS = push_swap.c \
 		input_to_stack.c \
+		show_sorting_stack.c \
+		sort_stack_a.c \
+		sort_stack_b.c \
+		sort_hard_a.c \
+		sort_hard_b.c \
+		merge_sort.c \
+		cmd_a.c \
+		cmd_b.c \
+		cmd_sim.c \
 		ft_split_space.c \
 		ft_atoi.c \
+		print_cmds.c \
 		stack.c \
 		stack_func.c \
 		free_type.c \
 		utils1.c \
 		utils2.c \
 
-
 OBJS = $(SRCS:.c=.o)
 
 all : $(FD_OBJ) $(NAME)
-
+		echo "MakeFile에 CFLAGS 수정해야함"
+		echo "MakeFile에 CFLAGS 수정해야함"
+		echo "MakeFile에 CFLAGS 수정해야함"
 $(NAME) : ${addprefix $(FD_OBJ)/, $(OBJS)}
 		$(CC) $(CFLAGS) $^ -o $@
 
