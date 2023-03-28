@@ -56,6 +56,7 @@ static t_stack	*cmd_sorting_stack(t_quick_params qprms)
 	stack_cmd = (t_stack *)malloc(1 * sizeof(stack_cmd));
 	if (!stack_cmd)
 		return (0);
+	initstack(stack_cmd);
 	if (sort_stack_a(qprms, stack_cmd, 0, \
 		qprms.len_left + qprms.len_mid + qprms.len_right) == ERROR)
 	{
