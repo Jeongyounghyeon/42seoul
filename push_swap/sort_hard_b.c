@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_hard.c                                        :+:      :+:    :+:   */
+/*   sort_hard_b.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/25 15:44:50 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/25 20:09:55 by youjeong         ###   ########.fr       */
+/*   Created: 2023/03/27 19:29:27 by youjeong          #+#    #+#             */
+/*   Updated: 2023/03/29 14:24:55 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	sort_hard(t_sort_params prms)
+int	sort_hard_b(t_quick_params qprms, t_stack *stack_cmd, \
+				int i_left, int total_len)
 {
-	int	cnt_data;
-
-	cnt_data = prms.right - prms.left + 1;
-	if (cnt_data == 1)
-		return (0);
-	else if (cnt_data == 2)
-	{
-		if ((prms.stack_a->top->data) > (prms.stack_a->top->next->data))
-			if (execute_cmd_sa(prms.stack_a, prms.stack_cmd) == ERROR)
-				return (ERROR);
-		return (0);
-	}
-	write(1, "sort_hard : out of range cnt_data\n", 34);
+	if (total_len == 1)
+		return (cmd_pa(qprms.stack_b, qprms.stack_a, stack_cmd));
 	return (0);
 }

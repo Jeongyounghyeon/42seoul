@@ -6,36 +6,18 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 13:20:39 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/25 20:13:42 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/03/26 19:13:05 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static char	*strarr_join(char **strs_in)
-{
-	char	*res;
-	char	**pinstr;
-
-	if (!strs_in)
-		return (0);
-	res = 0;
-	pinstr = strs_in;
-	while (*pinstr)
-	{
-		res = strjoin_sep(res, *pinstr, ' ');
-		if (!res)
-			return (0);
-		pinstr++;
-	}
-	return (res);
-}
 
 static t_stack	*strstostack(char **strs)
 {
 	t_stack	*stack;
 	char	**str_num;
 	int		data;
+	int		oor;
 
 	stack = (t_stack *)malloc(1 * sizeof(stack));
 	if (!stack)
@@ -44,13 +26,9 @@ static t_stack	*strstostack(char **strs)
 	str_num = strs;
 	while (*str_num)
 	{
-		data = ft_atoi(*str_num);
-		if (!isrange_int(*str_num) || isinstack(stack, data))
-		{
-			free_stack(stack);
-			return (0);
-		}
-		if (push_bottom(stack, data) == ERROR)
+		data = ft_atoi(*str_num, &oor);
+		if (oor == -1 || isinstack(stack, data)
+			|| push_bottom(stack, data) == ERROR)
 		{
 			free_stack(stack);
 			return (0);
@@ -60,17 +38,36 @@ static t_stack	*strstostack(char **strs)
 	return (stack);
 }
 
+static char	*strsjoin_sep(char **strs_in, char sep)
+{
+	char	*joined_str;
+	char	**pinstr;
+
+	if (!strs_in)
+		return (0);
+	joined_str = 0;
+	pinstr = strs_in;
+	while (*pinstr)
+	{
+		joined_str = strjoin_sep(joined_str, *pinstr, sep);
+		if (!joined_str)
+			return (0);
+		pinstr++;
+	}
+	return (joined_str);
+}
+
 t_stack	*input_to_stack(char **strs_in)
 {
 	t_stack	*stack;
-	char	*str_join;
+	char	*joined_str;
 	char	**strs;
 
-	str_join = strarr_join(strs_in);
-	if (!str_join)
+	joined_str = strsjoin_sep(strs_in, ' ');
+	if (!joined_str)
 		return (0);
-	strs = ft_split(str_join, ' ');
-	free (str_join);
+	strs = ft_split_space(joined_str);
+	free (joined_str);
 	if (!strs)
 		return (0);
 	stack = strstostack(strs);

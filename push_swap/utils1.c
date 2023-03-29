@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/15 14:37:21 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/20 19:35:23 by youjeong         ###   ########.fr       */
+/*   Created: 2023/03/26 17:44:22 by youjeong          #+#    #+#             */
+/*   Updated: 2023/03/26 18:38:09 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ int	ft_isspace(const char c)
 	if (c == '\t' || c == '\n' || c == '\v'
 		|| c == '\f' || c == '\r' || c == ' ')
 		return (1);
-	else
-		return (0);
+	return (0);
 }
 
 int	ft_strlen(const char *str)

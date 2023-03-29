@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 12:21:33 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/25 13:55:24 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/03/27 21:50:26 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,16 @@ int	push_swap(char **argv)
 {
 	t_stack	*stack_a;
 	t_stack	stack_b;
+	int		res;
 
 	stack_a = input_to_stack(argv);
 	if (!stack_a)
 		return (ERROR);
 	initstack(&stack_b);
-	if (show_sorting_stack(stack_a, &stack_b) == ERROR)
-		return (ERROR);
-	return (0);
+	res = show_sorting_stack(stack_a, &stack_b);
+	free_stack(stack_a);
+	free_stack_values(&stack_b);
+	return (res);
 }
 
 int	main(int argc, char **argv)

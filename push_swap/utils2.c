@@ -5,32 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/15 21:09:47 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/24 17:29:31 by youjeong         ###   ########.fr       */
+/*   Created: 2023/03/26 17:51:03 by youjeong          #+#    #+#             */
+/*   Updated: 2023/03/27 16:22:23 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	size_t			i;
-	unsigned char	*c1;
-	unsigned char	*c2;
-
-	i = 0;
-	c1 = (unsigned char *)s1;
-	c2 = (unsigned char *)s2;
-	while (i < n)
-	{
-		if (c1[i] != c2[i])
-			return (c1[i] - c2[i]);
-		if ((c1[i] == 0) || (c2[i] == 0))
-			return (c1[i] - c2[i]);
-		i++;
-	}
-	return (0);
-}
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -75,29 +55,21 @@ char	*strjoin_sep(char *str0, char *str1, char sep)
 	return (res);
 }
 
-int	isrange_int(char *str)
+int	*stacktoarr(t_stack *stack)
 {
-	char	*absol_value;
+	int		*res;
+	int		i;
+	t_node	*pnode;
 
-	if (!str)
-		return (ERROR);
-	absol_value = "2147483647";
-	if (*str == '-')
+	res = (int *)malloc((len_stack(stack)) * sizeof(int));
+	if (!res)
+		return (0);
+	pnode = stack->top;
+	i = 0;
+	while (i < (len_stack(stack)))
 	{
-		absol_value = "2147483648";
-		str++;
+		res[i++] = pnode->data;
+		pnode = pnode->next;
 	}
-	if (ft_strlen(str) < ft_strlen(absol_value))
-	{
-		while (*str)
-			if (!ft_isdigit(*str++))
-				return (FALSE);
-	}
-	else if (ft_strlen(str) > ft_strlen(absol_value))
-		return (FALSE);
-	else
-		while (*str)
-			if (!ft_isdigit(*str) || (*str++ > *absol_value++))
-				return (FALSE);
-	return (TRUE);
+	return (res);
 }

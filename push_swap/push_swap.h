@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/25 12:22:36 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/25 20:38:54 by youjeong         ###   ########.fr       */
+/*   Created: 2023/03/26 17:14:15 by youjeong          #+#    #+#             */
+/*   Updated: 2023/03/29 19:57:06 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define TRUE 1
 # define FALSE 0
-# define ERROR -1
+# define ERROR -1\
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -33,35 +33,42 @@ typedef struct s_stack {
 	t_node	*bottom;
 }t_stack;
 
-typedef struct s_sort_params {
-	t_stack	*stack_cmd;
+typedef struct s_quick_params {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
-	int		*arr;
-	int		left;
-	int		pivot1;
-	int		pivot2;
-	int		right;
-}t_sort_params;
+	int		*sorted_arr;
+	int		len_left;
+	int		len_mid;
+	int		len_right;
+}t_quick_params;
 
 int		push_swap(char **argv);
 t_stack	*input_to_stack(char **strs_in);
 int		show_sorting_stack(t_stack *stack_a, t_stack *stack_b);
+int		sort_stack_a(t_quick_params qprms, t_stack *stack_cmd, \
+					int i_left, int total_len);
+int		sort_stack_b(t_quick_params qprms, t_stack *stack_cmd, \
+					int i_left, int total_len);
 int		merge_sort(int *arr, int left, int right);
 
-// execute_cmd
-int		execute_cmd_sa(t_stack *stack, t_stack *cmd_res);
-int		execute_cmd_pa(t_stack *stack_a, t_stack *stack_b, t_stack *cmd_res);
-int		execute_cmd_ra(t_stack *stack, t_stack *cmd_res);
-int		execute_cmd_rra(t_stack *stack, t_stack *cmd_res);
-int		execute_cmd_sb(t_stack *stack, t_stack *cmd_res);
-int		execute_cmd_pb(t_stack *stack_b, t_stack *stack_a, t_stack *cmd_res);
-int		execute_cmd_rb(t_stack *stack, t_stack *cmd_res);
-int		execute_cmd_rrb(t_stack *stack, t_stack *cmd_res);
+// sort_hard
+int		sort_hard_a(t_quick_params qprms, t_stack *stack_cmd, \
+				int i_left, int total_len);
+int		sort_hard_b(t_quick_params qprms, t_stack *stack_cmd, \
+				int i_left, int total_len);
 
-// change_type
-int		ft_atoi(const char *str);
-int		*stacktoarr(t_stack *stack);
+// cmd
+int		cmd_sa(t_stack *stack, t_stack *stack_cmd);
+int		cmd_pa(t_stack *stack_b, t_stack *stack_a, t_stack *stack_cmd);
+int		cmd_ra(t_stack *stack, t_stack *stack_cmd);
+int		cmd_rra(t_stack *stack, t_stack *stack_cmd);
+int		cmd_sb(t_stack *stack, t_stack *stack_cmd);
+int		cmd_pb(t_stack *stack_a, t_stack *stack_b, t_stack *stack_cmd);
+int		cmd_rb(t_stack *stack, t_stack *stack_cmd);
+int		cmd_rrb(t_stack *stack, t_stack *stack_cmd);
+int		cmd_ss(t_stack *stack_a, t_stack *stack_b, t_stack *stack_cmd);
+int		cmd_rr(t_stack *stack_a, t_stack *stack_b, t_stack *stack_cmd);
+int		cmd_rrr(t_stack *stack_a, t_stack *stack_b, t_stack *stack_cmd);
 
 // stack & stack_func
 t_node	*getnode(void);
@@ -75,31 +82,26 @@ int		push_bottom(t_stack *stack, int data);
 int		pop_top(t_stack *stack);
 int		pop_bottom(t_stack *stack);
 
-// free_type
-void	free_2p_ch(char **strs);
-void	free_stack(t_stack *stack);
-void	free_stack_values(t_stack *stack);
-
-// sort_stack
-int		sort_stack_a(t_sort_params sprms);
-int		sort_hard(t_sort_params prms);
-
-// under_sort_stack
-void	print_cmd(t_node *node);
-void	set_next_params(t_sort_params *next, t_sort_params pre, int step);
-
-// utils
+// utils1
 int		ft_isdigit(int c);
 int		ft_isspace(const char c);
 int		ft_strlen(const char *str);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char	*ft_strdup(const char *s1);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
+
+// utils2
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*strjoin_sep(char *str0, char *str1, char sep);
-int		isrange_int(char *str);
+int		*stacktoarr(t_stack *stack);
+
+// free_type
+void	free_2p_ch(char **strs);
+void	free_stack(t_stack *stack);
+void	free_stack_values(t_stack *stack);
 
 // additional files
-char	**ft_split(char const *s, char c);
+char	**ft_split_space(char const *s);
+int		ft_atoi(const char *str, int *oor);
+void	print_cmds(t_stack *stack);
 
 #endif

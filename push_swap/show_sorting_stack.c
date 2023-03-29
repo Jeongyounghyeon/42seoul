@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/25 13:56:03 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/25 20:07:22 by youjeong         ###   ########.fr       */
+/*   Created: 2023/03/27 15:46:37 by youjeong          #+#    #+#             */
+/*   Updated: 2023/03/27 21:50:54 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	*presorted_stack(t_stack *stack)
+static int	*presort_stack(t_stack *stack)
 {
 	int	*res;
 
@@ -27,53 +27,57 @@ static int	*presorted_stack(t_stack *stack)
 	return (res);
 }
 
-static int	init_sprms(t_sort_params *sprms, t_stack *stack_a, t_stack *stack_b)
+static int	initqprms(t_quick_params *qprms, t_stack *stack_a, t_stack *stack_b)
 {
-	int				len_stack_a;
+	int	len_stack_a;
 
 	len_stack_a = len_stack(stack_a);
-	sprms->arr = presorted_stack(stack_a);
-	if (!sprms->arr)
+	qprms->sorted_arr = presort_stack(stack_a);
+	if (!qprms->sorted_arr)
 		return (ERROR);
-	sprms->stack_cmd = (t_stack *)malloc(sizeof(t_stack));
-	if (!sprms)
-		return (ERROR);
-	initstack(sprms->stack_cmd);
-	sprms->stack_a = stack_a;
-	sprms->stack_b = stack_b;
-	sprms->left = 0;
-	sprms->right = len_stack_a - 1;
-	sprms->pivot1 = sprms->left + ((sprms->right - sprms->left + 1) / 3);
-	sprms->pivot2 = sprms->left + (((sprms->right - sprms->left + 1) / 3) * 2);
+	qprms->stack_a = stack_a;
+	qprms->stack_b = stack_b;
+	qprms->len_left = len_stack_a / 3;
+	qprms->len_mid = len_stack_a / 3;
+	qprms->len_right = len_stack_a / 3;
+	if (len_stack_a % 3 > 0)
+	{
+		(qprms->len_right)++;
+		if (len_stack_a % 3 == 2)
+			(qprms->len_mid)++;
+	}
 	return (0);
 }
 
-static void	print_cmds(t_stack *stack)
+static t_stack	*cmd_sorting_stack(t_quick_params qprms)
 {
-	t_node	*pnode;
+	t_stack	*stack_cmd;
 
-	pnode = stack->bottom;
-	while (pnode)
+	stack_cmd = (t_stack *)malloc(1 * sizeof(stack_cmd));
+	if (!stack_cmd)
+		return (0);
+	initstack(stack_cmd);
+	if (sort_stack_a(qprms, stack_cmd, 0, \
+		qprms.len_left + qprms.len_mid + qprms.len_right) == ERROR)
 	{
-		print_cmd(pnode);
-		pnode = pnode->prev;
+		free_stack(stack_cmd);
+		return (0);
 	}
+	return (stack_cmd);
 }
 
 int	show_sorting_stack(t_stack *stack_a, t_stack *stack_b)
 {
-	t_sort_params	sprms;
-	int				len_stack_a;
+	t_quick_params	qprms;
+	t_stack			*stack_cmd;
 
-	if (init_sprms(&sprms, stack_a, stack_b) == ERROR)
-	{
-		free_stack(sprms.stack_cmd);
+	if (initqprms(&qprms, stack_a, stack_b) == ERROR)
 		return (ERROR);
-	}
-	if (sort_stack_a(sprms) == ERROR)
-		return (ERROR);
-	// 최적화
-	print_cmds(sprms.stack_cmd);
-	free_stack(sprms.stack_cmd);
+	stack_cmd = cmd_sorting_stack(qprms);
+	free(qprms.sorted_arr);
+	if (!stack_cmd)
+		return (-1);
+	print_cmds(stack_cmd);
+	free_stack(stack_cmd);
 	return (0);
 }
