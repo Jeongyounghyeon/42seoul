@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 17:04:52 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/29 19:55:14 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/04/02 18:49:28 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static void	update_params(t_quick_params *qprms, int total_len)
 	}
 }
 
-static int	part_a_cmd(t_quick_params *qprms, t_stack *stack_cmd, int i_left)
+static int	part_a_cmd(t_quick_params *qprms, t_stack *stack_cmd, int i_left, \
+						int *first_data)
 {
 	if ((qprms->stack_a->top->data) < \
 			qprms->sorted_arr[i_left + qprms->len_left + qprms->len_mid])
@@ -42,6 +43,11 @@ static int	part_a_cmd(t_quick_params *qprms, t_stack *stack_cmd, int i_left)
 	}
 	else
 	{
+		if (first_data[1] == 0)
+		{
+			*first_data = qprms->stack_a->top->data;
+			first_data[1] = 1;
+		}
 		if (cmd_ra(qprms->stack_a, stack_cmd) == ERROR)
 			return (ERROR);
 		return (1);
@@ -52,29 +58,30 @@ static int	part_a_cmd(t_quick_params *qprms, t_stack *stack_cmd, int i_left)
 static int	partition_a(t_quick_params *qprms, t_stack *stack_cmd, int i_left)
 {
 	int	b_cnt;
-	int	r_cnt;
-	int	rb_cnt;
+	int	r_cnt[2];
 	int	res_cmd;
+	int	first_data[2];
 
 	b_cnt = 0;
-	r_cnt = 0;
-	rb_cnt = 0;
+	r_cnt[0] = 0;
+	r_cnt[1] = 0;
+	first_data[1] = 0;
 	while (b_cnt < qprms->len_left + qprms->len_mid)
 	{
-		res_cmd = part_a_cmd(qprms, stack_cmd, i_left);
+		res_cmd = part_a_cmd(qprms, stack_cmd, i_left, first_data);
 		if (res_cmd == ERROR)
 			return (ERROR);
 		if (res_cmd == 1)
-			r_cnt++;
+			r_cnt[0]++;
 		if (res_cmd == 0 || res_cmd == 2)
 			b_cnt++;
 		if (res_cmd == 2)
-			rb_cnt++;
+			r_cnt[1]++;
 	}
-	while (r_cnt--)
-		if (cmd_rra(qprms->stack_a, stack_cmd) == ERROR)
-			return (ERROR);
-	return (rb_cnt);
+	if (i_left != 0
+		&& loof_rra(qprms, stack_cmd, r_cnt[0], *first_data) == ERROR)
+		return (ERROR);
+	return (r_cnt[1]);
 }
 
 static int	loof_rrb(t_quick_params qprms, t_stack *stack_cmd, int rb_cnt)
@@ -89,9 +96,13 @@ int	sort_stack_a(t_quick_params qprms, t_stack *stack_cmd, \
 				int i_left, int total_len)
 {
 	int	rb_cnt;
+	int	sort_hard;
 
-	if (total_len <= 1)
-		return (sort_hard_a(qprms, stack_cmd, i_left, total_len));
+	if (check_a_ordered_already(qprms, total_len))
+		return (0);
+	sort_hard = sort_hard_a(qprms, stack_cmd, i_left, total_len);
+	if (sort_hard <= 0)
+		return (sort_hard);
 	update_params(&qprms, total_len);
 	rb_cnt = partition_a(&qprms, stack_cmd, i_left);
 	if ((rb_cnt == ERROR)

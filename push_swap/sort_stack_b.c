@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 21:25:37 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/29 20:53:31 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/04/02 18:49:23 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,18 @@ static int	partition_b(t_quick_params *qprms, t_stack *stack_cmd, int i_left, \
 static int	loof_rr(t_quick_params qprms, t_stack *stack_cmd, int ra_cnt, \
 					int r_cnt)
 {
-	while (r_cnt--)
-		if (cmd_rrb(qprms.stack_b, stack_cmd) == ERROR)
+	while (r_cnt && ra_cnt)
+	{
+		if (cmd_rrr(qprms.stack_a, qprms.stack_b, stack_cmd) == ERROR)
 			return (ERROR);
+		r_cnt--;
+		ra_cnt--;
+	}
 	while (ra_cnt--)
 		if (cmd_rra(qprms.stack_a, stack_cmd) == ERROR)
+			return (ERROR);
+	while (r_cnt--)
+		if (cmd_rrb(qprms.stack_b, stack_cmd) == ERROR)
 			return (ERROR);
 	return (0);
 }
@@ -92,8 +99,10 @@ int	sort_stack_b(t_quick_params qprms, t_stack *stack_cmd, \
 	int	ra_cnt;
 	int	r_cnt;
 
+	if (check_b_ordered_already(qprms, stack_cmd, total_len))
+		return (0);
 	if (total_len <= 1)
-		return (sort_hard_b(qprms, stack_cmd, i_left, total_len));
+		return (sort_hard_b(qprms, stack_cmd, total_len));
 	update_params(&qprms, total_len);
 	ra_cnt = partition_b(&qprms, stack_cmd, i_left, &r_cnt);
 	if ((ra_cnt == ERROR)

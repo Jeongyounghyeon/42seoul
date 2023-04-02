@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 17:51:03 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/27 16:22:23 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/04/02 19:04:26 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ char	*strjoin_sep(char *str0, char *str1, char sep)
 		*pres++ = sep;
 	pres = pres + ft_strlcpy(pres, str1, str_len[1] + 1);
 	*pres = 0;
+	if (str0)
+		free(str0);
 	return (res);
 }
 

@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 17:14:15 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/29 19:57:06 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/04/02 18:52:02 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ int		merge_sort(int *arr, int left, int right);
 // sort_hard
 int		sort_hard_a(t_quick_params qprms, t_stack *stack_cmd, \
 				int i_left, int total_len);
-int		sort_hard_b(t_quick_params qprms, t_stack *stack_cmd, \
-				int i_left, int total_len);
+int		sort_hard_b(t_quick_params qprms, t_stack *stack_cmd, int total_len);
 
 // cmd
 int		cmd_sa(t_stack *stack, t_stack *stack_cmd);
@@ -69,6 +68,18 @@ int		cmd_rrb(t_stack *stack, t_stack *stack_cmd);
 int		cmd_ss(t_stack *stack_a, t_stack *stack_b, t_stack *stack_cmd);
 int		cmd_rr(t_stack *stack_a, t_stack *stack_b, t_stack *stack_cmd);
 int		cmd_rrr(t_stack *stack_a, t_stack *stack_b, t_stack *stack_cmd);
+
+// optimization & optimization_cmd
+int		check_a_ordered_already(t_quick_params qprms, int total_len);
+int		check_b_ordered_already(t_quick_params qprms, t_stack *stack_cmd, \
+								int total_len);
+int		optimization_cmd_sa(t_stack *stack, t_stack *stack_cmd);
+int		optimization_cmd_ra(t_stack *stack_cmd);
+int		optimization_cmd_rra(t_stack *stack_cmd);
+int		optimization_cmd_sb(t_stack *stack, t_stack *stack_cmd);
+int		optimization_cmd_rb(t_stack *stack_cmd);
+int		optimization_cmd_rrb(t_stack *stack_cmd);
+void	rm_node_in_stack(t_node *node, t_stack *stack);
 
 // stack & stack_func
 t_node	*getnode(void);
@@ -104,4 +115,11 @@ char	**ft_split_space(char const *s);
 int		ft_atoi(const char *str, int *oor);
 void	print_cmds(t_stack *stack);
 
+// utils_code
+int		loof_rra(t_quick_params *qprms, t_stack *stack_cmd, \
+				int r_cnt, int data);
+int		optimization_cmd_rb_2(t_node *pnode, t_stack *stack_cmd);
+int		optimization_cmd_rrb_2(t_node *pnode, t_stack *stack_cmd);
+int		optimization_cmd_ra_2(t_node *pnode, t_stack *stack_cmd);
+int		optimization_cmd_rra_2(t_node *pnode, t_stack *stack_cmd);
 #endif

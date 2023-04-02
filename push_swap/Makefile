@@ -13,8 +13,8 @@
 
 NAME = push_swap
 
-CC = gcc -g3
-#CFLAGS = -Wall -Wextra -Werror
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
 
 FD_OBJ = objs
 
@@ -37,6 +37,10 @@ SRCS = push_swap.c \
 		free_type.c \
 		utils1.c \
 		utils2.c \
+		optimization.c \
+		optimization_cmd_a.c \
+		optimization_cmd_b.c \
+		utils_code.c \
 
 OBJS = $(SRCS:.c=.o)
 
@@ -45,7 +49,7 @@ all : $(FD_OBJ) $(NAME)
 		echo "MakeFile에 CFLAGS 수정해야함"
 		echo "MakeFile에 CFLAGS 수정해야함"
 $(NAME) : ${addprefix $(FD_OBJ)/, $(OBJS)}
-		$(CC) -g3 $(CFLAGS) $^ -o $@
+		$(CC) $(CFLAGS) $^ -o $@
 
 $(FD_OBJ):
 		mkdir $@

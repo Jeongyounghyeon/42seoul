@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 19:39:27 by youjeong          #+#    #+#             */
-/*   Updated: 2023/03/27 20:32:28 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/04/02 18:51:06 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,7 @@ int	cmd_sa(t_stack *stack, t_stack *stack_cmd)
 	tmp = stack->top->data;
 	stack->top->data = stack->top->next->data;
 	stack->top->next->data = tmp;
-	if (stack_cmd->top && stack_cmd->top->data == sa)
-		pop_top(stack_cmd);
-	else if (stack_cmd->top && stack_cmd->top->data == sb)
-	{
-		pop_top(stack_cmd);
-		if (push_top(stack_cmd, ss) == ERROR)
-			return (ERROR);
-	}
-	else if (push_top(stack_cmd, sa) == ERROR)
+	if (optimization_cmd_sa(stack, stack_cmd))
 		return (ERROR);
 	return (0);
 }
@@ -70,15 +62,7 @@ int	cmd_ra(t_stack *stack, t_stack *stack_cmd)
 	pnode->prev = stack->bottom;
 	stack->bottom->next = pnode;
 	stack->bottom = pnode;
-	if (stack_cmd->top && stack_cmd->top->data == rra)
-		pop_top(stack_cmd);
-	else if (stack_cmd->top && stack_cmd->top->data == rb)
-	{
-		pop_top(stack_cmd);
-		if (push_top(stack_cmd, rr) == ERROR)
-			return (ERROR);
-	}
-	else if (push_top(stack_cmd, ra) == ERROR)
+	if (optimization_cmd_ra(stack_cmd))
 		return (ERROR);
 	return (0);
 }
@@ -96,15 +80,7 @@ int	cmd_rra(t_stack *stack, t_stack *stack_cmd)
 	pnode->next = stack->top;
 	stack->top->prev = pnode;
 	stack->top = pnode;
-	if (stack_cmd->top && stack_cmd->top->data == ra)
-		pop_top(stack_cmd);
-	else if (stack_cmd->top && stack_cmd->top->data == rrb)
-	{
-		pop_top(stack_cmd);
-		if (push_top(stack_cmd, rrr) == ERROR)
-			return (ERROR);
-	}
-	else if (push_top(stack_cmd, rra) == ERROR)
+	if (optimization_cmd_rra(stack_cmd))
 		return (ERROR);
 	return (0);
 }
