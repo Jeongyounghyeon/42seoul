@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 19:29:27 by youjeong          #+#    #+#             */
-/*   Updated: 2023/04/02 18:46:10 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/04/04 12:26:22 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	sort_hard_3(t_quick_params qprms, t_stack *stack_cmd)
 	if (data[0] > data[1] && data[0] > data[2])
 		return (sort_hard_3_case1(qprms, stack_cmd, data));
 	else if (data[1] > data[0] && data[1] > data[2])
-		return (0);
+		return (1);
 	else if (data[0] > data[1])
 		return (sort_hard_3_case3(qprms, stack_cmd, data));
 	return (0);
