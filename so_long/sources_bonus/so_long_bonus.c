@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   so_long_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 15:25:09 by youjeong          #+#    #+#             */
-/*   Updated: 2023/05/03 13:15:17 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/05/02 22:52:18 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 int	key_input(int keycode, t_so_long *so_long)
 {
@@ -63,10 +63,16 @@ int	so_long(t_map *map)
 	return (0);
 }
 
+void	check_leak(void)
+{
+	system("leaks --list -- so_long");
+}
+
 int	main(int argc, char **argv)
 {
 	t_map	map;
 
+	atexit(check_leak);
 	if (argc != 2)
 	{
 		print_err("The parameter must be one map of the form ber.\n");

@@ -6,7 +6,7 @@
 #    By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 14:25:17 by youjeong          #+#    #+#              #
-#    Updated: 2023/04/29 14:13:51 by youjeong         ###   ########.fr        #
+#    Updated: 2023/05/02 22:50:05 by youjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,10 +33,19 @@ GNL_A = $(FD_GNL)/get_next_line.a
 
 SRCS_BASIC = so_long.c \
 			map.c \
-			validation.c \
-			utils1.c \
-			player.c
-SRCS_BONUS = so_long.c
+			validation_map.c \
+			player.c \
+			init_so_long.c \
+			utils_so_long.c \
+			utils.c 
+			
+SRCS_BONUS = so_long_bonus.c \
+			map_bonus.c \
+			validation_map_bonus.c \
+			player_bonus.c \
+			init_so_long_bonus.c \
+			utils_so_long_bonus.c \
+			utils_bonus.c 
 
 OBJS_BASIC = $(SRCS_BASIC:.c=.o)
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)

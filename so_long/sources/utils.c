@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:36:40 by youjeong          #+#    #+#             */
-/*   Updated: 2023/04/29 13:23:04 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/05/01 16:54:08 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,11 @@ char	**dup_strs(char **strs, int size)
 		}
 	}
 	return (res);
+}
+
+int	print_err(char *comment)
+{
+	ft_putstr_fd("ERROR\n", 2);
+	ft_putstr_fd(comment, 2);
+	return (FALSE);
 }

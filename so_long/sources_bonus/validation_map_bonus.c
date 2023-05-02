@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validation.c                                       :+:      :+:    :+:   */
+/*   validation_map_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 21:37:40 by youjeong          #+#    #+#             */
-/*   Updated: 2023/04/29 15:03:24 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/05/02 22:52:25 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 static int	valid_map_line(t_map *map, int i, int *cnt_player)
 {
@@ -62,7 +62,7 @@ static int	valid_map_basic(t_map *map)
 	return (TRUE);
 }
 
-int	valid_map_dfs(int x, int y, t_player *player, char **visited)
+static int	valid_map_dfs(int x, int y, t_player *player, char **visited)
 {
 	if (visited[y][x] == '1')
 		return (0);
@@ -78,9 +78,9 @@ int	valid_map_dfs(int x, int y, t_player *player, char **visited)
 		valid_map_dfs(x, y - 1, player, visited);
 		valid_map_dfs(x + 1, y, player, visited);
 		valid_map_dfs(x, y + 1, player, visited);
-		return (1);
+		return (TRUE);
 	}
-	return (0);
+	return (FALSE);
 }
 
 static int	valid_map_avail(t_map *map)
@@ -91,13 +91,16 @@ static int	valid_map_avail(t_map *map)
 
 	visited = dup_strs(map->data, map->height);
 	if (!visited)
+	{
+		print_err("Not Enough memory!\n");
 		return (FALSE);
+	}
 	find_player(&player, map);
 	player.cnt_collect = 0;
 	player.cnt_exit = 0;
 	valid_map_dfs(player.x, player.y, &player, visited);
 	i = -1;
-	while (++i <= map->height)
+	while (++i < map->height)
 		free(visited[i]);
 	free(visited);
 	if (player.cnt_collect != map->cnt_collect
