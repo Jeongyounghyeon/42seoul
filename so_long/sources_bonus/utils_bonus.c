@@ -6,11 +6,14 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:36:40 by youjeong          #+#    #+#             */
-/*   Updated: 2023/05/02 22:52:20 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/05/03 19:01:41 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
+
+char	**dup_strs(char **strs, int size);
+int		print_err(char *comment);
 
 char	**dup_strs(char **strs, int size)
 {

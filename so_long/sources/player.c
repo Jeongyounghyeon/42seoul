@@ -6,11 +6,17 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 13:39:27 by youjeong          #+#    #+#             */
-/*   Updated: 2023/05/02 22:04:56 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/05/03 14:31:05 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	find_player(t_player *player, t_map *map);
+int		player_move_up(t_so_long *so_long);
+int		player_move_left(t_so_long *so_long);
+int		player_move_down(t_so_long *so_long);
+int		player_move_right(t_so_long *so_long);
 
 void	find_player(t_player *player, t_map *map)
 {
@@ -46,7 +52,7 @@ int	player_move_up(t_so_long *so_long)
 	else if (map[(player->y) - 1][player->x] == 'E')
 	{
 		if (player->cnt_collect == so_long->map->cnt_collect)
-			key_input(53, so_long);
+			clear_game(so_long);
 		else
 			return (0);
 	}
@@ -74,7 +80,7 @@ int	player_move_left(t_so_long *so_long)
 	else if (map[player->y][(player->x) - 1] == 'E')
 	{
 		if (player->cnt_collect == so_long->map->cnt_collect)
-			key_input(53, so_long);
+			clear_game(so_long);
 		else
 			return (0);
 	}
@@ -102,7 +108,7 @@ int	player_move_down(t_so_long *so_long)
 	else if (map[(player->y) + 1][player->x] == 'E')
 	{
 		if (player->cnt_collect == so_long->map->cnt_collect)
-			key_input(53, so_long);
+			clear_game(so_long);
 		else
 			return (0);
 	}
@@ -130,7 +136,7 @@ int	player_move_right(t_so_long *so_long)
 	else if (map[player->y][(player->x) + 1] == 'E')
 	{
 		if (player->cnt_collect == so_long->map->cnt_collect)
-			key_input(53, so_long);
+			clear_game(so_long);
 		else
 			return (0);
 	}

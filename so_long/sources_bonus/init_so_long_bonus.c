@@ -6,11 +6,61 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 20:27:47 by youjeong          #+#    #+#             */
-/*   Updated: 2023/05/02 22:52:03 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/05/03 19:00:37 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
+
+int			init_so_long(t_so_long *so_long, t_win *window, t_map *map);
+static int	init_img(t_so_long *so_long);
+static int	put_start_img(t_so_long *so_long);
+static void	init_img_player(void *mlx, t_img *img);
+static void	init_img_unplayer(void *mlx, t_img *img);
+
+int	init_so_long(t_so_long *so_long, t_win *window, t_map *map)
+{
+	so_long->win = window;
+	so_long->map = map;
+	if (init_img(so_long) == FALSE)
+		return (FALSE);
+	so_long->player = (t_player *)malloc(1 * sizeof(t_player));
+	if (!so_long->player)
+	{
+		print_err("Not enough memory!");
+		return (FALSE);
+	}
+	find_player(so_long->player, so_long->map);
+	so_long->player->cnt_collect = 0;
+	so_long->player->cnt_exit = 0;
+	so_long->player->cnt_move = 0;
+	so_long->player->direct = 'D';
+	put_start_img(so_long);
+	return (TRUE);
+}
+
+static int	init_img(t_so_long *so_long)
+{
+	t_img	*img;
+
+	so_long->img = (t_img *)malloc(1 * sizeof(t_img));
+	if (!(so_long->img))
+	{
+		print_err("Not Enough Memory!");
+		return (FALSE);
+	}
+	img = so_long->img;
+	init_img_player(so_long->win->mlx, img);
+	init_img_unplayer(so_long->win->mlx, img);
+	if (!(img->background) || !(img->collect) || !(img->exit) || !(img->wall) \
+		|| !(img->player_up) || !(img->player_down) \
+		|| !(img->player_left) || !(img->player_right))
+	{
+		print_err("Not Enough Memory!");
+		return (FALSE);
+	}
+	return (TRUE);
+}
 
 static int	put_start_img(t_so_long *so_long)
 {
@@ -34,21 +84,6 @@ static int	put_start_img(t_so_long *so_long)
 	return (0);
 }
 
-static void	init_img_unplayer(void *mlx, t_img *img)
-{
-	int	width;
-	int	height;
-
-	img->background = mlx_xpm_file_to_image(mlx, \
-					"textures/background.xpm", &width, &height);
-	img->collect = mlx_xpm_file_to_image(mlx, \
-					"textures/collect.xpm", &width, &height);
-	img->exit = mlx_xpm_file_to_image(mlx, \
-					"textures/exit.xpm", &width, &height);
-	img->wall = mlx_xpm_file_to_image(mlx, \
-					"textures/wall.xpm", &width, &height);
-}
-
 static void	init_img_player(void *mlx, t_img *img)
 {
 	int	width;
@@ -64,46 +99,17 @@ static void	init_img_player(void *mlx, t_img *img)
 					"textures/player/player_right.xpm", &width, &height);
 }
 
-static int	init_img(t_so_long *so_long)
+static void	init_img_unplayer(void *mlx, t_img *img)
 {
-	t_img	*img;
+	int	width;
+	int	height;
 
-	so_long->img = (t_img *)malloc(1 * sizeof(t_img));
-	if (!(so_long->img))
-	{
-		print_err("Not Enough Memory!");
-		return (FALSE);
-	}
-	img = so_long->img;
-	init_img_unplayer(so_long->win->mlx, img);
-	init_img_player(so_long->win->mlx, img);
-	if (!(img->background) || !(img->collect) || !(img->exit) || !(img->wall) \
-		|| !(img->player_up) || !(img->player_down) \
-		|| !(img->player_left) || !(img->player_right))
-	{
-		print_err("Not Enough Memory!");
-		return (FALSE);
-	}
-	return (TRUE);
-}
-
-int	init_so_long(t_so_long *so_long, t_win *window, t_map *map)
-{
-	so_long->win = window;
-	so_long->map = map;
-	if (init_img(so_long) == FALSE)
-		return (FALSE);
-	so_long->player = (t_player *)malloc(1 * sizeof(t_player));
-	if (!so_long->player)
-	{
-		print_err("Not enough memory!");
-		return (FALSE);
-	}
-	find_player(so_long->player, so_long->map);
-	so_long->player->cnt_collect = 0;
-	so_long->player->cnt_exit = 0;
-	so_long->player->cnt_move = 0;
-	so_long->player->direct = 'D';
-	put_start_img(so_long);
-	return (TRUE);
+	img->background = mlx_xpm_file_to_image(mlx, \
+					"textures/background.xpm", &width, &height);
+	img->collect = mlx_xpm_file_to_image(mlx, \
+					"textures/collect.xpm", &width, &height);
+	img->exit = mlx_xpm_file_to_image(mlx, \
+					"textures/exit.xpm", &width, &height);
+	img->wall = mlx_xpm_file_to_image(mlx, \
+					"textures/wall.xpm", &width, &height);
 }

@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 15:23:57 by youjeong          #+#    #+#             */
-/*   Updated: 2023/05/02 22:02:02 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/05/03 14:27:51 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,9 @@ typedef struct s_so_long
 	t_player	*player;
 }t_so_long;
 
+// so_long
 int		init_so_long(t_so_long *so_long, t_win *window, t_map *map);
+void	clear_game(t_so_long *so_long);
 void	put_img(t_so_long *so_long, char feature, int i, int j);
 int		key_input(int keycode, t_so_long *so_long);
 

@@ -1,16 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils1.c                                           :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:36:40 by youjeong          #+#    #+#             */
-/*   Updated: 2023/05/01 16:54:08 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/05/03 13:37:01 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+char	**dup_strs(char **strs, int size);
+int		print_err(char *comment);
 
 char	**dup_strs(char **strs, int size)
 {
