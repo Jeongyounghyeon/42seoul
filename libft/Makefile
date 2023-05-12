@@ -6,7 +6,7 @@
 #    By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/21 14:11:47 by youjeong          #+#    #+#              #
-#    Updated: 2023/01/15 14:26:35 by youjeong         ###   ########.fr        #
+#    Updated: 2023/05/12 16:33:47 by youjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,8 @@ NAME = libft.a
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-FD_SOURCE = sources
-FD_HEADER = headers
-FD_OBJ = objs
+SRC_DIR = src
+BUILD_DIR = build
 
 SRCS = ft_isalpha.c \
 		ft_isdigit.c \
@@ -64,19 +63,19 @@ SRCS = ft_isalpha.c \
 		ft_lstmap.c
 OBJS = $(SRCS:.c=.o)
 
-all : $(FD_OBJ) $(NAME)
+all : $(BUILD_DIR) $(NAME)
 
-$(NAME) : ${addprefix $(FD_OBJ)/, $(OBJS)}
+$(NAME) : ${addprefix $(BUILD_DIR)/, $(OBJS)}
 	ar -rcus $@ $^
 
-$(FD_OBJ):
+$(BUILD_DIR):
 	mkdir $@
 
-$(FD_OBJ)/%.o: $(FD_SOURCE)/%.c
-	$(CC) $(CFLAGS) -c $^ -o $@ -I $(FD_HEADER) 
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
+	$(CC) $(CFLAGS) -c $^ -o $@ -I $(SRC_DIR)/include
 
 clean:
-	rm -rf $(FD_OBJ)
+	rm -rf $(BUILD_DIR)
 
 fclean: clean
 	rm -f $(NAME)
