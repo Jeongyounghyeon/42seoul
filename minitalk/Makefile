@@ -6,7 +6,7 @@
 #    By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 14:25:17 by youjeong          #+#    #+#              #
-#    Updated: 2023/05/12 22:20:07 by youjeong         ###   ########.fr        #
+#    Updated: 2023/05/14 13:50:44 by youjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,22 +78,22 @@ $(BUILD_DIR):
 	mkdir $(BUILD_SERVER_DIR)
 	mkdir $(BUILD_SHARED_DIR)
 
-$(CLIENT): $(addprefix $(BUILD_SHARED_DIR)/, $(OBJ_SHARED)) $(addprefix $(BUILD_CLIENT_DIR)/, $(OBJ_CLIENT)) | $(BUILD_SHARED_DIR) $(BUILD_CLIENT_DIR)
+$(CLIENT): $(addprefix $(BUILD_SHARED_DIR)/, $(OBJ_SHARED)) $(addprefix $(BUILD_CLIENT_DIR)/, $(OBJ_CLIENT))
 	$(CC) $(CFLAGS) $^ $(LIBFT_A) -o $@
 
 
-$(SERVER): $(addprefix $(BUILD_SHARED_DIR)/, $(OBJ_SHARED)) $(addprefix $(BUILD_SERVER_DIR)/, $(OBJ_SERVER)) | $(BUILD_SHARED_DIR) $(BUILD_SERVER_DIR)
+$(SERVER): $(addprefix $(BUILD_SHARED_DIR)/, $(OBJ_SHARED)) $(addprefix $(BUILD_SERVER_DIR)/, $(OBJ_SERVER))
 	$(CC) $(CFLAGS) $^ $(LIBFT_A) -o $@
 
-$(BUILD_SHARED_DIR)/%.o: $(SRC_SHARED_DIR)/%.c | $(BUILD_SHARED_DIR)
+$(BUILD_SHARED_DIR)/%.o: $(SRC_SHARED_DIR)/%.c $(BUILD_SHARED_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(SRC_DIR)/include \
 								-I $(LIBFT_SRC_DIR)/include
 
-$(BUILD_CLIENT_DIR)/%.o: $(SRC_CLIENT_DIR)/%.c | $(BUILD_CLIENT_DIR)
+$(BUILD_CLIENT_DIR)/%.o: $(SRC_CLIENT_DIR)/%.c $(BUILD_CLIENT_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(SRC_DIR)/include \
 								-I $(LIBFT_SRC_DIR)/include
 	
-$(BUILD_SERVER_DIR)/%.o: $(SRC_SERVER_DIR)/%.c | $(BUILD_SHARED_DIR)
+$(BUILD_SERVER_DIR)/%.o: $(SRC_SERVER_DIR)/%.c $(BUILD_SHARED_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(SRC_DIR)/include \
 								-I $(LIBFT_SRC_DIR)/include
 

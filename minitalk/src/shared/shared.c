@@ -6,14 +6,8 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 18:21:27 by youjeong          #+#    #+#             */
-/*   Updated: 2023/05/12 18:21:45 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/05/14 13:52:15 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shared.h"
-
-void	shared(void)
-{
-	ft_putstr_fd("libft_test\n", 1);
-	printf("shared_test\n");
-}
