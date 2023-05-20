@@ -6,8 +6,19 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 18:21:27 by youjeong          #+#    #+#             */
-/*   Updated: 2023/05/14 13:52:15 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/05/20 15:16:41 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shared.h"
+
+void	send_sig(pid_t pid, int sig)
+{
+	if (kill(pid, sig) != 0)
+	{
+		ft_putstr_fd("Connection with server failed.\n", 1);
+		exit(1);
+	}
+	else
+		usleep(100);
+}
