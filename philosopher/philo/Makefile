@@ -6,7 +6,7 @@
 #    By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 15:25:29 by youjeong          #+#    #+#              #
-#    Updated: 2023/05/23 15:42:11 by youjeong         ###   ########.fr        #
+#    Updated: 2023/05/23 22:39:40 by youjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,10 @@ CFLAGS = -Wall -Wextra -Werror
 SRC_DIR = src
 BUILD_DIR = build
 
-SRCS = philo.c
+SRCS = philo.c \
+		input_handler.c \
+		exception.c \
+		utils.c
 OBJS = $(SRCS:.c=.o)
 
 all : $(BUILD_DIR) $(NAME)
