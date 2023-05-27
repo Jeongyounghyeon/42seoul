@@ -1,26 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exception.c                                        :+:      :+:    :+:   */
+/*   start_acting.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 22:01:49 by youjeong          #+#    #+#             */
-/*   Updated: 2023/05/27 19:28:34 by youjeong         ###   ########.fr       */
+/*   Created: 2023/05/25 15:14:47 by youjeong          #+#    #+#             */
+/*   Updated: 2023/05/27 15:16:56 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	parameter_exception(void);
+int		start_thinking(t_info_philo infoPhilo, t_philo *philo);
+void	start_sleeping(void);
+void	start_eating(void);
 
-void	parameter_exception(void)
+int	start_thinking(t_info_philo info_philo, t_philo *philo)
 {
-	write(1, "The philo program requires a factor of 5~6 int numbers.\n \
-1. number_of_philosophers\n \
-2. time_to_die\n \
-3. time_to_eat\n \
-4. time_to_sleep\n \
-5. number_of_times_each_philosopher_must_eat(Option)\n", 188);
-	exit(1);
+	struct timeval	tv;
+
+	if (gettimeofday(&tv, 0) == ERROR)
+		return (ERROR);
+
+	// fork 대기
+	return (0);
+}
+
+void	start_sleeping(void)
+{
+	struct timeval	tv;
+	char			*str;
+
+
+	return ;
+}
+
+void	start_eating(void)
+{
+	return ;
 }

@@ -6,7 +6,7 @@
 #    By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 15:25:29 by youjeong          #+#    #+#              #
-#    Updated: 2023/05/23 22:39:40 by youjeong         ###   ########.fr        #
+#    Updated: 2023/05/27 19:24:24 by youjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,11 @@ BUILD_DIR = build
 
 SRCS = philo.c \
 		input_handler.c \
+		init.c \
 		exception.c \
-		utils.c
+		utils.c \
+		ft_atoi.c \
+		ft_itoa.c
 OBJS = $(SRCS:.c=.o)
 
 all : $(BUILD_DIR) $(NAME)
