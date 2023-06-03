@@ -9,52 +9,68 @@ int		height;
 FILE	*pfile;
 
 int		main(int argc, char **argv);
-void	open_file(char *argv);
-void	init_paper();
-void	drawings();
+int		open_file(char *argv);
+int	init_paper();
+int	drawings();
 void	print_paper();
 
 int main(int argc, char **argv)
 {
-	if (argc != 2)
-		return (0);
+	if (argc != 2) {
+		write(1, "Error: argument\n", 17);
+		return (1);
+	}
 
-	open_file(argv[1]);
-	init_paper();
-	drawings();
+	if (open_file(argv[1]) == 1)
+		return (1);
+	if (init_paper() == 1 || drawings() == 1) {
+		write(1, "Operation file corrupted\n", 26);
+		return (1);
+	}
 	fclose(pfile);
 	print_paper();
-	exit (0);
+	return (0);
 }
 
-void	open_file(char *argv)
+int	open_file(char *argv)
 {
 	pfile = fopen(argv, "r");
 	if (pfile == 0)
-		exit(1);
+		return (1);
+	return (0);
 }
 
-void	init_paper()
+int	init_paper()
 {
 	char c;
 
-	if (fscanf(pfile, "%d %d %c\n", &width, &height, &c) == EOF) exit(1);
-	if (!(paper = (char **)malloc(height * sizeof(char *)))) exit(1);
+	if (fscanf(pfile, "%d %d %c\n", &width, &height, &c) == EOF) 
+		return (1);
+	if (!(paper = (char **)malloc(height * sizeof(char *)))) 
+		return (1);
 	for (int i = 0; i < height; i++) {
-		if (!(paper[i] = (char *)malloc(width * sizeof(char)))) exit(1);
+		if (!(paper[i] = (char *)malloc(width * sizeof(char))))
+			return (1);
 		memset(paper[i], c, width * sizeof(char));
 	}
+	if (!(width <= 300 && height <= 300))
+		return (1);
+	return (0);
 }
 
-void	drawings()
+int	drawings()
 {
 	char	rR, c;
 	float	x, y, w, h;
 	int		x_, _x, y_, _y;
+	int		res_scanf;
 
-	while (fscanf(pfile, "%c %f %f %f %f %c\n", &rR, &x, &y, &w, &h, &c) != EOF)
+	res_scanf = fscanf(pfile, "%c %f %f %f %f %c\n", &rR, &x, &y, &w, &h, &c);
+	while (res_scanf != EOF)
 	{
-		if (rR != 'r' && rR != 'R') exit(1);
+		if ((rR != 'r' && rR != 'R')
+			|| w <= 0 || h <= 0) 
+			return (1);
 		_x = (int)(x + w);
 		_y = (int)(y + h);
 		x_ = (int)x;
@@ -72,7 +88,11 @@ void	drawings()
 				paper[i][j] = c;
 			}
 		}
+		res_scanf = fscanf(pfile, "%c %f %f %f %f %c\n", &rR, &x, &y, &w, &h, &c);
 	}
+	if (res_scanf != EOF)
+		return (1);
+	return (0);
 }
 
 void	print_paper()
