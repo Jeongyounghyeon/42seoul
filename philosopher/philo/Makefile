@@ -6,7 +6,7 @@
 #    By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 15:25:29 by youjeong          #+#    #+#              #
-#    Updated: 2023/05/27 19:24:24 by youjeong         ###   ########.fr        #
+#    Updated: 2023/06/05 19:31:22 by youjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRCS = philo.c \
 		utils.c \
 		ft_atoi.c \
 		ft_itoa.c
+
 OBJS = $(SRCS:.c=.o)
 
 all : $(BUILD_DIR) $(NAME)

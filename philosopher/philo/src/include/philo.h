@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:35:34 by youjeong          #+#    #+#             */
-/*   Updated: 2023/05/27 19:35:21 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/06/05 19:31:15 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,19 @@
 # include <stdlib.h>
 # include <pthread.h>
 # include <sys/time.h>
-
-
 # include <stdio.h>
 
-typedef pthread_mutex_t t_fork;
-
-typedef struct s_info_philo
+typedef struct	s_info_philo
 {
-	int	number_of_philosophers;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	number_of_times_each_philosopher_must_eat;
+	int				nbr_of_philos;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				time_to_must_eat;
+	pthread_mutex_t	*key_print;
 }t_info_philo;
+
+typedef pthread_mutex_t	t_fork;
 
 typedef struct s_philo
 {
@@ -42,7 +41,10 @@ typedef struct s_philo
 	int			num;
 	t_fork		*lfork;
 	t_fork		*rfork;
+	uint64_t	last_eat_time;
 }t_philo;
+
+typedef enum e_state {thinking, eating, sleeping, dying, taking}t_state;
 
 void	input_handler(t_info_philo *info_philo, char **argv);
 void	set_table(t_philo **philos, t_fork **forks, t_info_philo *info_philo);
@@ -59,7 +61,7 @@ void	parameter_exception(void);
 // utils
 int		ft_strlen(const char *s);
 int		ft_atoi(const char *str);
-char    *ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_itoa(int n);
-
+int		ft_atoi(const char *str);
 #endif

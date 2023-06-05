@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 16:05:13 by youjeong          #+#    #+#             */
-/*   Updated: 2023/05/27 19:40:06 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/06/05 18:40:02 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_table(t_philo *philos, t_fork *forks, t_info_philo *info_philo)
 	int	i;
 
 	i = 0;
-	while (i < info_philo->number_of_philosophers - 1)
+	while (i < info_philo->nbr_of_philos - 1)
 	{
 		init_philo(&philos[i], philos[i].num, &forks[i], &forks[i + 1]);
 		i++;
@@ -48,7 +48,7 @@ t_philo	*get_philos(int n)
 	philos = (t_philo *)malloc(n * sizeof(t_philo));
 	if (philos == 0)
 	{
-		write(1, "Not enough memory!\n", 1);
+		printf("Not enough memory!\n");
 		return (0);
 	}
 	while (i < n)
@@ -70,7 +70,7 @@ t_fork	*get_forks(int n)
 	forks = (t_fork *)malloc(n * sizeof(t_fork));
 	if (forks == 0)
 	{
-		write(1, "Not enough memory!\n", 1);
+		printf("Not enough memory!\n");
 		return (0);
 	}
 	while (i < n)
