@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 21:32:05 by youjeong          #+#    #+#             */
-/*   Updated: 2023/06/05 18:46:52 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/06/07 21:14:27 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,11 @@ void	set_table(t_philo **philos, t_fork **forks, t_info_philo *info_philo)
 	*philos = get_philos(info_philo->nbr_of_philos);
 	*forks = get_forks(info_philo->nbr_of_philos);
 	info_philo->key_print = (pthread_mutex_t *)malloc(1 * sizeof(pthread_mutex_t));
+	pthread_mutex_init(info_philo->key_print, 0);
 	if (!info_philo->key_print)
 		printf("Not enough memory!\n");
 	if (!(*philos) || !(*forks) || !info_philo->key_print)
 		exit(1);
 	init_table(*philos, *forks, info_philo);
+	info_philo->flag = 0;
 }

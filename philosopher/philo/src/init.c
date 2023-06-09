@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 16:05:13 by youjeong          #+#    #+#             */
-/*   Updated: 2023/06/05 18:40:02 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/06/06 17:26:33 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	init_table(t_philo *philos, t_fork *forks, t_info_philo *info_philo)
 	while (i < info_philo->nbr_of_philos - 1)
 	{
 		init_philo(&philos[i], philos[i].num, &forks[i], &forks[i + 1]);
+		philos[i].info_philo = info_philo;
 		i++;
 	}
 	init_philo(&philos[i], philos[i].num, &forks[i], &forks[0]);

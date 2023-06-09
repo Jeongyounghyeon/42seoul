@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:35:34 by youjeong          #+#    #+#             */
-/*   Updated: 2023/06/05 19:31:15 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/06/07 21:06:13 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <sys/time.h>
 # include <stdio.h>
 
+typedef	uint64_t	t_ms;
+
 typedef struct	s_info_philo
 {
 	int				nbr_of_philos;
@@ -31,17 +33,19 @@ typedef struct	s_info_philo
 	int				time_to_sleep;
 	int				time_to_must_eat;
 	pthread_mutex_t	*key_print;
+	int				flag;
 }t_info_philo;
 
 typedef pthread_mutex_t	t_fork;
 
-typedef struct s_philo
+typedef struct	s_philo
 {
-	pthread_t	thread;
-	int			num;
-	t_fork		*lfork;
-	t_fork		*rfork;
-	uint64_t	last_eat_time;
+	pthread_t		thread;
+	int				num;
+	t_fork			*lfork;
+	t_fork			*rfork;
+	t_ms			last_eat_time;
+	t_info_philo	*info_philo;
 }t_philo;
 
 typedef enum e_state {thinking, eating, sleeping, dying, taking}t_state;
@@ -55,6 +59,11 @@ void	init_philo(t_philo *philo, int num, t_fork *lfork, t_fork *rfork);
 t_philo	*get_philos(int n);
 t_fork	*get_forks(int n);
 
+/* routine */
+void	*routine(void *arg_philo);
+void	*monitoring(void *arg_philo);
+int		start_dying(t_philo *philo, t_info_philo *info_philo);;
+
 // exception
 void	parameter_exception(void);
 
@@ -64,4 +73,5 @@ int		ft_atoi(const char *str);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_itoa(int n);
 int		ft_atoi(const char *str);
+t_ms	get_current_time();
 #endif

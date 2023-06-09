@@ -6,14 +6,15 @@
 #    By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 15:25:29 by youjeong          #+#    #+#              #
-#    Updated: 2023/06/05 19:31:22 by youjeong         ###   ########.fr        #
+#    Updated: 2023/06/07 21:07:14 by youjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = 
+# CFLAGS = -Wall -Wextra -Werror
 
 SRC_DIR = src
 BUILD_DIR = build
@@ -21,6 +22,8 @@ BUILD_DIR = build
 SRCS = philo.c \
 		input_handler.c \
 		init.c \
+		routine.c \
+		monitoring.c \
 		exception.c \
 		utils.c \
 		ft_atoi.c \

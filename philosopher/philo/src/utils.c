@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 21:50:01 by youjeong          #+#    #+#             */
-/*   Updated: 2023/05/28 13:01:30 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:04:05 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int		ft_strlen(const char *s);
 size_t  ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t  ft_strlcat(char *dst, const char *src, size_t dstsize);
 char    *ft_strjoin(char const *s1, char const *s2);
+t_ms	get_current_time();
 
 int	ft_strlen(const char *s)
 {
@@ -89,4 +90,19 @@ char    *ft_strjoin(char const *s1, char const *s2)
 	ft_strlcat(res, s2, s1_len + s2_len + 1);
 	res[s1_len + s2_len] = 0;
 	return (res);
+}
+
+t_ms	get_current_time()
+{
+	static t_ms		time_start;
+	t_ms			time_ms;
+	struct timeval	tv;
+
+	gettimeofday(&tv, 0);
+	if (time_start == 0) {
+        time_start = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+		return (time_start);
+    }
+	time_ms = (tv.tv_sec * 1000) + (tv.tv_usec / 1000) - time_start;
+	return (time_ms);
 }

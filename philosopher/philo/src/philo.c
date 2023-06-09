@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:35:36 by youjeong          #+#    #+#             */
-/*   Updated: 2023/06/05 19:31:52 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:51:25 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int		main(int argc, char **argv);
 void	set_table(t_philo **philos, t_fork **forks, t_info_philo *info_philo);
 void	test(t_philo *philos, t_fork *forks, t_info_philo *s_info_philo);
-void	*test2(void *test);
 
 int	main(int argc, char **argv)
 {
@@ -27,17 +26,18 @@ int	main(int argc, char **argv)
 		parameter_exception();
 	input_handler(&info_philo, argv);
 	set_table(&philos, &forks, &info_philo);
-	test(philos, forks, &info_philo);
+	// test(philos, forks, &info_philo);
 	
-	// for (int i = 0; i < info_philo.nbr_of_philos; i++) {
-	// 	if (pthread_create(&philos[i].thread, 0, test2, (void *)&philos[i]) < 0) {
-	// 		perror("ERROR: thread create error\n");
-	// 		exit(1);
-	// 	}
-	// }
-	
-	// for (int i = 0; i < info_philo.nbr_of_philos; i++)
-	// 	pthread_join(philos[i].thread, 0);
+	for (int i = 0; i < info_philo.nbr_of_philos - 1; i++) {
+		// if (pthread_create(&philos[i].thread, 0, (void *)routine, (void *)&philos[i]) != 0)
+		
+		if (pthread_create(&philos[i].thread, 0, (void *)routine, (void *)&philos[i]) != 0
+			|| pthread_create(&philos[i].thread, 0, (void *)monitoring, (void *)&philos[i]) != 0)
+			printf("thread create error\n");
+		get_current_time();
+		info_philo.flag = 1;
+	}
+	sleep(1000);
 	return (0);
 }
 
