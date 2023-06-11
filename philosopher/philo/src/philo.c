@@ -34,9 +34,9 @@ int	main(int argc, char **argv)
 		if (pthread_create(&philos[i].thread, 0, (void *)routine, (void *)&philos[i]) != 0
 			|| pthread_create(&philos[i].thread, 0, (void *)monitoring, (void *)&philos[i]) != 0)
 			printf("thread create error\n");
-		get_current_time();
-		info_philo.flag = 1;
 	}
+	get_current_time();
+	info_philo.flag = 1;
 	sleep(1000);
 	return (0);
 }

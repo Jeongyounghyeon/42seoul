@@ -42,7 +42,7 @@ static int	wait_eating(t_philo *philo, t_info_philo *info_philo)
 		pthread_mutex_unlock(philo->lfork);
 		pthread_mutex_unlock(philo->rfork);
 	}
-	while (pthread_mutex_lock(info_philo->key_print) != 0)
+	while(pthread_mutex_lock(info_philo->key_print))
 		continue;
 	philo->last_eat_time = get_current_time();
 	if (info_philo->flag == -1)
@@ -59,7 +59,7 @@ static int	wait_eating(t_philo *philo, t_info_philo *info_philo)
 
 static int	start_thinking(t_philo *philo, t_info_philo *info_philo)
 {
-	while (pthread_mutex_lock(info_philo->key_print) != 0)
+	while(pthread_mutex_lock(info_philo->key_print))
 		continue;
 	if (info_philo->flag == -1)
 		return (1);
@@ -70,7 +70,7 @@ static int	start_thinking(t_philo *philo, t_info_philo *info_philo)
 
 static int	start_sleeping(t_philo *philo, t_info_philo *info_philo)
 {
-	while (pthread_mutex_lock(info_philo->key_print) != 0)
+	while(pthread_mutex_lock(info_philo->key_print))
 		continue;
 	if (info_philo->flag == -1)
 		return (1);
@@ -82,11 +82,11 @@ static int	start_sleeping(t_philo *philo, t_info_philo *info_philo)
 
 int	start_dying(t_philo *philo, t_info_philo *info_philo)
 {
-	while (pthread_mutex_lock(info_philo->key_print) != 0)
+	while(pthread_mutex_lock(info_philo->key_print))
 		continue;
 	if (info_philo->flag == -1)
 		return (1);
-	printf("%llu %d is dying\n", get_current_time(), philo->num);
+	printf("%llu %d died\n", get_current_time(), philo->num);
 	info_philo->flag = -1;
 	pthread_mutex_unlock(info_philo->key_print);
 	return (0);

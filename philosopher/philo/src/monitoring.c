@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 20:51:01 by youjeong          #+#    #+#             */
-/*   Updated: 2023/06/08 20:09:44 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/06/11 18:06:40 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	*monitoring(void *arg_philo)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg_philo;
+	while (philo->info_philo->flag == 0)
+		continue;
 	while (1) {
 		if (check_philo(philo, philo->info_philo)) {
 			return (0);
