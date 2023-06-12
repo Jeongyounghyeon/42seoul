@@ -6,11 +6,11 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 16:05:13 by youjeong          #+#    #+#             */
-/*   Updated: 2023/06/11 19:06:04 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/06/12 20:59:59 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philo.h"
+#include "philo.h"
 
 void	init_table(t_philo *philos, t_fork *forks, t_info_philo *info_philo);
 void	init_philo(t_philo *philo, int num, t_fork *lfork, t_fork *rfork);
@@ -46,9 +46,9 @@ t_philo	*get_philos(int n)
 
 	i = 0;
 	if (n == 0)
-		return 0;
+		return (0);
 	philos = (t_philo *)malloc(n * sizeof(t_philo));
-	if (philos == 0)
+	if (!philos)
 	{
 		printf("Not enough memory!\n");
 		return (0);
@@ -68,9 +68,9 @@ t_fork	*get_forks(int n)
 
 	i = 0;
 	if (n == 0)
-		return 0;
+		return (0);
 	forks = (t_fork *)malloc(n * sizeof(t_fork));
-	if (forks == 0)
+	if (!forks)
 	{
 		printf("Not enough memory!\n");
 		return (0);

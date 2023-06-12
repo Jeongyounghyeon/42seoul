@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 20:51:01 by youjeong          #+#    #+#             */
-/*   Updated: 2023/06/12 16:51:50 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/06/12 20:48:03 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ int	check_philo(t_philo *philo, t_info_philo *info_philo)
 
 int	start_dying(t_philo *philo, t_info_philo *info_philo)
 {
-	pthread_mutex_lock(info_philo->key_print);
+	pthread_mutex_lock(&info_philo->key_print);
 	if (info_philo->flag == -1)
 	{
-		pthread_mutex_unlock(info_philo->key_print);
+		pthread_mutex_unlock(&info_philo->key_print);
 		return (1);
 	}
 	printf("%llu %d died\n", get_current_time(), philo->num);
 	info_philo->flag = -1;
-	pthread_mutex_unlock(info_philo->key_print);
+	pthread_mutex_unlock(&info_philo->key_print);
 	return (0);
 }
 

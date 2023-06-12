@@ -6,14 +6,14 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 21:32:05 by youjeong          #+#    #+#             */
-/*   Updated: 2023/06/12 18:32:35 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/06/12 21:04:57 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 void	input_handler(t_info_philo *info_philo, char **argv);
-void	set_table(t_philo **philos, t_fork **forks, t_info_philo *info_philo);
+int		set_table(t_philo **philos, t_fork **forks, t_info_philo *info_philo);
 
 void	input_handler(t_info_philo *info_philo, char **argv)
 {
@@ -25,16 +25,32 @@ void	input_handler(t_info_philo *info_philo, char **argv)
 	return ;
 }
 
-void	set_table(t_philo **philos, t_fork **forks, t_info_philo *info_philo)
+int	set_table(t_philo **philos, t_fork **forks, t_info_philo *info_philo)
 {
 	*philos = get_philos(info_philo->nbr_of_philos);
+	if (!*philos)
+		return (ERROR);
 	*forks = get_forks(info_philo->nbr_of_philos);
-	info_philo->key_print = (pthread_mutex_t *)malloc(1 * sizeof(pthread_mutex_t));
-	pthread_mutex_init(info_philo->key_print, 0);
-	if (!info_philo->key_print)
-		printf("Not enough memory!\n");
-	if (!(*philos) || !(*forks) || !info_philo->key_print)
-		exit(1);
+	if (!*forks)
+	{
+		free(*philos);
+		return (ERROR);
+	}
+	pthread_mutex_init(&info_philo->key_print, 0);
 	init_table(*philos, *forks, info_philo);
 	info_philo->flag = 0;
+	return (0);
+}
+
+void	set_routine_philo(t_philo *philos, t_info_philo *info_philo)
+{
+	int	i;
+
+	i = 0;
+	while (i < info_philo->nbr_of_philos)
+	{
+		pthread_create(&philos[i].thread, 0,
+			(void *)routine, (void *)&philos[i]);
+		i++;
+	}
 }

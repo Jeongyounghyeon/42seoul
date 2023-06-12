@@ -6,13 +6,14 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 22:01:49 by youjeong          #+#    #+#             */
-/*   Updated: 2023/06/12 16:58:18 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/06/12 20:54:34 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 void	parameter_exception(void);
+void	pfree(void *ptr);
 
 void	parameter_exception(void)
 {

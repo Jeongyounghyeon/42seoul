@@ -6,7 +6,7 @@
 #    By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 15:25:29 by youjeong          #+#    #+#              #
-#    Updated: 2023/06/12 19:00:53 by youjeong         ###   ########.fr        #
+#    Updated: 2023/06/12 20:26:42 by youjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,6 @@ SRCS = philo.c \
 		exception.c \
 		utils.c \
 		ft_atoi.c \
-		ft_itoa.c
 
 OBJS = $(SRCS:.c=.o)
 
