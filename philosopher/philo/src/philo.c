@@ -33,7 +33,9 @@ int	main(int argc, char **argv)
 			printf("thread create error\n");
 	}
 	get_current_time();
+	pthread_mutex_lock(&info_philo.flag_mutex);
 	info_philo.flag = 1;
+	pthread_mutex_unlock(&info_philo.flag_mutex);
 	for (int i = 0; i < info_philo.nbr_of_philos; i++)
 		pthread_join(philos[i].thread, 0);
 	return (0);
@@ -42,10 +44,10 @@ int	main(int argc, char **argv)
 void	test(t_philo *philos, t_fork *forks, t_info_philo *info_philo)
 {
 	printf("%-45s : %d\n", "nbr_of_philos", info_philo->nbr_of_philos);
-	printf("%-45s : %d\n", "time_to_must_eat", info_philo->time_to_must_eat);
-	printf("%-45s : %d\n", "time_to_die", info_philo->time_to_die);
-	printf("%-45s : %d\n", "time_to_eat", info_philo->time_to_eat);
-	printf("%-45s : %d\n", "time_to_sleep", info_philo->time_to_sleep);
+	printf("%-45s : %llu\n", "time_to_must_eat", info_philo->time_to_must_eat);
+	printf("%-45s : %llu\n", "time_to_die", info_philo->time_to_die);
+	printf("%-45s : %llu\n", "time_to_eat", info_philo->time_to_eat);
+	printf("%-45s : %llu\n", "time_to_sleep", info_philo->time_to_sleep);
 	printf("%-45s : %p\n", "key_print", info_philo->key_print);
 	printf("------------------------------------------------------------------------------------------------------------\n");
 	for(int i = 0; i < info_philo->nbr_of_philos; i++)

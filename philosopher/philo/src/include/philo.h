@@ -28,12 +28,13 @@ typedef	uint64_t	t_ms;
 typedef struct	s_info_philo
 {
 	int				nbr_of_philos;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				time_to_must_eat;
+	t_ms			time_to_die;
+	t_ms			time_to_eat;
+	t_ms			time_to_sleep;
+	t_ms			time_to_must_eat;
 	pthread_mutex_t	*key_print;
 	int				flag;
+	pthread_mutex_t	flag_mutex;
 }t_info_philo;
 
 typedef pthread_mutex_t	t_fork;

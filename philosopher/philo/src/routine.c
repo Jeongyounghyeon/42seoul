@@ -28,8 +28,17 @@ void	*routine(void *arg_philo)
 		eating_routin = wait_eating_odd;
 	else
 		eating_routin = wait_eating_even;
+	while(1)
+	{
+		pthread_mutex_lock(&philo->info_philo->flag_mutex);
+		if (philo->info_philo->flag == 1)
+		{
+			pthread_mutex_unlock(&philo->info_philo->flag_mutex);
+			break;
+		}
+		pthread_mutex_unlock(&philo->info_philo->flag_mutex);
+	}
 	while (philo->info_philo->flag == 0)
-		continue;
 	philo->last_eat_time = get_current_time();
 	if (philo->num % 2 == 0)
 	{

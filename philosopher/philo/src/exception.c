@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 22:01:49 by youjeong          #+#    #+#             */
-/*   Updated: 2023/06/05 18:25:42 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/06/12 16:58:18 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,4 @@ void	parameter_exception(void)
 3. time_to_eat\n \
 4. time_to_sleep\n \
 5. number_of_times_each_philosopher_must_eat(Option)\n");
-	exit(1);
 }
