@@ -28,16 +28,14 @@ int	main(int argc, char **argv)
 	set_table(&philos, &forks, &info_philo);
 	// test(philos, forks, &info_philo);
 	
-	for (int i = 0; i < info_philo.nbr_of_philos - 1; i++) {
-		// if (pthread_create(&philos[i].thread, 0, (void *)routine, (void *)&philos[i]) != 0)
-		
-		if (pthread_create(&philos[i].thread, 0, (void *)routine, (void *)&philos[i]) != 0
-			|| pthread_create(&philos[i].thread, 0, (void *)monitoring, (void *)&philos[i]) != 0)
+	for (int i = 0; i < info_philo.nbr_of_philos; i++) {
+		if (pthread_create(&philos[i].thread, 0, (void *)routine, (void *)&philos[i]) != 0)
 			printf("thread create error\n");
 	}
 	get_current_time();
 	info_philo.flag = 1;
-	sleep(1000);
+	for (int i = 0; i < info_philo.nbr_of_philos; i++)
+		pthread_join(philos[i].thread, 0);
 	return (0);
 }
 
@@ -56,6 +54,7 @@ void	test(t_philo *philos, t_fork *forks, t_info_philo *info_philo)
 		printf("number : %d\n", philos[i].num);
 		printf("lfork : %p\n", philos[i].lfork);
 		printf("rfork : %p\n", philos[i].rfork);
+		printf("address : %p\n", &philos[i].thread);
 	}
 	printf("------------------------------------------------------------------------------------------------------------\n");
 	for(int i = 0; i < info_philo->nbr_of_philos; i++)

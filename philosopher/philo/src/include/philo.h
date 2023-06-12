@@ -61,8 +61,9 @@ t_fork	*get_forks(int n);
 
 /* routine */
 void	*routine(void *arg_philo);
-void	*monitoring(void *arg_philo);
-int		start_dying(t_philo *philo, t_info_philo *info_philo);;
+int		check_philo(t_philo *philo, t_info_philo *info_philo);
+int		start_dying(t_philo *philo, t_info_philo *info_philo);
+int		philo_usleep(useconds_t usec, t_philo *philo);
 
 // exception
 void	parameter_exception(void);
