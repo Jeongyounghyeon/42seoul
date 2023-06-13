@@ -6,13 +6,13 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:36:50 by youjeong          #+#    #+#             */
-/*   Updated: 2023/05/23 15:43:06 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/06/12 21:16:49 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int main()
+int	main(void)
 {
 	write(1, &"test\n", 5);
 	return (0);

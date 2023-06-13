@@ -62,9 +62,12 @@ t_fork	*get_forks(int n);
 
 /* routine */
 void	*routine(void *arg_philo);
+
+/* monotoring */
 int		check_philo(t_philo *philo, t_info_philo *info_philo);
-int		start_dying(t_philo *philo, t_info_philo *info_philo);
+int		start_dying(t_philo *philo, t_info_philo *info_philo, int mutex_lock);
 int		philo_usleep(useconds_t usec, t_philo *philo);
+void	wait_setting(t_philo *philo);
 
 /* exception */
 void	parameter_exception(void);
@@ -72,4 +75,6 @@ void	parameter_exception(void);
 /* utils */
 int		ft_atoi(const char *str);
 t_ms	get_current_time(void);
+void	destroy_mutexes(pthread_mutex_t *mutexes, int cnt);
+
 #endif

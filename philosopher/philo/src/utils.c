@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 21:50:01 by youjeong          #+#    #+#             */
-/*   Updated: 2023/06/12 21:05:08 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/06/13 09:36:02 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,13 @@ t_ms	get_current_time(void)
 	}
 	time_ms = (tv.tv_sec * 1000) + (tv.tv_usec / 1000) - time_start;
 	return (time_ms);
+}
+
+void	destroy_mutexes(pthread_mutex_t *mutexes, int cnt)
+{
+	int	i;
+
+	i = 0;
+	while (i < cnt)
+		pthread_mutex_destroy(&mutexes[i++]);
 }

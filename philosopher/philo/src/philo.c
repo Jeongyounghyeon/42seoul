@@ -28,6 +28,7 @@ int	main(int argc, char **argv)
 		return (1);
 	set_routine_philo(philos, &info_philo);
 	execute_philo(philos, &info_philo);
+	destroy_mutexes(forks, info_philo.nbr_of_philos);
 	free(philos);
 	free(forks);
 	return (0);
@@ -37,8 +38,8 @@ static void	execute_philo(t_philo *philos, t_info_philo *info_philo)
 {
 	int	i;
 
-	get_current_time();
 	pthread_mutex_lock(&info_philo->flag_mutex);
+	get_current_time();
 	info_philo->flag = 1;
 	pthread_mutex_unlock(&info_philo->flag_mutex);
 	i = 0;

@@ -22,35 +22,21 @@ void	*routine(void *arg_philo)
 {
 	t_philo	*philo;
 	int		(*eating_routin)(t_philo *, t_info_philo *);
-	
+
 	philo = (t_philo *)arg_philo;
 	if (philo->num % 2 != 0)
 		eating_routin = wait_eating_odd;
 	else
 		eating_routin = wait_eating_even;
-	while(1)
-	{
-		pthread_mutex_lock(&philo->info_philo->flag_mutex);
-		if (philo->info_philo->flag == 1)
-		{
-			pthread_mutex_unlock(&philo->info_philo->flag_mutex);
-			break;
-		}
-		pthread_mutex_unlock(&philo->info_philo->flag_mutex);
-	}
-	while (philo->info_philo->flag == 0)
+	wait_setting(philo);
 	philo->last_eat_time = get_current_time();
-	if (philo->num % 2 == 0)
-	{
-		if (philo_usleep(1000 * philo->info_philo->time_to_eat, philo) == 1)
-			return (0);
-	}
-	while (1) {
-		if (eating_routin(philo, philo->info_philo)
-			|| start_sleeping(philo, philo->info_philo)
-			|| start_thinking(philo, philo->info_philo))
-			break;
-	}
+	if (philo->num % 2 == 0
+		&& philo_usleep(1000 * philo->info_philo->time_to_eat, philo) == 1)
+		return (0);
+	while ((eating_routin(philo, philo->info_philo) != 1)
+		&& (start_sleeping(philo, philo->info_philo) != 1)
+		&& (start_thinking(philo, philo->info_philo)) != 1)
+		continue ;
 	return (0);
 }
 
@@ -60,11 +46,9 @@ static int	wait_eating_odd(t_philo *philo, t_info_philo *info_philo)
 	pthread_mutex_lock(philo->rfork);
 	pthread_mutex_lock(&info_philo->key_print);
 	philo->last_eat_time = get_current_time();
-	// necessary edit
 	if (check_philo(philo, info_philo) || info_philo->flag == -1)
 	{
-		pthread_mutex_unlock(&info_philo->key_print);
-		start_dying(philo, info_philo);
+		start_dying(philo, info_philo, TRUE);
 		pthread_mutex_unlock(philo->lfork);
 		pthread_mutex_unlock(philo->rfork);
 		return (1);
@@ -80,7 +64,6 @@ static int	wait_eating_odd(t_philo *philo, t_info_philo *info_philo)
 	return (0);
 }
 
-
 static int	wait_eating_even(t_philo *philo, t_info_philo *info_philo)
 {
 	pthread_mutex_lock(philo->rfork);
@@ -89,8 +72,7 @@ static int	wait_eating_even(t_philo *philo, t_info_philo *info_philo)
 	philo->last_eat_time = get_current_time();
 	if (check_philo(philo, info_philo) || info_philo->flag == -1)
 	{
-		pthread_mutex_unlock(&info_philo->key_print);
-		start_dying(philo, info_philo);
+		start_dying(philo, info_philo, TRUE);
 		pthread_mutex_unlock(philo->rfork);
 		pthread_mutex_unlock(philo->lfork);
 		return (1);
@@ -111,8 +93,7 @@ static int	start_thinking(t_philo *philo, t_info_philo *info_philo)
 	pthread_mutex_lock(&info_philo->key_print);
 	if (check_philo(philo, info_philo) || info_philo->flag == -1)
 	{
-		pthread_mutex_unlock(&info_philo->key_print);
-		start_dying(philo, info_philo);
+		start_dying(philo, info_philo, TRUE);
 		return (1);
 	}
 	printf("%llu %d is thinking\n", get_current_time(), philo->num);
@@ -125,8 +106,7 @@ static int	start_sleeping(t_philo *philo, t_info_philo *info_philo)
 	pthread_mutex_lock(&info_philo->key_print);
 	if (check_philo(philo, info_philo) || info_philo->flag == -1)
 	{
-		pthread_mutex_unlock(&info_philo->key_print);
-		start_dying(philo, info_philo);
+		start_dying(philo, info_philo, TRUE);
 		return (1);
 	}
 	printf("%llu %d is sleeping\n", get_current_time(), philo->num);
