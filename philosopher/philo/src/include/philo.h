@@ -65,6 +65,7 @@ void	*routine(void *arg_philo);
 
 /* monotoring */
 int		check_philo(t_philo *philo, t_info_philo *info_philo);
+int		check_pre_print(t_philo *philo, t_info_philo *info_philo);
 int		start_dying(t_philo *philo, t_info_philo *info_philo, int mutex_lock);
 int		philo_usleep(useconds_t usec, t_philo *philo);
 void	wait_setting(t_philo *philo);
