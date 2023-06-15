@@ -37,6 +37,7 @@ int	set_table(t_philo **philos, t_fork **forks, t_info_philo *info_philo)
 		return (ERROR);
 	}
 	pthread_mutex_init(&info_philo->key_print, 0);
+	pthread_mutex_init(&info_philo->flag_mutex, 0);
 	init_table(*philos, *forks, info_philo);
 	info_philo->flag = 0;
 	return (0);
