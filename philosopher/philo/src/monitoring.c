@@ -62,7 +62,7 @@ int	philo_usleep(useconds_t usec, t_philo *philo)
 			return (ERROR);
 		if (check_philo(philo, philo->info_philo))
 		{
-			start_dying(philo, philo->info_philo, FALSE);
+			print_philo_state_in_mutex(philo, dying, philo->info_philo);
 			return (1);
 		}
 	}

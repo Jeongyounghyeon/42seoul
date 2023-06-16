@@ -48,7 +48,7 @@ typedef struct s_philo
 	t_info_philo	*info_philo;
 }t_philo;
 
-typedef enum e_state {thinking, eating, sleeping, dying, taking}t_state;
+typedef enum e_state {thinking, eating, sleeping, dying, taking1, taking2}t_state;
 
 void	input_handler(t_info_philo *info_philo, char **argv);
 int		set_table(t_philo **philos, t_fork **forks, t_info_philo *info_philo);
@@ -70,12 +70,21 @@ int		start_dying(t_philo *philo, t_info_philo *info_philo, int mutex_lock);
 int		philo_usleep(useconds_t usec, t_philo *philo);
 void	wait_setting(t_philo *philo);
 
+/* print_state */
+int		print_philo_state_in_mutex(\
+			t_philo *philo, t_state state, t_info_philo *info_philo);
+
 /* exception */
 void	parameter_exception(void);
+
+/* utils_philo */
+int		get_group_of_philo(t_philo *philo);
 
 /* utils */
 int		ft_atoi(const char *str);
 t_ms	get_current_time(void);
 void	destroy_mutexes(pthread_mutex_t *mutexes, int cnt);
+void	set_mutex_value(pthread_mutex_t *mutex, int *ptr_value, int value);
+int		get_mutex_value(pthread_mutex_t *mutex, int *ptr_value);
 
 #endif

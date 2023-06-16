@@ -13,6 +13,9 @@
 #include "philo.h"
 
 t_ms	get_current_time(void);
+void	destroy_mutexes(pthread_mutex_t *mutexes, int cnt);
+void	set_mutex_value(pthread_mutex_t *mutex, int *ptr_value, int value);
+int		get_mutex_value(pthread_mutex_t *mutex, int *ptr_value);
 
 t_ms	get_current_time(void)
 {
@@ -37,4 +40,21 @@ void	destroy_mutexes(pthread_mutex_t *mutexes, int cnt)
 	i = 0;
 	while (i < cnt)
 		pthread_mutex_destroy(&mutexes[i++]);
+}
+
+void	set_mutex_value(pthread_mutex_t *mutex, int *ptr_value, int value)
+{
+	pthread_mutex_lock(mutex);
+	*ptr_value = value;
+	pthread_mutex_unlock(mutex);
+}
+
+int	get_mutex_value(pthread_mutex_t *mutex, int *ptr_value)
+{
+	int	value;
+
+	pthread_mutex_lock(mutex);
+	value = *ptr_value;
+	pthread_mutex_unlock(mutex);
+	return (value);
 }

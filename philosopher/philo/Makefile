@@ -13,7 +13,7 @@
 NAME = philo
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=thread
 
 SRC_DIR = src
 BUILD_DIR = build
@@ -23,7 +23,9 @@ SRCS = philo.c \
 		init.c \
 		routine.c \
 		monitoring.c \
+		print_state.c \
 		exception.c \
+		utils_philo.c \
 		utils.c \
 		ft_atoi.c \
 
