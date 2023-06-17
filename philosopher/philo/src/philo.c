@@ -22,8 +22,11 @@ int	main(int argc, char **argv)
 	t_fork			*forks;
 
 	if (argc < 5 || argc > 6)
+	{
 		parameter_exception();
-	input_handler(&info_philo, argv);
+		return (0);
+	}
+	input_handler(&info_philo, argv, argc);
 	if (set_table(&philos, &forks, &info_philo) == ERROR)
 		return (1);
 	set_routine_philo(philos, &info_philo);

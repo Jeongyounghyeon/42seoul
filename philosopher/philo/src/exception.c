@@ -13,7 +13,6 @@
 #include "philo.h"
 
 void	parameter_exception(void);
-void	pfree(void *ptr);
 
 void	parameter_exception(void)
 {

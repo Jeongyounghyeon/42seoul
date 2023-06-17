@@ -14,7 +14,7 @@
 
 int		check_philo(t_philo *philo, t_info_philo *info_philo);
 int		philo_usleep(useconds_t usec, t_philo *philo);
-void	wait_setting(t_philo *philo);
+void	wait_setting(t_info_philo *info_philo);
 
 int	check_philo(t_philo *philo, t_info_philo *info_philo)
 {
@@ -42,16 +42,11 @@ int	philo_usleep(useconds_t usec, t_philo *philo)
 	return (0);
 }
 
-void	wait_setting(t_philo *philo)
+void	wait_setting(t_info_philo *info_philo)
 {	
 	while (1)
 	{
-		pthread_mutex_lock(&philo->info_philo->flag_mutex);
-		if (philo->info_philo->flag == 1)
-		{
-			pthread_mutex_unlock(&philo->info_philo->flag_mutex);
+		if (get_mutex_value(&info_philo->flag_mutex, &info_philo->flag) == 1)
 			break ;
-		}
-		pthread_mutex_unlock(&philo->info_philo->flag_mutex);
 	}
 }

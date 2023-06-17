@@ -32,8 +32,10 @@ typedef struct s_info_philo
 	t_ms			time_to_die;
 	t_ms			time_to_eat;
 	t_ms			time_to_sleep;
-	t_ms			time_to_must_eat;
+	int				time_to_must_eat;
 	pthread_mutex_t	key_print;
+	int				more_eat;
+	pthread_mutex_t	more_eat_mutex;
 	int				flag;
 	pthread_mutex_t	flag_mutex;
 }t_info_philo;
@@ -45,6 +47,7 @@ typedef struct s_philo
 	t_fork			*lfork;
 	t_fork			*rfork;
 	t_ms			last_eat_time;
+	int				time_to_eat;
 	t_info_philo	*info_philo;
 }t_philo;
 
@@ -58,7 +61,7 @@ typedef enum e_state
 	taking2
 }t_state;
 
-void	input_handler(t_info_philo *info_philo, char **argv);
+void	input_handler(t_info_philo *info_philo, char **argv, int argc);
 int		set_table(t_philo **philos, t_fork **forks, t_info_philo *info_philo);
 void	set_routine_philo(t_philo *philos, t_info_philo *info_philo);
 
@@ -74,7 +77,7 @@ void	*routine(void *arg_philo);
 /* monotoring */
 int		check_philo(t_philo *philo, t_info_philo *info_philo);
 int		philo_usleep(useconds_t usec, t_philo *philo);
-void	wait_setting(t_philo *philo);
+void	wait_setting(t_info_philo *info_philo);
 
 /* print_state */
 int		print_philo_state_in_mutex(\
@@ -84,7 +87,6 @@ int		print_philo_state_in_mutex(\
 void	parameter_exception(void);
 
 /* utils_philo */
-int		get_group_of_philo(t_philo *philo);
 
 /* utils */
 int		ft_atoi(const char *str);

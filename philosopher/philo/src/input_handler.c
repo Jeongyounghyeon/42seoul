@@ -12,16 +12,19 @@
 
 #include "philo.h"
 
-void	input_handler(t_info_philo *info_philo, char **argv);
+void	input_handler(t_info_philo *info_philo, char **argv, int argc);
 int		set_table(t_philo **philos, t_fork **forks, t_info_philo *info_philo);
 
-void	input_handler(t_info_philo *info_philo, char **argv)
+void	input_handler(t_info_philo *info_philo, char **argv, int argc)
 {
 	info_philo->nbr_of_philos = ft_atoi(argv[1]);
 	info_philo->time_to_die = (t_ms)ft_atoi(argv[2]);
 	info_philo->time_to_eat = (t_ms)ft_atoi(argv[3]);
 	info_philo->time_to_sleep = (t_ms)ft_atoi(argv[4]);
-	info_philo->time_to_must_eat = (t_ms)ft_atoi(argv[5]);
+	if (argc == 5)
+		info_philo->time_to_must_eat = -1;
+	else
+		info_philo->time_to_must_eat = ft_atoi(argv[5]);
 	return ;
 }
 
@@ -37,6 +40,7 @@ int	set_table(t_philo **philos, t_fork **forks, t_info_philo *info_philo)
 		return (ERROR);
 	}
 	pthread_mutex_init(&info_philo->key_print, 0);
+	pthread_mutex_init(&info_philo->more_eat_mutex, 0);
 	pthread_mutex_init(&info_philo->flag_mutex, 0);
 	init_table(*philos, *forks, info_philo);
 	info_philo->flag = 0;
