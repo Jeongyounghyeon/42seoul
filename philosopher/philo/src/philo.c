@@ -27,6 +27,8 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	input_handler(&info_philo, argv, argc);
+	if (check_input(&info_philo))
+		return (1);
 	if (set_table(&philos, &forks, &info_philo) == ERROR)
 		return (1);
 	set_routine_philo(philos, &info_philo);

@@ -53,17 +53,25 @@ static int	wait_eating_odd(t_philo *philo, t_info_philo *info_philo)
 
 	rtn = 0;
 	pthread_mutex_lock(philo->lfork);
-	if (print_philo_state_in_mutex(philo, taking1, info_philo))
+	if (print_philo_state(FORMAT_TAKE, philo, info_philo))
 	{
 		pthread_mutex_unlock(philo->lfork);
 		return (1);
 	}
 	pthread_mutex_lock(philo->rfork);
-	if (print_philo_state_in_mutex(philo, taking2, info_philo)
-		|| philo_usleep(1000 * info_philo->time_to_eat, philo) == 1)
-		rtn = 1;
+	print_philo_state(FORMAT_TAKE, philo, info_philo);
+	print_philo_state(FORMAT_EAT, philo, info_philo);
+	philo->last_eat_time = get_current_time();
+	if (philo_usleep(1000 * info_philo->time_to_eat, philo))
+	{
+		pthread_mutex_unlock(philo->lfork);
+		pthread_mutex_unlock(philo->rfork);
+		return (1);
+	}
 	pthread_mutex_unlock(philo->lfork);
 	pthread_mutex_unlock(philo->rfork);
+	if (info_philo->time_to_must_eat != -1)
+		check_more_eat(philo, philo->info_philo);
 	return (rtn);
 }
 
@@ -73,23 +81,31 @@ static int	wait_eating_even(t_philo *philo, t_info_philo *info_philo)
 
 	rtn = 0;
 	pthread_mutex_lock(philo->rfork);
-	if (print_philo_state_in_mutex(philo, taking1, info_philo))
+	if (print_philo_state(FORMAT_TAKE, philo, info_philo))
 	{
 		pthread_mutex_unlock(philo->rfork);
 		return (1);
 	}
 	pthread_mutex_lock(philo->lfork);
-	if (print_philo_state_in_mutex(philo, taking2, info_philo)
-		|| philo_usleep(1000 * info_philo->time_to_eat, philo) == 1)
-		rtn = 1;
+	print_philo_state(FORMAT_TAKE, philo, info_philo);
+	print_philo_state(FORMAT_EAT, philo, info_philo);
+	philo->last_eat_time = get_current_time();
+	if (philo_usleep(1000 * info_philo->time_to_eat, philo))
+	{
+		pthread_mutex_unlock(philo->rfork);
+		pthread_mutex_unlock(philo->lfork);
+		return (1);
+	}
 	pthread_mutex_unlock(philo->rfork);
 	pthread_mutex_unlock(philo->lfork);
+	if (info_philo->time_to_must_eat != -1)
+		check_more_eat(philo, philo->info_philo);
 	return (rtn);
 }
 
 static int	start_thinking(t_philo *philo, t_info_philo *info_philo)
 {
-	if (print_philo_state_in_mutex(philo, thinking, info_philo))
+	if (print_philo_state(FORMAT_THINK, philo, info_philo))
 		return (1);
 	if (info_philo->nbr_of_philos % 2 != 0
 		&& philo_usleep(1000 * \
@@ -101,7 +117,7 @@ static int	start_thinking(t_philo *philo, t_info_philo *info_philo)
 
 static int	start_sleeping(t_philo *philo, t_info_philo *info_philo)
 {
-	if (print_philo_state_in_mutex(philo, sleeping, info_philo))
+	if (print_philo_state(FORMAT_SLEEP, philo, info_philo))
 		return (1);
 	if (philo_usleep(info_philo->time_to_sleep * 1000, philo) == 1)
 		return (1);

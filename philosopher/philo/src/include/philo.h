@@ -17,51 +17,14 @@
 # define FALSE 0
 # define ERROR -1
 
-# include <unistd.h>
+# include "type.h"
+# include "state.h"
 # include <stdlib.h>
-# include <pthread.h>
 # include <sys/time.h>
 # include <stdio.h>
 
-typedef uint64_t		t_ms;
-typedef pthread_mutex_t	t_fork;
-
-typedef struct s_info_philo
-{
-	int				nbr_of_philos;
-	t_ms			time_to_die;
-	t_ms			time_to_eat;
-	t_ms			time_to_sleep;
-	int				time_to_must_eat;
-	pthread_mutex_t	key_print;
-	int				more_eat;
-	pthread_mutex_t	more_eat_mutex;
-	int				flag;
-	pthread_mutex_t	flag_mutex;
-}t_info_philo;
-
-typedef struct s_philo
-{
-	pthread_t		thread;
-	int				num;
-	t_fork			*lfork;
-	t_fork			*rfork;
-	t_ms			last_eat_time;
-	int				time_to_eat;
-	t_info_philo	*info_philo;
-}t_philo;
-
-typedef enum e_state
-{
-	thinking,
-	eating,
-	sleeping,
-	dying,
-	taking1,
-	taking2
-}t_state;
-
 void	input_handler(t_info_philo *info_philo, char **argv, int argc);
+int		check_input(t_info_philo *info_philo);
 int		set_table(t_philo **philos, t_fork **forks, t_info_philo *info_philo);
 void	set_routine_philo(t_philo *philos, t_info_philo *info_philo);
 
@@ -76,17 +39,14 @@ void	*routine(void *arg_philo);
 
 /* monotoring */
 int		check_philo(t_philo *philo, t_info_philo *info_philo);
+void	check_more_eat(t_philo *philo, t_info_philo *info_philo);
 int		philo_usleep(useconds_t usec, t_philo *philo);
 void	wait_setting(t_info_philo *info_philo);
 
-/* print_state */
-int		print_philo_state_in_mutex(\
-			t_philo *philo, t_state state, t_info_philo *info_philo);
-
-/* exception */
-void	parameter_exception(void);
-
 /* utils_philo */
+int		print_philo_state(\
+			char *format, t_philo *philo, t_info_philo *info_philo);
+void	parameter_exception(void);
 
 /* utils */
 int		ft_atoi(const char *str);
