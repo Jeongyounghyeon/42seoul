@@ -107,10 +107,7 @@ static int	start_thinking(t_philo *philo, t_info_philo *info_philo)
 {
 	if (print_philo_state(FORMAT_THINK, philo, info_philo))
 		return (1);
-	if (info_philo->nbr_of_philos % 2 != 0
-		&& philo_usleep(1000 * \
-			(2 * info_philo->time_to_eat - info_philo->time_to_sleep), \
-			philo) == 1)
+	if (philo_usleep(1000 * info_philo->time_to_think, philo) == 1)
 		return (1);
 	return (0);
 }

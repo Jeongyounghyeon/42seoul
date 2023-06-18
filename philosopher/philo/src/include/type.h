@@ -25,6 +25,7 @@ typedef struct s_info_philo
 	t_ms			time_to_die;
 	t_ms			time_to_eat;
 	t_ms			time_to_sleep;
+	t_ms			time_to_think;
 	int				time_to_must_eat;
 	pthread_mutex_t	key_print;
 	int				more_eat;

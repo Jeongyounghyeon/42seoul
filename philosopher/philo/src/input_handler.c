@@ -13,6 +13,7 @@
 #include "philo.h"
 
 void	input_handler(t_info_philo *info_philo, char **argv, int argc);
+void	input_time_to_think(t_info_philo *info_philo);
 int		check_input(t_info_philo *info_philo);
 int		set_table(t_philo **philos, t_fork **forks, t_info_philo *info_philo);
 
@@ -30,7 +31,25 @@ void	input_handler(t_info_philo *info_philo, char **argv, int argc)
 		if (info_philo->time_to_must_eat <= -1)
 			info_philo->time_to_must_eat = -2;
 	}
+	input_time_to_think(info_philo);
 	return ;
+}
+
+void	input_time_to_think(t_info_philo *info_philo)
+{
+	info_philo->time_to_think = 0;
+	if (info_philo->nbr_of_philos % 2 != 0)
+	{
+		if (2 * info_philo->time_to_eat > info_philo->time_to_sleep)
+			info_philo->time_to_think = \
+				2 * info_philo->time_to_eat - info_philo->time_to_sleep;
+	}
+	else
+	{
+		if (info_philo->time_to_eat > info_philo->time_to_sleep)
+			info_philo->time_to_think = \
+				info_philo->time_to_eat - info_philo->time_to_sleep;
+	}
 }
 
 int	check_input(t_info_philo *info_philo)

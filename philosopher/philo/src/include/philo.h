@@ -51,7 +51,7 @@ void	parameter_exception(void);
 /* utils */
 int		ft_atoi(const char *str);
 t_ms	get_current_time(void);
-void	destroy_mutexes(pthread_mutex_t *mutexes, int cnt);
+void	destroy_mutexes(pthread_mutex_t *mutexes, t_info_philo *info_philo);
 void	set_mutex_value(pthread_mutex_t *mutex, int *ptr_value, int value);
 int		get_mutex_value(pthread_mutex_t *mutex, int *ptr_value);
 

@@ -33,7 +33,7 @@ int	main(int argc, char **argv)
 		return (1);
 	set_routine_philo(philos, &info_philo);
 	execute_philo(philos, &info_philo);
-	destroy_mutexes(forks, info_philo.nbr_of_philos);
+	destroy_mutexes(forks, &info_philo);
 	free(philos);
 	free(forks);
 	return (0);

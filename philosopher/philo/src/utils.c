@@ -13,7 +13,7 @@
 #include "philo.h"
 
 t_ms	get_current_time(void);
-void	destroy_mutexes(pthread_mutex_t *mutexes, int cnt);
+void	destroy_mutexes(pthread_mutex_t *mutexes, t_info_philo *info_philo);
 void	set_mutex_value(pthread_mutex_t *mutex, int *ptr_value, int value);
 int		get_mutex_value(pthread_mutex_t *mutex, int *ptr_value);
 
@@ -33,13 +33,16 @@ t_ms	get_current_time(void)
 	return (time_ms);
 }
 
-void	destroy_mutexes(pthread_mutex_t *mutexes, int cnt)
+void	destroy_mutexes(pthread_mutex_t *mutexes, t_info_philo *info_philo)
 {
 	int	i;
 
 	i = 0;
-	while (i < cnt)
+	while (i < info_philo->nbr_of_philos)
 		pthread_mutex_destroy(&mutexes[i++]);
+	pthread_mutex_destroy(&info_philo->flag_mutex);
+	pthread_mutex_destroy(&info_philo->key_print);
+	pthread_mutex_destroy(&info_philo->more_eat_mutex);
 }
 
 void	set_mutex_value(pthread_mutex_t *mutex, int *ptr_value, int value)
