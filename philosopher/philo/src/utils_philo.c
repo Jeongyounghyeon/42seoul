@@ -14,6 +14,7 @@
 
 int		print_philo_state( \
 			char *format, t_philo *philo, t_info_philo *info_philo);
+int		check_arg_num(char **argv, int argc);
 void	parameter_exception(void);
 
 void	parameter_exception(void)
@@ -25,6 +26,27 @@ void	parameter_exception(void)
 3. time_to_eat\n \
 4. time_to_sleep\n \
 5. number_of_times_each_philosopher_must_eat(Option)\n");
+}
+
+int	check_arg_num(char **argv, int argc)
+{
+	int		i;
+	char	*ptr;
+
+	i = 0;
+	while (++i < argc)
+	{
+		ptr = argv[i];
+		if (ft_atoi(ptr) <= 0)
+			return (1);
+		while (*ptr)
+		{
+			if (!((*ptr >= '0' && *ptr <= '9') || (*ptr == '-' || *ptr == '+')))
+				return (1);
+			ptr++;
+		}
+	}
+	return (0);
 }
 
 int	print_philo_state( \

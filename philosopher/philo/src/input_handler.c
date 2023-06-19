@@ -15,6 +15,7 @@
 void	input_handler(t_info_philo *info_philo, char **argv, int argc);
 void	input_time_to_think(t_info_philo *info_philo);
 int		check_input(t_info_philo *info_philo);
+void	set_routine_philo(t_philo *philos, t_info_philo *info_philo);
 int		set_table(t_philo **philos, t_fork **forks, t_info_philo *info_philo);
 
 void	input_handler(t_info_philo *info_philo, char **argv, int argc)
@@ -32,6 +33,8 @@ void	input_handler(t_info_philo *info_philo, char **argv, int argc)
 			info_philo->time_to_must_eat = -2;
 	}
 	input_time_to_think(info_philo);
+	if (check_arg_num(argv, argc))
+		info_philo->time_to_must_eat = -2;
 	return ;
 }
 
@@ -60,7 +63,7 @@ int	check_input(t_info_philo *info_philo)
 		|| info_philo->time_to_sleep <= 0
 		|| info_philo->time_to_must_eat == -2)
 	{
-		printf("The arguments must be a reasonable value.\n");
+		printf("Please enter at least one philo, at least 1ms times.\n");
 		return (1);
 	}
 	return (0);

@@ -16,6 +16,7 @@ t_ms	get_current_time(void);
 void	destroy_mutexes(pthread_mutex_t *mutexes, t_info_philo *info_philo);
 void	set_mutex_value(pthread_mutex_t *mutex, int *ptr_value, int value);
 int		get_mutex_value(pthread_mutex_t *mutex, int *ptr_value);
+size_t	ft_strlen(const char *s);
 
 t_ms	get_current_time(void)
 {

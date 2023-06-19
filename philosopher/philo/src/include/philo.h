@@ -46,6 +46,7 @@ void	wait_setting(t_info_philo *info_philo);
 /* utils_philo */
 int		print_philo_state(\
 			char *format, t_philo *philo, t_info_philo *info_philo);
+int		check_arg_num(char **argv, int argc);
 void	parameter_exception(void);
 
 /* utils */
