@@ -19,14 +19,4 @@
 # define FORMAT_THINK "%llu %d is thinking\n"
 # define FORMAT_DIE "%llu %d died\n"
 
-typedef enum e_state
-{
-	thinking,
-	eating,
-	sleeping,
-	dying,
-	taking1,
-	taking2
-}t_state;
-
 #endif

@@ -18,7 +18,16 @@ CFLAGS = -Wall -Wextra -Werror
 SRC_DIR = src
 BUILD_DIR = build
 
-SRCS = philo.c
+SRCS = philo.c \
+		input_handler.c \
+		set_philo.c \
+		init.c \
+		routine.c \
+		monitoring.c \
+		utils_philo.c \
+		utils.c \
+		ft_atoi.c \
+
 OBJS = $(SRCS:.c=.o)
 
 all : $(BUILD_DIR) $(NAME)

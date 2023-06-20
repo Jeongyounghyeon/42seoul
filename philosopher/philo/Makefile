@@ -20,10 +20,10 @@ BUILD_DIR = build
 
 SRCS = philo.c \
 		input_handler.c \
+		set_philo.c \
 		init.c \
 		routine.c \
 		monitoring.c \
-		utils_philo.c \
 		utils.c \
 		ft_atoi.c \
 
