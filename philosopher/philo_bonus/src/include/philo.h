@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:35:34 by youjeong          #+#    #+#             */
-/*   Updated: 2023/05/23 15:36:15 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/06/11 18:06:51 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,42 @@
 # define FALSE 0
 # define ERROR -1
 
-# include <unistd.h>
+# include "type.h"
+# include "state.h"
+# include <stdlib.h>
+# include <sys/time.h>
+# include <stdio.h>
+
+/* input_handle */
+int		input_handler(t_info_philo *info_philo, char **argv, int argc);
+
+/* set_philo */
+int		set_table(t_philo **philos, t_fork **forks, t_info_philo *info_philo);
+void	set_routine_philo(t_philo *philos, t_info_philo *info_philo);
+void	execute_philo(t_philo *philos, t_info_philo *info_philo);
+
+/* init */
+void	init_table(t_philo *philos, t_fork *forks, t_info_philo *info_philo);
+void	init_philo(t_philo *philo, int num, t_fork *lfork, t_fork *rfork);
+t_philo	*get_philos(int n);
+t_fork	*get_forks(int n);
+
+/* routine */
+void	*routine(void *arg_philo);
+
+/* monotoring */
+int		check_philo(t_philo *philo, t_info_philo *info_philo);
+void	check_more_eat(t_philo *philo, t_info_philo *info_philo);
+int		philo_usleep(useconds_t usec, t_philo *philo);
+void	wait_setting(t_info_philo *info_philo);
+
+/* utils */
+int		ft_atoi(const char *str);
+t_ms	get_current_time(void);
+void	destroy_mutexes(pthread_mutex_t *mutexes, t_info_philo *info_philo);
+void	set_mutex_value(pthread_mutex_t *mutex, int *ptr_value, int value);
+int		get_mutex_value(pthread_mutex_t *mutex, int *ptr_value);
+int		print_philo_state(\
+			char *format, t_philo *philo, t_info_philo *info_philo);
 
 #endif
