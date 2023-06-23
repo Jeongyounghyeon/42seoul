@@ -26,6 +26,7 @@ void	*routine(void *arg_philo)
 
 	philo = (t_philo *)arg_philo;
 	info_philo = philo->info_philo;
+	sem_wait(info_philo->more_eat);
 	if (philo->num % 2 != 0 || philo->num == info_philo->nbr_of_philos)
 		eating_routin = wait_eating_odd;
 	else
@@ -52,24 +53,24 @@ static int	wait_eating_odd(t_philo *philo, t_info_philo *info_philo)
 	int	rtn;
 
 	rtn = 0;
-	pthread_mutex_lock(philo->lfork);
+	sem_wait(philo->forks);
 	if (print_philo_state(FORMAT_TAKE, philo, info_philo))
 	{
-		pthread_mutex_unlock(philo->lfork);
+		sem_post(philo->forks);
 		return (1);
 	}
-	pthread_mutex_lock(philo->rfork);
+	sem_wait(philo->forks);
 	print_philo_state(FORMAT_TAKE, philo, info_philo);
 	print_philo_state(FORMAT_EAT, philo, info_philo);
 	philo->last_eat_time = get_current_time();
 	if (philo_usleep(1000 * info_philo->time_to_eat, philo))
 	{
-		pthread_mutex_unlock(philo->lfork);
-		pthread_mutex_unlock(philo->rfork);
+		sem_post(philo->forks);
+		sem_post(philo->forks);
 		return (1);
 	}
-	pthread_mutex_unlock(philo->lfork);
-	pthread_mutex_unlock(philo->rfork);
+	sem_post(philo->forks);
+	sem_post(philo->forks);
 	if (info_philo->time_to_must_eat != -1)
 		check_more_eat(philo, philo->info_philo);
 	return (rtn);
@@ -80,24 +81,24 @@ static int	wait_eating_even(t_philo *philo, t_info_philo *info_philo)
 	int	rtn;
 
 	rtn = 0;
-	pthread_mutex_lock(philo->rfork);
+	sem_wait(philo->forks);
 	if (print_philo_state(FORMAT_TAKE, philo, info_philo))
 	{
-		pthread_mutex_unlock(philo->rfork);
+		sem_post(philo->forks);
 		return (1);
 	}
-	pthread_mutex_lock(philo->lfork);
+	sem_wait(philo->forks);
 	print_philo_state(FORMAT_TAKE, philo, info_philo);
 	print_philo_state(FORMAT_EAT, philo, info_philo);
 	philo->last_eat_time = get_current_time();
 	if (philo_usleep(1000 * info_philo->time_to_eat, philo))
 	{
-		pthread_mutex_unlock(philo->rfork);
-		pthread_mutex_unlock(philo->lfork);
+		sem_post(philo->forks);
+		sem_post(philo->forks);
 		return (1);
 	}
-	pthread_mutex_unlock(philo->rfork);
-	pthread_mutex_unlock(philo->lfork);
+	sem_post(philo->forks);
+	sem_post(philo->forks);
 	if (info_philo->time_to_must_eat != -1)
 		check_more_eat(philo, philo->info_philo);
 	return (rtn);

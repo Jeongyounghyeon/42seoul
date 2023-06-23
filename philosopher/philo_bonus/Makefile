@@ -24,7 +24,6 @@ SRCS = philo.c \
 		init.c \
 		routine.c \
 		monitoring.c \
-		utils_philo.c \
 		utils.c \
 		ft_atoi.c \
 

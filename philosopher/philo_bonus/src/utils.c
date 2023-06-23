@@ -13,7 +13,7 @@
 #include "philo.h"
 
 t_ms	get_current_time(void);
-void	destroy_mutexes(pthread_mutex_t *mutexes, t_info_philo *info_philo);
+void	destroy_mutexes(t_info_philo *info_philo);
 void	set_mutex_value(pthread_mutex_t *mutex, int *ptr_value, int value);
 int		get_mutex_value(pthread_mutex_t *mutex, int *ptr_value);
 int		print_philo_state( \
@@ -35,16 +35,9 @@ t_ms	get_current_time(void)
 	return (time_ms);
 }
 
-void	destroy_mutexes(pthread_mutex_t *mutexes, t_info_philo *info_philo)
+void	destroy_mutexes(t_info_philo *info_philo)
 {
-	int	i;
-
-	i = 0;
-	while (i < info_philo->nbr_of_philos)
-		pthread_mutex_destroy(&mutexes[i++]);
 	pthread_mutex_destroy(&info_philo->flag_mutex);
-	pthread_mutex_destroy(&info_philo->key_print);
-	pthread_mutex_destroy(&info_philo->more_eat_mutex);
 }
 
 void	set_mutex_value(pthread_mutex_t *mutex, int *ptr_value, int value)
@@ -70,7 +63,7 @@ int	print_philo_state( \
 	int				rtn;
 
 	rtn = 0;
-	pthread_mutex_lock(&info_philo->key_print);
+	sem_wait(info_philo->key_print);
 	if (get_mutex_value(&info_philo->flag_mutex, &info_philo->flag) == -1)
 		rtn = 1;
 	else if (check_philo(philo, info_philo))
@@ -81,6 +74,6 @@ int	print_philo_state( \
 	}
 	else
 		printf(format, get_current_time(), philo->num);
-	pthread_mutex_unlock(&info_philo->key_print);
+	sem_post(info_philo->key_print);
 	return (rtn);
 }

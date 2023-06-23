@@ -33,9 +33,8 @@ void	execute_philo(t_philo *philos, t_info_philo *info_philo);
 
 /* init */
 void	init_table(t_philo *philos, t_fork *forks, t_info_philo *info_philo);
-void	init_philo(t_philo *philo, int num, t_fork *lfork, t_fork *rfork);
+void	init_philo(t_philo *philo, int num, t_fork *forks);
 t_philo	*get_philos(int n);
-t_fork	*get_forks(int n);
 
 /* routine */
 void	*routine(void *arg_philo);
@@ -49,7 +48,7 @@ void	wait_setting(t_info_philo *info_philo);
 /* utils */
 int		ft_atoi(const char *str);
 t_ms	get_current_time(void);
-void	destroy_mutexes(pthread_mutex_t *mutexes, t_info_philo *info_philo);
+void	destroy_mutexes(t_info_philo *info_philo);
 void	set_mutex_value(pthread_mutex_t *mutex, int *ptr_value, int value);
 int		get_mutex_value(pthread_mutex_t *mutex, int *ptr_value);
 int		print_philo_state(\

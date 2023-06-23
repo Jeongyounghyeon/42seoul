@@ -25,8 +25,10 @@ int	main(int argc, char **argv)
 		return (1);
 	set_routine_philo(philos, &info_philo);
 	execute_philo(philos, &info_philo);
-	destroy_mutexes(forks, &info_philo);
+	destroy_mutexes(&info_philo);
 	free(philos);
-	free(forks);
+	sem_close(info_philo.key_print);
+	sem_close(forks);
+	sem_close(info_philo.more_eat);
 	return (0);
 }
