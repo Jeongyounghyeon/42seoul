@@ -34,6 +34,7 @@ void	init_philo(t_philo *philo, int num, t_fork *forks)
 	philo->num = num;
 	philo->forks = forks;
 	philo->time_to_eat = 0;
+	philo->last_eat_time = 0;
 }
 
 t_philo	*get_philos(int n)

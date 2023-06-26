@@ -23,12 +23,11 @@ int	main(int argc, char **argv)
 	if (!input_handler(&info_philo, argv, argc)
 		|| set_table(&philos, &forks, &info_philo) == ERROR)
 		return (1);
-	set_routine_philo(philos, &info_philo);
 	execute_philo(philos, &info_philo);
-	destroy_mutexes(&info_philo);
 	free(philos);
 	sem_close(info_philo.key_print);
 	sem_close(forks);
 	sem_close(info_philo.more_eat);
+	sem_close(info_philo.key_fork);
 	return (0);
 }

@@ -22,13 +22,13 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <stdio.h>
+# include <signal.h>
 
 /* input_handle */
 int		input_handler(t_info_philo *info_philo, char **argv, int argc);
 
 /* set_philo */
 int		set_table(t_philo **philos, t_fork **forks, t_info_philo *info_philo);
-void	set_routine_philo(t_philo *philos, t_info_philo *info_philo);
 void	execute_philo(t_philo *philos, t_info_philo *info_philo);
 
 /* init */
@@ -43,14 +43,10 @@ void	*routine(void *arg_philo);
 int		check_philo(t_philo *philo, t_info_philo *info_philo);
 void	check_more_eat(t_philo *philo, t_info_philo *info_philo);
 int		philo_usleep(useconds_t usec, t_philo *philo);
-void	wait_setting(t_info_philo *info_philo);
 
 /* utils */
 int		ft_atoi(const char *str);
 t_ms	get_current_time(void);
-void	destroy_mutexes(t_info_philo *info_philo);
-void	set_mutex_value(pthread_mutex_t *mutex, int *ptr_value, int value);
-int		get_mutex_value(pthread_mutex_t *mutex, int *ptr_value);
 int		print_philo_state(\
 			char *format, t_philo *philo, t_info_philo *info_philo);
 

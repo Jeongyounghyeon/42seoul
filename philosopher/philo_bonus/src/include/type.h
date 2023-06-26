@@ -22,24 +22,21 @@ typedef sem_t		t_fork;
 
 typedef struct s_info_philo
 {
-	int				nbr_of_philos;
-	t_ms			time_to_die;
-	t_ms			time_to_eat;
-	t_ms			time_to_sleep;
-	t_ms			time_to_think;
-	int				time_to_must_eat;
-	sem_t			*key_print;
-	sem_t			*more_eat;
-	// int				more_eat;
-	// pthread_mutex_t	more_eat_mutex;
-	int				flag;
-	pthread_mutex_t	flag_mutex;
+	int		nbr_of_philos;
+	t_ms	time_to_die;
+	t_ms	time_to_eat;
+	t_ms	time_to_sleep;
+	t_ms	time_to_think;
+	int		time_to_must_eat;
+	sem_t	*key_print;
+	sem_t	*key_fork;
+	sem_t	*more_eat;
 }t_info_philo;
 
 typedef struct s_philo
 {
-	pthread_t		thread;
 	int				num;
+	pid_t			pid;
 	t_fork			*forks;
 	t_ms			last_eat_time;
 	int				time_to_eat;

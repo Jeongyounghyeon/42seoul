@@ -13,9 +13,6 @@
 #include "philo.h"
 
 t_ms	get_current_time(void);
-void	destroy_mutexes(t_info_philo *info_philo);
-void	set_mutex_value(pthread_mutex_t *mutex, int *ptr_value, int value);
-int		get_mutex_value(pthread_mutex_t *mutex, int *ptr_value);
 int		print_philo_state( \
 			char *format, t_philo *philo, t_info_philo *info_philo);
 
@@ -35,28 +32,6 @@ t_ms	get_current_time(void)
 	return (time_ms);
 }
 
-void	destroy_mutexes(t_info_philo *info_philo)
-{
-	pthread_mutex_destroy(&info_philo->flag_mutex);
-}
-
-void	set_mutex_value(pthread_mutex_t *mutex, int *ptr_value, int value)
-{
-	pthread_mutex_lock(mutex);
-	*ptr_value = value;
-	pthread_mutex_unlock(mutex);
-}
-
-int	get_mutex_value(pthread_mutex_t *mutex, int *ptr_value)
-{
-	int	value;
-
-	pthread_mutex_lock(mutex);
-	value = *ptr_value;
-	pthread_mutex_unlock(mutex);
-	return (value);
-}
-
 int	print_philo_state( \
 		char *format, t_philo *philo, t_info_philo *info_philo)
 {
@@ -64,13 +39,10 @@ int	print_philo_state( \
 
 	rtn = 0;
 	sem_wait(info_philo->key_print);
-	if (get_mutex_value(&info_philo->flag_mutex, &info_philo->flag) == -1)
-		rtn = 1;
-	else if (check_philo(philo, info_philo))
+	if (check_philo(philo, info_philo))
 	{
-		set_mutex_value(&info_philo->flag_mutex, &info_philo->flag, -1);
 		printf(FORMAT_DIE, get_current_time(), philo->num);
-		rtn = 1;
+		return (1);
 	}
 	else
 		printf(format, get_current_time(), philo->num);

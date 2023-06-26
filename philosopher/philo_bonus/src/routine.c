@@ -26,26 +26,15 @@ void	*routine(void *arg_philo)
 
 	philo = (t_philo *)arg_philo;
 	info_philo = philo->info_philo;
-	sem_wait(info_philo->more_eat);
-	if (philo->num % 2 != 0 || philo->num == info_philo->nbr_of_philos)
+	if (philo->num <= info_philo->nbr_of_philos / 2)
 		eating_routin = wait_eating_odd;
 	else
 		eating_routin = wait_eating_even;
-	wait_setting(info_philo);
-	philo->last_eat_time = get_current_time();
-	if (philo->num % 2 == 0)
-	{
-		if (philo_usleep(1000 * info_philo->time_to_eat, philo) == 1)
-			return (0);
-	}
-	else if (philo->num == info_philo->nbr_of_philos
-		&& philo_usleep(2 * 1000 * info_philo->time_to_eat, philo) == 1)
-		return (0);
 	while ((eating_routin(philo, info_philo) != 1)
 		&& (start_sleeping(philo, info_philo) != 1)
 		&& (start_thinking(philo, info_philo) != 1))
 		continue ;
-	return (0);
+	exit(0);
 }
 
 static int	wait_eating_odd(t_philo *philo, t_info_philo *info_philo)
@@ -55,20 +44,14 @@ static int	wait_eating_odd(t_philo *philo, t_info_philo *info_philo)
 	rtn = 0;
 	sem_wait(philo->forks);
 	if (print_philo_state(FORMAT_TAKE, philo, info_philo))
-	{
-		sem_post(philo->forks);
 		return (1);
-	}
 	sem_wait(philo->forks);
-	print_philo_state(FORMAT_TAKE, philo, info_philo);
-	print_philo_state(FORMAT_EAT, philo, info_philo);
+	if (print_philo_state(FORMAT_TAKE, philo, info_philo)
+		|| print_philo_state(FORMAT_EAT, philo, info_philo))
+		return (1);
 	philo->last_eat_time = get_current_time();
 	if (philo_usleep(1000 * info_philo->time_to_eat, philo))
-	{
-		sem_post(philo->forks);
-		sem_post(philo->forks);
 		return (1);
-	}
 	sem_post(philo->forks);
 	sem_post(philo->forks);
 	if (info_philo->time_to_must_eat != -1)
@@ -81,22 +64,18 @@ static int	wait_eating_even(t_philo *philo, t_info_philo *info_philo)
 	int	rtn;
 
 	rtn = 0;
+	sem_wait(info_philo->key_fork);
 	sem_wait(philo->forks);
 	if (print_philo_state(FORMAT_TAKE, philo, info_philo))
-	{
-		sem_post(philo->forks);
 		return (1);
-	}
 	sem_wait(philo->forks);
-	print_philo_state(FORMAT_TAKE, philo, info_philo);
-	print_philo_state(FORMAT_EAT, philo, info_philo);
+	sem_post(info_philo->key_fork);
+	if (print_philo_state(FORMAT_TAKE, philo, info_philo)
+		|| print_philo_state(FORMAT_EAT, philo, info_philo))
+		return (1);
 	philo->last_eat_time = get_current_time();
 	if (philo_usleep(1000 * info_philo->time_to_eat, philo))
-	{
-		sem_post(philo->forks);
-		sem_post(philo->forks);
 		return (1);
-	}
 	sem_post(philo->forks);
 	sem_post(philo->forks);
 	if (info_philo->time_to_must_eat != -1)
