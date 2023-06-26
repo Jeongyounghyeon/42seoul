@@ -23,6 +23,7 @@ SRCS = philo.c \
 		set_philo.c \
 		init.c \
 		routine.c \
+		exception.c \
 		monitoring.c \
 		utils.c \
 		ft_atoi.c \

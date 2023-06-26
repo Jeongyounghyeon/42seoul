@@ -13,8 +13,8 @@
 #include "philo.h"
 
 void		*routine(void *arg_philo);
-static int	wait_eating_odd(t_philo *philo, t_info_philo *info_philo);
-static int	wait_eating_even(t_philo *philo, t_info_philo *info_philo);
+int			wait_eating_odd(t_philo *philo, t_info_philo *info_philo);
+int			wait_eating_even(t_philo *philo, t_info_philo *info_philo);
 static int	start_thinking(t_philo *philo, t_info_philo *info_philo);
 static int	start_sleeping(t_philo *philo, t_info_philo *info_philo);
 
@@ -26,12 +26,9 @@ void	*routine(void *arg_philo)
 
 	philo = (t_philo *)arg_philo;
 	info_philo = philo->info_philo;
-	if (philo->num % 2 != 0 || philo->num == info_philo->nbr_of_philos)
-		eating_routin = wait_eating_odd;
-	else
-		eating_routin = wait_eating_even;
-	wait_setting(info_philo);
-	philo->last_eat_time = get_current_time();
+	set_eating_routine(philo, info_philo, &eating_routin);
+	if (wait_setting(info_philo) == ERROR)
+		return (0);
 	if (philo->num % 2 == 0)
 	{
 		if (philo_usleep(1000 * info_philo->time_to_eat, philo) == 1)
@@ -47,11 +44,8 @@ void	*routine(void *arg_philo)
 	return (0);
 }
 
-static int	wait_eating_odd(t_philo *philo, t_info_philo *info_philo)
+int	wait_eating_odd(t_philo *philo, t_info_philo *info_philo)
 {
-	int	rtn;
-
-	rtn = 0;
 	pthread_mutex_lock(philo->lfork);
 	if (print_philo_state(FORMAT_TAKE, philo, info_philo))
 	{
@@ -72,14 +66,11 @@ static int	wait_eating_odd(t_philo *philo, t_info_philo *info_philo)
 	pthread_mutex_unlock(philo->rfork);
 	if (info_philo->time_to_must_eat != -1)
 		check_more_eat(philo, philo->info_philo);
-	return (rtn);
+	return (0);
 }
 
-static int	wait_eating_even(t_philo *philo, t_info_philo *info_philo)
+int	wait_eating_even(t_philo *philo, t_info_philo *info_philo)
 {
-	int	rtn;
-
-	rtn = 0;
 	pthread_mutex_lock(philo->rfork);
 	if (print_philo_state(FORMAT_TAKE, philo, info_philo))
 	{
@@ -100,7 +91,7 @@ static int	wait_eating_even(t_philo *philo, t_info_philo *info_philo)
 	pthread_mutex_unlock(philo->lfork);
 	if (info_philo->time_to_must_eat != -1)
 		check_more_eat(philo, philo->info_philo);
-	return (rtn);
+	return (0);
 }
 
 static int	start_thinking(t_philo *philo, t_info_philo *info_philo)

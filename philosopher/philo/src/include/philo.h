@@ -28,8 +28,10 @@ int		input_handler(t_info_philo *info_philo, char **argv, int argc);
 
 /* set_philo */
 int		set_table(t_philo **philos, t_fork **forks, t_info_philo *info_philo);
-void	set_routine_philo(t_philo *philos, t_info_philo *info_philo);
+int		set_routine_philo(t_philo *philos, t_info_philo *info_philo);
 void	execute_philo(t_philo *philos, t_info_philo *info_philo);
+void	set_eating_routine(t_philo *philo, t_info_philo *info_philo, \
+							int (**eating_routine)(t_philo *, t_info_philo *));
 
 /* init */
 void	init_table(t_philo *philos, t_fork *forks, t_info_philo *info_philo);
@@ -39,12 +41,15 @@ t_fork	*get_forks(int n);
 
 /* routine */
 void	*routine(void *arg_philo);
+int		wait_eating_odd(t_philo *philo, t_info_philo *info_philo);
+int		wait_eating_even(t_philo *philo, t_info_philo *info_philo);
+int		eating_routine_1(t_philo *philo, t_info_philo *info_philo);
 
 /* monotoring */
 int		check_philo(t_philo *philo, t_info_philo *info_philo);
 void	check_more_eat(t_philo *philo, t_info_philo *info_philo);
 int		philo_usleep(useconds_t usec, t_philo *philo);
-void	wait_setting(t_info_philo *info_philo);
+int		wait_setting(t_info_philo *info_philo);
 
 /* utils */
 int		ft_atoi(const char *str);

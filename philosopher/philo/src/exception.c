@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   exception.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 15:35:36 by youjeong          #+#    #+#             */
-/*   Updated: 2023/06/08 16:51:25 by youjeong         ###   ########.fr       */
+/*   Created: 2023/06/26 20:54:58 by youjeong          #+#    #+#             */
+/*   Updated: 2023/06/26 21:09:19 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char **argv);
-
-int	main(int argc, char **argv)
+int	eating_routine_1(t_philo *philo, t_info_philo *info_philo)
 {
-	t_philo			*philos;
-	t_info_philo	info_philo;
-	t_fork			*forks;
-
-	if (!input_handler(&info_philo, argv, argc)
-		|| set_table(&philos, &forks, &info_philo) == ERROR)
+	pthread_mutex_lock(philo->rfork);
+	if (print_philo_state(FORMAT_TAKE, philo, info_philo))
+	{
+		pthread_mutex_unlock(philo->rfork);
 		return (1);
-	if (set_routine_philo(philos, &info_philo) != ERROR)
-		execute_philo(philos, &info_philo);
-	destroy_mutexes(forks, &info_philo);
-	free(philos);
-	free(forks);
-	return (0);
+	}
+	if (philo_usleep(1000 * info_philo->time_to_die, philo))
+	{
+		pthread_mutex_unlock(philo->rfork);
+		return (1);
+	}
+	return (1);
 }
