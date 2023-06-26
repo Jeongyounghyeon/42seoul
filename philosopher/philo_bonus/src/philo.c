@@ -20,11 +20,13 @@ int	main(int argc, char **argv)
 	t_info_philo	info_philo;
 	t_fork			*forks;
 
-	if (!input_handler(&info_philo, argv, argc)
-		|| set_table(&philos, &forks, &info_philo) == ERROR)
-		return (1);
-	execute_philo(philos, &info_philo);
-	free(philos);
+	forks = 0;
+	if ((input_handler(&info_philo, argv, argc) == TRUE)
+		&& (set_table(&philos, &forks, &info_philo) == 0))
+	{
+		execute_philo(philos, &info_philo);
+		free(philos);
+	}
 	sem_close(info_philo.key_print);
 	sem_close(forks);
 	sem_close(info_philo.more_eat);

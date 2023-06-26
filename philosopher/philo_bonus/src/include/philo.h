@@ -38,6 +38,7 @@ t_philo	*get_philos(int n);
 
 /* routine */
 void	*routine(void *arg_philo);
+int		eating_routine_1(t_philo *philo, t_info_philo *info_philo);
 
 /* monotoring */
 int		check_philo(t_philo *philo, t_info_philo *info_philo);
@@ -49,5 +50,6 @@ int		ft_atoi(const char *str);
 t_ms	get_current_time(void);
 int		print_philo_state(\
 			char *format, t_philo *philo, t_info_philo *info_philo);
+int		make_sem(sem_t **sem, const char *name, unsigned int value);
 
 #endif

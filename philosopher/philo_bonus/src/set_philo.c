@@ -14,6 +14,7 @@
 
 int		set_table(t_philo **philos, t_fork **forks, t_info_philo *info_philo);
 void	execute_philo(t_philo *philos, t_info_philo *info_philo);
+int		set_philos(t_philo *philos, t_info_philo *info_philo);
 void	*monitoring_more_eat(void *args);
 
 int	set_table(t_philo **philos, t_fork **forks, t_info_philo *info_philo)
@@ -21,27 +22,15 @@ int	set_table(t_philo **philos, t_fork **forks, t_info_philo *info_philo)
 	*philos = get_philos(info_philo->nbr_of_philos);
 	if (!*philos)
 		return (ERROR);
-	sem_unlink("forks");
-	*forks = sem_open("forks", O_CREAT, 0777, info_philo->nbr_of_philos);
-	if (*forks == SEM_FAILED)
+	if (make_sem(forks, "forks", info_philo->nbr_of_philos) == ERROR
+		|| make_sem(&info_philo->key_print, "key_print", 1) == ERROR
+		|| make_sem(&info_philo->more_eat, "more_eat", 0) == ERROR
+		|| make_sem(&info_philo->key_fork, "key_fork", 1) == ERROR)
+	{
+		free(philos);
 		return (ERROR);
-	sem_unlink("forks");
+	}
 	init_table(*philos, *forks, info_philo);
-	sem_unlink("key_print");
-	info_philo->key_print = sem_open("key_print", O_CREAT, 0777, 1);
-	if (info_philo->key_print == SEM_FAILED)
-		return (ERROR);
-	sem_unlink("key_print");
-	sem_unlink("more_eat");
-	info_philo->more_eat = sem_open("more_eat", O_CREAT, 0777, 0);
-	if (info_philo->more_eat == SEM_FAILED)
-		return (ERROR);
-	sem_unlink("more_eat");
-	sem_unlink("key_fork");
-	info_philo->key_fork = sem_open("key_fork", O_CREAT, 0777, 1);
-	if (info_philo->key_fork == SEM_FAILED)
-		return (ERROR);
-	sem_unlink("key_fork");
 	return (0);
 }
 
@@ -50,25 +39,45 @@ void	execute_philo(t_philo *philos, t_info_philo *info_philo)
 	pid_t	pid;
 	int		i;
 
-	i = 0;
 	get_current_time();
 	pid = fork();
 	if (pid == 0)
 		monitoring_more_eat((void *)info_philo);
+	i = set_philos(philos, info_philo);
+	if (i != ERROR)
+	{
+		waitpid(-1, 0, 0);
+		i = 0;
+		while (i < info_philo->nbr_of_philos)
+			kill(philos[i++].pid, SIGKILL);
+	}
+	kill(pid, SIGKILL);
+}
+
+int	set_philos(t_philo *philos, t_info_philo *info_philo)
+{
+	int	i;
+
+	i = 0;
 	while (i < info_philo->nbr_of_philos)
 	{
 		philos[i].pid = fork();
 		if (philos[i].pid == 0)
 			routine((void *)&philos[i]);
 		else if (philos[i].pid == -1)
+		{
 			printf("fork error\n");
+			break ;
+		}
 		i++;
 	}
-	waitpid(-1, 0, 0);
-	i = 0;
-	while (i < info_philo->nbr_of_philos)
-		kill(philos[i++].pid, SIGKILL);
-	kill(pid, SIGKILL);
+	if (i != info_philo->nbr_of_philos)
+	{
+		while (i-- > 0)
+			kill(philos[i++].pid, SIGKILL);
+		return (ERROR);
+	}
+	return (0);
 }
 
 void	*monitoring_more_eat(void *args)

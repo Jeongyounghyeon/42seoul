@@ -22,7 +22,7 @@ int	input_handler(t_info_philo *info_philo, char **argv, int argc)
 	if (!valid_input(argv, argc))
 	{
 		printf("The philo program requires a factor of 5~6 int numbers.\n");
-		printf("1. number_of_philosophers (At least 2)\n");
+		printf("1. number_of_philosophers (At least 1)\n");
 		printf("2. time_to_die (At least 1)\n");
 		printf("3. time_to_eat (At least 1)\n");
 		printf("4. time_to_sleep (At least 1)\n");
@@ -66,9 +66,7 @@ static int	valid_input(char **argv, int argc)
 		if (!valid_input_common(argv[i]))
 			return (FALSE);
 	}
-	i = 1;
-	if (ft_atoi(argv[i]) <= 1)
-		return (FALSE);
+	i = 0;
 	while (++i < argc)
 	{
 		if (ft_atoi(argv[i]) <= 0)

@@ -22,15 +22,17 @@ void	*routine(void *arg_philo)
 {
 	t_philo			*philo;
 	t_info_philo	*info_philo;
-	int				(*eating_routin)(t_philo *, t_info_philo *);
+	int				(*eating_routine)(t_philo *, t_info_philo *);
 
 	philo = (t_philo *)arg_philo;
 	info_philo = philo->info_philo;
-	if (philo->num <= info_philo->nbr_of_philos / 2)
-		eating_routin = wait_eating_odd;
+	if (info_philo->nbr_of_philos == 1)
+		eating_routine = eating_routine_1;
+	else if (philo->num <= info_philo->nbr_of_philos / 2)
+		eating_routine = wait_eating_odd;
 	else
-		eating_routin = wait_eating_even;
-	while ((eating_routin(philo, info_philo) != 1)
+		eating_routine = wait_eating_even;
+	while ((eating_routine(philo, info_philo) != 1)
 		&& (start_sleeping(philo, info_philo) != 1)
 		&& (start_thinking(philo, info_philo) != 1))
 		continue ;
@@ -39,9 +41,6 @@ void	*routine(void *arg_philo)
 
 static int	wait_eating_odd(t_philo *philo, t_info_philo *info_philo)
 {
-	int	rtn;
-
-	rtn = 0;
 	sem_wait(philo->forks);
 	if (print_philo_state(FORMAT_TAKE, philo, info_philo))
 		return (1);
@@ -56,14 +55,11 @@ static int	wait_eating_odd(t_philo *philo, t_info_philo *info_philo)
 	sem_post(philo->forks);
 	if (info_philo->time_to_must_eat != -1)
 		check_more_eat(philo, philo->info_philo);
-	return (rtn);
+	return (0);
 }
 
 static int	wait_eating_even(t_philo *philo, t_info_philo *info_philo)
 {
-	int	rtn;
-
-	rtn = 0;
 	sem_wait(info_philo->key_fork);
 	sem_wait(philo->forks);
 	if (print_philo_state(FORMAT_TAKE, philo, info_philo))
@@ -80,7 +76,7 @@ static int	wait_eating_even(t_philo *philo, t_info_philo *info_philo)
 	sem_post(philo->forks);
 	if (info_philo->time_to_must_eat != -1)
 		check_more_eat(philo, philo->info_philo);
-	return (rtn);
+	return (0);
 }
 
 static int	start_thinking(t_philo *philo, t_info_philo *info_philo)

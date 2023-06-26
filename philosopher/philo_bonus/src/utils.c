@@ -15,6 +15,7 @@
 t_ms	get_current_time(void);
 int		print_philo_state( \
 			char *format, t_philo *philo, t_info_philo *info_philo);
+int		make_sem(sem_t **sem, const char *name, unsigned int value);
 
 t_ms	get_current_time(void)
 {
@@ -35,9 +36,6 @@ t_ms	get_current_time(void)
 int	print_philo_state( \
 		char *format, t_philo *philo, t_info_philo *info_philo)
 {
-	int				rtn;
-
-	rtn = 0;
 	sem_wait(info_philo->key_print);
 	if (check_philo(philo, info_philo))
 	{
@@ -47,5 +45,15 @@ int	print_philo_state( \
 	else
 		printf(format, get_current_time(), philo->num);
 	sem_post(info_philo->key_print);
-	return (rtn);
+	return (0);
+}
+
+int	make_sem(sem_t **sem, const char *name, unsigned int value)
+{
+	sem_unlink(name);
+	*sem = sem_open(name, O_CREAT, 0777, value);
+	sem_unlink(name);
+	if (*sem == SEM_FAILED)
+		return (ERROR);
+	return (0);
 }
