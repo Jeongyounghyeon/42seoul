@@ -1,97 +1,82 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
-#include <stdlib.h>
+#include <math.h>
 
-char	**paper;
+#define TRUE	1
+#define False	0
+#define ERROR	-1
+
+char	paper[300][300];
 int		width;
 int		height;
 FILE	*pfile;
 
-int		main(int argc, char **argv);
-int		open_file(char *argv);
-int	init_paper();
-int	drawings();
+int		open_file(char *file_name);
+int		init_paper();
+int		drawing();
 void	print_paper();
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	if (argc != 2) {
 		write(1, "Error: argument\n", 17);
 		return (1);
 	}
-
-	if (open_file(argv[1]) == 1)
-		return (1);
-	if (init_paper() == 1 || drawings() == 1) {
-		write(1, "Operation file corrupted\n", 26);
+	if (open_file(argv[1]) == ERROR
+		|| init_paper() == ERROR
+		|| drawing() == ERROR)
+	{
+		write(1, "Error: Operation file corrupted\n", 33);
 		return (1);
 	}
-	fclose(pfile);
 	print_paper();
+	fclose(pfile);
 	return (0);
 }
 
-int	open_file(char *argv)
+int	open_file(char *file)
 {
-	pfile = fopen(argv, "r");
-	if (pfile == 0)
-		return (1);
+	pfile = fopen(file, "r");
+	if (!pfile)
+		return (ERROR);
 	return (0);
 }
 
 int	init_paper()
 {
-	char c;
+	char	c;
 
-	if (fscanf(pfile, "%d %d %c\n", &width, &height, &c) == EOF) 
-		return (1);
-	if (!(paper = (char **)malloc(height * sizeof(char *)))) 
-		return (1);
-	for (int i = 0; i < height; i++) {
-		if (!(paper[i] = (char *)malloc(width * sizeof(char))))
-			return (1);
-		memset(paper[i], c, width * sizeof(char));
-	}
-	if (!(width <= 300 && height <= 300))
-		return (1);
+	if (fscanf(pfile, "%d %d %c\n", &width, &height, &c) != 3)
+		return (ERROR);
+	if (width <= 0 || width > 300 || height <= 0 || height > 300)
+		return (ERROR);
+	memset(paper[0], c, 300 * 300);
 	return (0);
 }
 
-int	drawings()
+int	drawing()
 {
-	char	rR, c;
-	float	x, y, w, h;
-	int		x_, _x, y_, _y;
-	int		res_scanf;
+	char	Cc, c;
+	float	x, y, r;
+	int		rtn_fscanf;
 
-	res_scanf = fscanf(pfile, "%c %f %f %f %f %c\n", &rR, &x, &y, &w, &h, &c);
-	while (res_scanf != EOF)
-	{
-		if ((rR != 'r' && rR != 'R')
-			|| w <= 0 || h <= 0) 
-			return (1);
-		_x = (int)(x + w);
-		_y = (int)(y + h);
-		x_ = (int)x;
-		y_ = (int)y;
-		if (x != x_) x_++;
-		if (y != y_) y_++;
-		for (int i = y_; i <= _y; i++) {
-			if (i < 0) continue;
-			if (i >= height) break;
-			for (int j = x_; j <= _x; j++) {
-				if (j < 0) continue;
-				if (j >= width) break;
-				if (rR == 'r' && ((i != y_ && i != _y) && (j != x_ && j != _x)))
+	while ((rtn_fscanf = fscanf(pfile, "%c %f %f %f %c\n", &Cc, &x, &y, &r, &c)) == 5) {
+		if (r <= 0 || (Cc != 'c' && Cc != 'C'))
+			return (ERROR);
+		for (int i = 0; i < 300; i++) {
+			for (int j = 0; j < 300; j++) {
+				float	sum_squre = (x - j) * (x - j) + (y - i) * (y - i);
+				if (sum_squre > r * r)
+					continue;
+				if (Cc == 'c' && (sqrtf(sum_squre) < r - 1))
 					continue;
 				paper[i][j] = c;
 			}
 		}
-		res_scanf = fscanf(pfile, "%c %f %f %f %f %c\n", &rR, &x, &y, &w, &h, &c);
 	}
-	if (res_scanf != EOF)
-		return (1);
+	if (rtn_fscanf != EOF)
+		return (ERROR);
 	return (0);
 }
 
