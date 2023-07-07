@@ -1,0 +1,77 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   type.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/04 20:16:07 by youjeong          #+#    #+#             */
+/*   Updated: 2023/07/07 21:08:30 by youjeong         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef TYPE_H
+# define TYPE_H
+
+# include <stdlib.h>
+# include <stdio.h>
+# include <stdbool.h>
+# include <errno.h>
+
+typedef enum e_type {
+	PIPELINE,
+	REDIRECT,
+	SPACE,
+	WORD,
+	SINGLE_QUOTE,
+	DOUBLE_QUOTE,
+}t_type;
+
+typedef struct s_token {
+	char			*word;
+	t_type			type;
+}t_token;
+
+typedef struct s_node {
+	t_token			*data;
+	struct s_node	*parent;
+	struct s_node	*left;
+	struct s_node	*right;
+}t_node;
+
+typedef struct s_token_list {
+	t_node	*front;
+	t_node	*rear;
+}t_token_list;
+
+typedef struct s_tree {
+	t_node	*root;
+}t_tree;
+
+// token
+t_token	*get_token();
+void	free_token(t_token *token);
+t_token	*get_token_with_data(const char *word, t_type type);
+
+// node
+t_node	*getnode(t_token *data);
+void	free_node(t_node *node);
+
+// list
+void	init_list(t_token_list *lst);
+bool	isempty_list(t_token_list *lst);
+void	free_list(t_token_list **lst);
+void	push_front(t_token_list *lst, t_node *node);
+void	push_back(t_token_list *lst, t_node *node);
+t_node	*pop_front(t_token_list *lst);
+t_node	*pop_rear(t_token_list *lst);
+
+// tree
+void	init_tree(t_tree *tree);
+void	free_tree(t_tree **tree);
+void	add_lchild(t_node *parent, t_node *child);
+void	add_rchild(t_node *parent, t_node *child);
+void	add_parent_for_lchild(t_tree *tree, t_node *parent, t_node *child);
+void	add_parent_for_rchild(t_tree *tree, t_node *parent, t_node *child);
+
+#endif

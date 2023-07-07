@@ -1,61 +1,66 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/05/23 15:25:29 by youjeong          #+#    #+#              #
-#    Updated: 2023/07/04 22:04:04 by youjeong         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME =		minishell
 
-NAME = minishell
+CC =		cc
+CFLAGS =	-Wall -Wextra -Werror
+INCLUDE = 	-I includes
+RM =		rm -rf
+LIB = -Llibft -lft -lncurses
+BUILD_LIBFT = make -C libft $@
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
+SRCS_RT_DIR =	srcs/
 
-SRC_DIR = src
-BUILD_DIR = build
+SRCS_DIR =		data/ \
+				parse/
 
-SRCS = minishell.c \
-		get_token.c \
-		node.c \
-		tree.c 
+CFILES =		main.c \
+				data/token.c \
+                data/node.c \
+                data/token_list.c \
+                data/token_list_action.c \
+                data/tree.c \
+                data/tree_action.c \
+				parse/get_ast_tree.c \
+				parse/get_token_list.c
+CFILES :=		$(addprefix $(SRCS_RT_DIR), $(CFILES))
 
-OBJS = $(SRCS:.c=.o)
+SRCS = 			$(notdir $(CFILES))
 
-#LIBFT
-LIBFT_DIR = libft
-LIBFT_SRC_DIR = $(LIBFT_DIR)/src
-LIBFT_A = $(LIBFT_DIR)/libft.a
+OBJS_DIR = 		objs/
+OBJS = 			$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 
-all : $(BUILD_DIR) $(LIBFT_A) $(NAME)
+VPATH = 		$(SRCS_RT_DIR) \
+				$(addprefix $(SRCS_RT_DIR), $(SRCS_DIR))
 
-$(LIBFT_A):
-	make -C $(LIBFT_DIR)
+$(OBJS_DIR)%o: %c
+	$(CC) $(CFLAGS) ${INCLUDE} -c $< -o $@
 
-$(NAME): ${addprefix $(BUILD_DIR)/, $(OBJS)}
-	$(CC) $(CFLAGS) $^ -o $@ -lreadline
+$(NAME): make_mandatory
 
-$(BUILD_DIR):
-	mkdir $(BUILD_DIR)
+all: $(NAME)
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
-	$(CC) $(CFLAGS) -c $< -o $@ -I $(SRC_DIR)/include -I $(LIBFT_SRC_DIR)/include
+bonus: make_bonus
+
+make_mandatory: $(OBJS)
+	$(BUILD_LIBFT)
+	$(CC) $(CFLAGS) $(LIB) -o $(NAME) $^ -lreadline
+	touch $@
+
+make_bonus: $(OBJS_BONUS)
+	$(BUILD_LIBFT)
+	$(CC) $(CFLAGS) $(LIB) -o $(NAME) $^ -lreadline
+	touch $@
 
 clean:
-	make clean -C $(LIBFT_DIR)
-	rm -rf $(BUILD_DIR)
+	$(RM) $(OBJS) $(OBJS_BONUS)
+	$(RM) make_mandatory make_bonus
+	$(BUILD_LIBFT)
 
-fclean:
-	make fclean -C $(LIBFT_DIR)
-	make clean
-	rm -f $(NAME)
+fclean: clean
+	$(RM) $(NAME)
+	$(BUILD_LIBFT)
 
-re:
-	make re -C $(LIBFT_DIR)
+re: 
 	make fclean
 	make all
 
-.PHONY: clean fclean re all
+.PHONY: all clean fclean re bonus

@@ -1,85 +1,91 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/12/21 14:11:47 by youjeong          #+#    #+#              #
-#    Updated: 2023/05/12 16:33:47 by youjeong         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME =		libft.a
 
-NAME = libft.a
+CC =		cc
+CFLAGS =	-Wall -Wextra -Werror
+AR =		ar -rcus
+RM =		rm -rf
+INCLUDE = 	-I includes
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+FILES =		ft_isalpha \
+			ft_isalnum \
+			ft_isascii \
+			ft_isdigit \
+			ft_isprint \
+			ft_tolower \
+			ft_toupper \
+			ft_strlen \
+			ft_strlcpy \
+			ft_strlcat \
+			ft_strncmp \
+			ft_strnstr \
+			ft_strchr \
+			ft_strrchr \
+			ft_strdup \
+			ft_memset \
+			ft_memcpy \
+			ft_memmove \
+			ft_memchr \
+			ft_memcmp \
+			ft_bzero \
+			ft_calloc \
+			ft_atoi \
+			ft_substr \
+			ft_strjoin \
+			ft_strmapi \
+			ft_strtrim \
+			ft_split \
+			ft_itoa \
+			ft_striteri \
+			ft_putchar_fd \
+			ft_putstr_fd \
+			ft_putendl_fd \
+			ft_putnbr_fd
 
-SRC_DIR = src
-BUILD_DIR = build
+FILES_BONUS	=	ft_lstnew \
+				ft_lstadd_front \
+				ft_lstadd_back \
+				ft_lstsize \
+				ft_lstlast \
+				ft_lstdelone \
+				ft_lstclear \
+				ft_lstiter \
+				ft_lstmap
 
-SRCS = ft_isalpha.c \
-		ft_isdigit.c \
-		ft_isalnum.c \
-		ft_isascii.c \
-		ft_isprint.c \
-		ft_strlen.c \
-		ft_memset.c \
-		ft_bzero.c \
-		ft_memcpy.c \
-		ft_memmove.c \
-		ft_strlcpy.c \
-		ft_strlcat.c \
-		ft_toupper.c \
-		ft_tolower.c \
-		ft_strchr.c \
-		ft_strrchr.c \
-		ft_strncmp.c \
-		ft_memchr.c \
-		ft_memcmp.c \
-		ft_strnstr.c \
-		ft_atoi.c \
-		ft_calloc.c \
-		ft_strdup.c \
-		ft_substr.c \
-		ft_strjoin.c \
-		ft_strtrim.c \
-		ft_split.c \
-		ft_itoa.c \
-		ft_strmapi.c \
-		ft_striteri.c \
-		ft_putchar_fd.c \
-		ft_putstr_fd.c \
-		ft_putendl_fd.c \
-		ft_putnbr_fd.c \
-		ft_lstnew.c \
-		ft_lstadd_front.c \
-		ft_lstsize.c \
-		ft_lstlast.c \
-		ft_lstadd_back.c \
-		ft_lstdelone.c \
-		ft_lstclear.c \
-		ft_lstiter.c \
-		ft_lstmap.c
-OBJS = $(SRCS:.c=.o)
+SRCS_DIR = 		srcs/
+SRCS =  		$(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
+SRCS_BONUS = 	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES_BONUS)))
 
-all : $(BUILD_DIR) $(NAME)
+OBJS_DIR = 		objs/
+OBJS =  		$(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
+OBJS_BONUS = 	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES_BONUS)))
 
-$(NAME) : ${addprefix $(BUILD_DIR)/, $(OBJS)}
-	ar -rcus $@ $^
+$(OBJS_DIR)%o: $(SRCS_DIR)%c
+	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
-$(BUILD_DIR):
-	mkdir $@
+$(NAME): all
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
-	$(CC) $(CFLAGS) -c $^ -o $@ -I $(SRC_DIR)/include
+all: make_mandatory
+
+bonus: make_bonus
+
+make_mandatory: $(OBJS)
+	$(AR) $(NAME) $^
+	touch $@
+
+make_bonus: $(OBJS) $(OBJS_BONUS)
+	$(AR) $(NAME) $^
+	touch make_mandatory
+	touch $@
 
 clean:
-	rm -rf $(BUILD_DIR)
+	$(RM) $(OBJS) $(OBJS_BONUS)
+	$(RM) make_mandatory make_bonus
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
-re: fclean all
+re: 
+	make fclean
+	make all
 
-.PHONY: clean fclean re all
+.PHONY: all clean fclean re bonus
