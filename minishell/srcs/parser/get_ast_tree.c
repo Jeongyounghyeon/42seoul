@@ -23,7 +23,7 @@ t_tree	*get_ast_tree(char *str)
 	lst_token = get_token_list(str);
 	if (!lst_token)
 		return (0);
-
+	printf("-------------start list---------------\n");
 	while (!isempty_list(lst_token))
 	{
 		t_token	*token;
@@ -31,8 +31,7 @@ t_tree	*get_ast_tree(char *str)
 		printf("%d : %s\n", token->type, token->word);
 		pop_front(lst_token);
 	}
-	printf("\n");
-
+	printf("--------------end list--------------\n");
 	// ast_tree = get_ast_by_list(lst_token);
 	// return (ast_tree);
 	return (0);

@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_ast_by_list.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/07 17:31:36 by youjeong          #+#    #+#             */
-/*   Updated: 2023/07/09 17:07:43 by youjeong         ###   ########.fr       */
+/*   Created: 2023/07/08 15:33:11 by youjeong          #+#    #+#             */
+/*   Updated: 2023/07/09 17:15:22 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/parse.h"
 
-int main()
+t_tree	*get_ast_by_list(lst_token)
 {
 	t_tree	*ast_tree;
-	char 	*str;
 
-	str = readline("readline input : ");
-	printf("readline output : %s\n", str);
-	ast_tree = get_ast_tree(str);
-	if (ast_tree)
+	ast_tree = (t_tree *)malloc(1 * sizeof(t_tree));
+	if (!ast_tree)
 	{
-		free_tree(ast_tree);
-		ast_tree = 0;
+		perror("minishell");
+		return (0);
 	}
-	free(str);
+	
 }

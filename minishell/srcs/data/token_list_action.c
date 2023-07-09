@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 17:20:32 by youjeong          #+#    #+#             */
-/*   Updated: 2023/07/07 18:27:07 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/07/08 15:31:14 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	push_front(t_token_list *lst, t_node *node);
 void	push_back(t_token_list *lst, t_node *node);
 t_node	*pop_front(t_token_list *lst);
-t_node	*pop_rear(t_token_list *lst);
+t_node	*pop_back(t_token_list *lst);
 
 void	push_front(t_token_list *lst, t_node *node)
 {
@@ -50,12 +50,15 @@ t_node	*pop_front(t_token_list *lst)
 	{
 		lst->front = pop_node->right;
 		if (lst->rear == pop_node)
+		{
+			lst->front = 0;
 			lst->rear = 0;
+		}
 	}
 	return (pop_node);
 }
 
-t_node	*pop_rear(t_token_list *lst)
+t_node	*pop_back(t_token_list *lst)
 {
 	t_node	*pop_node;
 
@@ -64,7 +67,10 @@ t_node	*pop_rear(t_token_list *lst)
 	{
 		lst->rear = pop_node->left;
 		if (lst->front == pop_node)
+		{
 			lst->front = 0;
+			lst->rear = 0;
+		}
 	}
 	return (pop_node);
 }

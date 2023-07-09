@@ -1,38 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cleaned_list.c                                 :+:      :+:    :+:   */
+/*   get_token_list.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/07 20:46:47 by youjeong          #+#    #+#             */
-/*   Updated: 2023/07/07 21:12:36 by youjeong         ###   ########.fr       */
+/*   Created: 2023/07/07 18:50:12 by youjeong          #+#    #+#             */
+/*   Updated: 2023/07/07 19:01:31 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parse.h"
 #include "../../libft/includes/libft.h"
 
-t_token_list *get_cleaned_list(t_token_list *origin)
-{
-	t_node			*node;
-	t_token_list	*lst_cleaned;
-	t_type			type;
+t_token_list	*get_token_list(const char *str);
 
+t_token_list	*get_token_list(const char *str)
+{
+	t_token_list	*lst_origin;
+	t_token_list	*lst_cleaned;
+
+	lst_origin = get_origin_word_list(str);
+	if (!lst_origin)
+		return (0);
 	lst_cleaned = (t_token_list *)malloc(1 * sizeof(t_token_list));
 	if (!lst_cleaned)
 	{
-		perror("minishell");
+		free_list(lst_origin);
 		return (0);
 	}
-	while (!isempty_list(origin))
+	init_token_list(lst_cleaned);
+	if (origin_list_to_cleand_list(lst_origin, lst_cleaned) == -1)
 	{
-		node = pop_front(origin);
-		type = node->data->type;
-		// if (type == DOUBLE_QUOTE || type == WORD)
-		// 	replace_environment_in_node(node);
-		if (type >= SINGLE_QUOTE)
-			trim_quote_in_node(node);
+		free_list(lst_cleaned);
+		lst_cleaned = 0;
 	}
+	free(lst_origin);
+	return (lst_cleaned);
 }
-
