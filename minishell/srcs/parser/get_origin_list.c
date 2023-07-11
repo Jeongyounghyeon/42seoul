@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 16:39:07 by youjeong          #+#    #+#             */
-/*   Updated: 2023/07/09 16:25:16 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/07/11 21:40:15 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_token_list	*get_origin_word_list(const char *str)
 		node = get_first_node_in_str(str);
 		if (!node)
 		{
-			free_list(lst);
+			free_token_list(lst);
 			lst = 0;
 			return (0);
 		}

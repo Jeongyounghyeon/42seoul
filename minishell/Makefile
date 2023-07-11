@@ -22,7 +22,8 @@ CFILES =		main.c \
 				parser/get_ast_tree.c \
 				parser/get_token_list.c \
 				parser/get_cleaned_list.c \
-				parser/get_origin_list.c
+				parser/get_origin_list.c \
+				parser/get_ast_by_list.c
 CFILES :=		$(addprefix $(SRCS_RT_DIR), $(CFILES))
 
 SRCS = 			$(notdir $(CFILES))

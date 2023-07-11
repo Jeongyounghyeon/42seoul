@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 20:46:47 by youjeong          #+#    #+#             */
-/*   Updated: 2023/07/09 17:08:45 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/07/11 21:40:15 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,42 @@
 #include "../../libft/includes/libft.h"
 
 int				origin_list_to_cleand_list(t_token_list *origin, t_token_list *cleaned);
-static int		move_one_node_interpret(t_token_list *src, t_token_list *dst);
+static int		add_node_to_cleaned_list(t_node *node, t_token_list *dst, t_type pre_type);
 static int		trim_quote_in_node(t_node *node);
 static t_node	*merge_double_word_node(t_node *node1, t_node *node2);
 
 int	origin_list_to_cleand_list(t_token_list *origin, t_token_list *cleaned)
 {
-	while (!isempty_list(origin))
-	{		
-		if (move_one_node_interpret(origin, cleaned) == -1)
+	t_node	*pnode;
+	t_type	pre_type;
+	int		rtn_func;
+
+	pre_type = -1;
+	while (!isempty_token_list(origin))
+	{
+		pnode = pop_front(origin);
+		rtn_func = add_node_to_cleaned_list(pnode, cleaned, pre_type);
+		if (rtn_func == -1)
 		{
-			free_list(cleaned);
+			free_node(pnode);
+			free_token_list(cleaned);
 			return (-1);
 		}
+		pre_type = pnode->data->type;
+		if (rtn_func == 1)
+			free_node(pnode);
 	}
 	return (0);
 }
 
-static int	move_one_node_interpret(t_token_list *src, t_token_list *dst)
+static int	add_node_to_cleaned_list(t_node *node, t_token_list *dst, t_type pre_type)
 {
-	t_node			*node;
 	t_type			type;
-	static	t_type	pre_type = -1;
-
-	node = pop_front(src);
+	int				rtn;
 	type = node->data->type;
+	rtn = 0;
 	if (type == SPACE)
-		free(node);
+		return (1);
 	else
 	{
 		if (type == DOUBLE_QUOTE || type == WORD)
@@ -49,10 +58,7 @@ static int	move_one_node_interpret(t_token_list *src, t_token_list *dst)
 		}
 		if (type == SINGLE_QUOTE || type == DOUBLE_QUOTE)
 			if (trim_quote_in_node(node) == -1)
-			{
-				free_node(node);
 				return (-1);
-			}
 		type = node->data->type;
 		if (type == WORD && pre_type == WORD)
 		{
@@ -62,44 +68,14 @@ static int	move_one_node_interpret(t_token_list *src, t_token_list *dst)
 			pre_node = pop_back(dst);
 			update_node = merge_double_word_node(pre_node, node);
 			free_node(pre_node);
-			free_node(node);
 			if (!update_node)
 				return (-1);
 			node = update_node;
+			rtn = 1;
 		}
 		push_back(dst, node);
 	}
-	pre_type = type;
-	// if (type == DOUBLE_QUOTE || type == WORD)
-	// {
-	// 	//환경변수 처리
-	// }
-	// if (type == SINGLE_QUOTE || type == DOUBLE_QUOTE)
-	// 	if (trim_quote_in_node(node) == -1)
-	// 	{
-	// 		free_node(node);
-	// 		return (-1);
-	// 	}
-	// type = node->data->type;
-	// if (type == WORD && pre_type == WORD)
-	// {
-	// 	t_node	*pre_node;
-	// 	t_node	*update_node = 0;
-
-	// 	pre_node = pop_back(dst);
-	// 	update_node = merge_double_word_node(pre_node, node);
-	// 	free_node(pre_node);
-	// 	free_node(node);
-	// 	if (!update_node)
-	// 		return (-1);
-	// 	node = update_node;
-	// }
-	// if (type == SPACE)
-	// 	free_node(node);
-	// else
-	// 	push_back(dst, node);
-	// pre_type = type;
-	return (0);
+	return (rtn);
 }
 
 static t_node	*merge_double_word_node(t_node *node1, t_node *node2)

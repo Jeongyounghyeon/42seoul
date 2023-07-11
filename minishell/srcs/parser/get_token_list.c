@@ -26,13 +26,13 @@ t_token_list	*get_token_list(const char *str)
 	lst_cleaned = (t_token_list *)malloc(1 * sizeof(t_token_list));
 	if (!lst_cleaned)
 	{
-		free_list(lst_origin);
+		free_token_list(lst_origin);
 		return (0);
 	}
 	init_token_list(lst_cleaned);
 	if (origin_list_to_cleand_list(lst_origin, lst_cleaned) == -1)
 	{
-		free_list(lst_cleaned);
+		free_token_list(lst_cleaned);
 		lst_cleaned = 0;
 	}
 	free(lst_origin);

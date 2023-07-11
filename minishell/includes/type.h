@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 20:16:07 by youjeong          #+#    #+#             */
-/*   Updated: 2023/07/09 16:25:16 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/07/11 21:40:15 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <errno.h>
 
 typedef enum e_type {
+	COMMAND,
 	PIPELINE,
 	REDIRECT,
 	SPACE,
@@ -59,8 +60,8 @@ void	free_node(t_node *node);
 
 // list
 void	init_token_list(t_token_list *lst);
-bool	isempty_list(t_token_list *lst);
-void	free_list(t_token_list *lst);
+bool	isempty_token_list(t_token_list *lst);
+void	free_token_list(t_token_list *lst);
 void	push_front(t_token_list *lst, t_node *node);
 void	push_back(t_token_list *lst, t_node *node);
 t_node	*pop_front(t_token_list *lst);

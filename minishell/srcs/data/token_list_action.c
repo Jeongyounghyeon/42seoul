@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 17:20:32 by youjeong          #+#    #+#             */
-/*   Updated: 2023/07/08 15:31:14 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/07/11 21:39:59 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_node	*pop_back(t_token_list *lst);
 
 void	push_front(t_token_list *lst, t_node *node)
 {
-	if (isempty_list(lst))
+	if (isempty_token_list(lst))
 		lst->rear = node;
 	else
 	{
@@ -31,7 +31,7 @@ void	push_front(t_token_list *lst, t_node *node)
 
 void	push_back(t_token_list *lst, t_node *node)
 {
-	if (isempty_list(lst))
+	if (isempty_token_list(lst))
 		lst->front = node;
 	else
 	{
@@ -46,7 +46,7 @@ t_node	*pop_front(t_token_list *lst)
 	t_node	*pop_node;
 
 	pop_node = lst->front;
-	if (!isempty_list(lst))
+	if (!isempty_token_list(lst))
 	{
 		lst->front = pop_node->right;
 		if (lst->rear == pop_node)
@@ -54,7 +54,10 @@ t_node	*pop_front(t_token_list *lst)
 			lst->front = 0;
 			lst->rear = 0;
 		}
+		else
+			lst->front->left = 0;
 	}
+	pop_node->right = 0;
 	return (pop_node);
 }
 
@@ -63,7 +66,7 @@ t_node	*pop_back(t_token_list *lst)
 	t_node	*pop_node;
 
 	pop_node = lst->rear;
-	if (!isempty_list(lst))
+	if (!isempty_token_list(lst))
 	{
 		lst->rear = pop_node->left;
 		if (lst->front == pop_node)
@@ -71,6 +74,9 @@ t_node	*pop_back(t_token_list *lst)
 			lst->front = 0;
 			lst->rear = 0;
 		}
+		else
+			lst->rear->right = 0;
 	}
+	pop_node->left = 0;
 	return (pop_node);
 }
