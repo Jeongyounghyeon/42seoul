@@ -1,45 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cleaned_list.c                                 :+:      :+:    :+:   */
+/*   token_list_to_lex_list.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 20:46:47 by youjeong          #+#    #+#             */
-/*   Updated: 2023/07/11 21:40:15 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/07/12 23:07:47 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parse.h"
 #include "../../libft/includes/libft.h"
 
-int				origin_list_to_cleand_list(t_token_list *origin, t_token_list *cleaned);
+t_token_list	*token_list_to_lex_list(t_token_list *lst_token);
 static int		add_node_to_cleaned_list(t_node *node, t_token_list *dst, t_type pre_type);
 static int		trim_quote_in_node(t_node *node);
 static t_node	*merge_double_word_node(t_node *node1, t_node *node2);
 
-int	origin_list_to_cleand_list(t_token_list *origin, t_token_list *cleaned)
+t_token_list	*token_list_to_lex_list(t_token_list *lst_token)
 {
+	t_token_list	*lst_lex;
 	t_node	*pnode;
 	t_type	pre_type;
 	int		rtn_func;
 
-	pre_type = -1;
-	while (!isempty_token_list(origin))
+	lst_lex = (t_token_list *)malloc(1 * sizeof(t_token_list));
+	if (!lst_lex)
 	{
-		pnode = pop_front(origin);
-		rtn_func = add_node_to_cleaned_list(pnode, cleaned, pre_type);
+		perror("minishell");
+		return (0);
+	}
+	pre_type = -1;
+	while (!isempty_token_list(lst_token))
+	{
+		pnode = pop_front(lst_token);
+		rtn_func = add_node_to_cleaned_list(pnode, lst_lex, pre_type);
 		if (rtn_func == -1)
 		{
 			free_node(pnode);
-			free_token_list(cleaned);
-			return (-1);
+			free_token_list(lst_lex);
+			return (0);
 		}
 		pre_type = pnode->data->type;
 		if (rtn_func == 1)
 			free_node(pnode);
 	}
-	return (0);
+	return (lst_lex);
 }
 
 static int	add_node_to_cleaned_list(t_node *node, t_token_list *dst, t_type pre_type)

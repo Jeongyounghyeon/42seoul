@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 17:31:36 by youjeong          #+#    #+#             */
-/*   Updated: 2023/07/11 21:54:47 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/07/12 14:23:22 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,14 @@ int main()
 
 	str = readline("readline input : ");
 	printf("readline output : %s\n", str);
-	ast_tree = get_ast_tree(str);
+	ast_tree = str_to_ast_tree(str);
+	free(str);
+	if (!ast_tree)
+		return (0);
 	if (ast_tree->root)
 		printf("root on\n");
 	print_preorder(ast_tree->root);
-	free(str);
+	free_tree(ast_tree);
 }
 
 void	print_data(t_node	*node)

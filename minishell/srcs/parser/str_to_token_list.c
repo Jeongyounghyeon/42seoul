@@ -1,51 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_origin_list.c                                  :+:      :+:    :+:   */
+/*   str_to_token_list.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 16:39:07 by youjeong          #+#    #+#             */
-/*   Updated: 2023/07/11 21:40:15 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/07/12 15:02:10 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parse.h"
 #include "../../libft/includes/libft.h"
 
-t_token_list	*get_origin_word_list(const char *str);
+t_token_list	*str_to_token_list(const char *str);
 static t_node	*get_first_node_in_str(const char *str);
 static t_type	get_first_type_in_str(const char *str);
 static char		*get_frist_word_by_type(const char *str, t_type type);
 static int		is_parse_sep(char c);
 
-t_token_list	*get_origin_word_list(const char *str)
+t_token_list	*str_to_token_list(const char *str)
 {
-	t_token_list	*lst;
+	t_token_list	*lst_token;
 	t_node			*node;
 
-	lst = (t_token_list *)malloc(1 * sizeof(t_token_list));
-	if (!lst)
+	lst_token = (t_token_list *)malloc(1 * sizeof(t_token_list));
+	if (!lst_token)
 	{
 		perror("minishell");
 		return (0);
 	}
-	init_token_list(lst);
+	init_token_list(lst_token);
 	while (*str)
 	{
-		while (*str == ' ' && *(str + 1) == ' ')
+		while (ft_strncmp(str, "  ", 2) == 0)
 			str++;
 		node = get_first_node_in_str(str);
 		if (!node)
 		{
-			free_token_list(lst);
-			lst = 0;
+			free_token_list(lst_token);
 			return (0);
 		}
-		push_back(lst, node);
+		push_back(lst_token, node);
 		str = str + ft_strlen(node->data->word);
 	}
-	return (lst);
+	return (lst_token);
 }
 
 static t_node	*get_first_node_in_str(const char *str)
@@ -65,7 +64,7 @@ static t_node	*get_first_node_in_str(const char *str)
 		return (0);
 	node = getnode(token);
 	if (!node)
-		free(token);
+		free_token(token);
 	return (node);
 }
 

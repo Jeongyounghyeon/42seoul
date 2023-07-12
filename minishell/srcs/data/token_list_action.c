@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 17:20:32 by youjeong          #+#    #+#             */
-/*   Updated: 2023/07/11 21:39:59 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/07/12 15:51:15 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ t_node	*pop_front(t_token_list *lst)
 		}
 		else
 			lst->front->left = 0;
+		pop_node->right = 0;
 	}
-	pop_node->right = 0;
 	return (pop_node);
 }
 
@@ -76,7 +76,7 @@ t_node	*pop_back(t_token_list *lst)
 		}
 		else
 			lst->rear->right = 0;
+		pop_node->left = 0;
 	}
-	pop_node->left = 0;
 	return (pop_node);
 }
