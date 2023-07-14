@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 20:16:07 by youjeong          #+#    #+#             */
-/*   Updated: 2023/07/11 21:40:15 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/07/14 12:10:44 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <stdbool.h>
-# include <errno.h>
+# include "error.h"
 
 typedef enum e_type {
 	COMMAND,

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_to_ast_tree.c                                    :+:      :+:    :+:   */
+/*   parse.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,26 +12,17 @@
 
 #include "../../includes/parse.h"
 
-t_tree	*str_to_ast_tree(char *str);
+void	parse(char *str, t_tree *ast);
 
-t_tree	*str_to_ast_tree(char *str)
+void	parse(char *str, t_tree *ast)
 {
-	t_tree			*ast_tree;
-	t_token_list	*lst_lex;
-	
-	lst_lex = str_to_lex_list(str);
-	if (!lst_lex)
-		return (0);
-	// printf("-------------start list---------------\n");
-	// while (!isempty_token_list(lst_lex))
-	// {
-	// 	t_token	*token;
-	// 	token = lst_lex->front->data;
-	// 	printf("%d : %s\n", token->type, token->word);
-	// 	pop_front(lst_lex);
-	// }
-	// printf("--------------end list--------------\n");
-	ast_tree = get_ast_by_list(lst_lex);
-	free_token_list(lst_lex);
-	return (ast_tree);
+	t_token_list	lst_token;
+	t_token_list	lst_lex;
+
+	init_token_list(&lst_token);
+	init_token_list(&lst_lex);
+	tokenize(str, &lst_token);
+	lex(&lst_token, &lst_lex);
+	valid_syntax(&lst_lex);
+	parse_tree(&lst_lex, ast);
 }

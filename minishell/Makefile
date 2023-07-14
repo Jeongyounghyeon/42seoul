@@ -19,11 +19,12 @@ CFILES =		main.c \
                 data/token_list_action.c \
                 data/tree.c \
                 data/tree_action.c \
-				parser/str_to_ast_tree.c \
-				parser/str_to_lex_list.c \
-				parser/str_to_token_list.c \
-				parser/token_list_to_lex_list.c \
-				parser/get_ast_by_list.c 
+				parser/parse.c \
+				parser/tokenize.c \
+				parser/lex.c \
+				parser/parse_tree.c \
+				parser/valid.c \
+				parser/error.c
 CFILES :=		$(addprefix $(SRCS_RT_DIR), $(CFILES))
 
 SRCS = 			$(notdir $(CFILES))

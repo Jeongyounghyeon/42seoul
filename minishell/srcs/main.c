@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 17:31:36 by youjeong          #+#    #+#             */
-/*   Updated: 2023/07/12 14:23:22 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/07/14 15:46:59 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,17 @@ void print_preorder(t_node *node);
 
 int main()
 {
-	t_tree	*ast_tree;
+	t_tree	ast;
 	char 	*str;
 
 	str = readline("readline input : ");
 	printf("readline output : %s\n", str);
-	ast_tree = str_to_ast_tree(str);
+	
+	init_tree(&ast);
+	parse(str, &ast);
 	free(str);
-	if (!ast_tree)
-		return (0);
-	if (ast_tree->root)
-		printf("root on\n");
-	print_preorder(ast_tree->root);
-	free_tree(ast_tree);
+	
+	print_preorder(ast.root);
 }
 
 void	print_data(t_node	*node)

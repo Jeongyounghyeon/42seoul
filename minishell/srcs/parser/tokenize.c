@@ -1,70 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_to_token_list.c                                :+:      :+:    :+:   */
+/*   tokenize.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 16:39:07 by youjeong          #+#    #+#             */
-/*   Updated: 2023/07/12 15:02:10 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/07/14 14:07:32 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parse.h"
 #include "../../libft/includes/libft.h"
 
-t_token_list	*str_to_token_list(const char *str);
+void			tokenize(const char *str, t_token_list *lst_token);
 static t_node	*get_first_node_in_str(const char *str);
 static t_type	get_first_type_in_str(const char *str);
 static char		*get_frist_word_by_type(const char *str, t_type type);
 static int		is_parse_sep(char c);
 
-t_token_list	*str_to_token_list(const char *str)
+void	tokenize(const char *str, t_token_list *lst_token)
 {
-	t_token_list	*lst_token;
 	t_node			*node;
 
-	lst_token = (t_token_list *)malloc(1 * sizeof(t_token_list));
-	if (!lst_token)
-	{
-		perror("minishell");
-		return (0);
-	}
-	init_token_list(lst_token);
 	while (*str)
 	{
 		while (ft_strncmp(str, "  ", 2) == 0)
 			str++;
 		node = get_first_node_in_str(str);
-		if (!node)
-		{
-			free_token_list(lst_token);
-			return (0);
-		}
 		push_back(lst_token, node);
 		str = str + ft_strlen(node->data->word);
 	}
-	return (lst_token);
 }
 
 static t_node	*get_first_node_in_str(const char *str)
 {
 	t_node		*node;
-	t_token		*token;
 	char		*word;
 	t_type		type;
 
 	type = get_first_type_in_str(str);
 	word = get_frist_word_by_type(str, type);
-	if (!word)
-		return (0);
-	token = get_token_with_data(word, type);
+	node = getnode(get_token_with_data(word, type));
 	free(word);
-	if (!token)
-		return (0);
-	node = getnode(token);
-	if (!node)
-		free_token(token);
 	return (node);
 }
 
@@ -107,7 +85,7 @@ static char	*get_frist_word_by_type(const char *str, t_type type)
 		word = ft_substr(str, 0, end_ptr - str + 1);
 	}
 	if (!word)
-		perror("minishell");
+		print_error(ENOMEM);
 	return (word);
 }
 

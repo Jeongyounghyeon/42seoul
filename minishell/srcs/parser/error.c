@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.h                                            :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/07 17:30:25 by youjeong          #+#    #+#             */
-/*   Updated: 2023/07/14 16:01:23 by youjeong         ###   ########.fr       */
+/*   Created: 2023/07/14 12:09:18 by youjeong          #+#    #+#             */
+/*   Updated: 2023/07/14 15:29:05 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_H
-# define PARSE_H
+#include "error.h"
+#include "../../libft/includes/libft.h"
+#include <string.h>
 
-# include "type.h"
+void	print_error(int errno_type)
+{
+	char	*error_message;
 
-// get_ast_tree
-void	parse(char *str, t_tree *ast);
-
-t_token_list	*str_to_lex_list(const char *str);
-void			tokenize(const char *str, t_token_list *lst_token);
-void			lex(t_token_list *lst_token, t_token_list *lst_lex);
-
-
-void	parse_tree(t_token_list *lst_token, t_tree *ast);
-
-// valid
-void	valid_syntax(t_token_list *lst);
-
-#endif
+	error_message = strerror(errno_type);
+	write(2, error_message, ft_strlen(error_message));
+	exit(errno_type);
+}
