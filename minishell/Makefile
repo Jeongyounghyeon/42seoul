@@ -22,6 +22,7 @@ CFILES =		main.c \
 				parser/parse.c \
 				parser/tokenize.c \
 				parser/lex.c \
+				parser/translate_env.c \
 				parser/parse_tree.c \
 				parser/valid.c \
 				parser/error.c

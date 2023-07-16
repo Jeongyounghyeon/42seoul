@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 17:30:25 by youjeong          #+#    #+#             */
-/*   Updated: 2023/07/14 16:01:23 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/07/16 17:21:29 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,9 @@
 
 // get_ast_tree
 void	parse(char *str, t_tree *ast);
-
-t_token_list	*str_to_lex_list(const char *str);
-void			tokenize(const char *str, t_token_list *lst_token);
-void			lex(t_token_list *lst_token, t_token_list *lst_lex);
-
-
+void	tokenize(const char *str, t_token_list *lst_token);
+void	lex(t_token_list *lst_token, t_token_list *lst_lex);
+void	translate_env_in_node(t_node *node);
 void	parse_tree(t_token_list *lst_token, t_tree *ast);
 
 // valid

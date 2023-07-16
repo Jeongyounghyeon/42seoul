@@ -43,7 +43,7 @@ static void	push_to_lex(t_token_list *lst_lex, t_node *node, t_type *pre_type)
 	else
 	{
 		if (type == DOUBLE_QUOTE || type == WORD)
-			; // 환경변수 처리
+			translate_env_in_node(node);
 		if (type == SINGLE_QUOTE || type == DOUBLE_QUOTE)
 			trim_quote_in_node(node);
 		type = node->data->type;

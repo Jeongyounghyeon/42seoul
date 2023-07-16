@@ -76,13 +76,13 @@ static char	*get_frist_word_by_type(const char *str, t_type type)
 	else
 	{
 		if (type == SINGLE_QUOTE || type == DOUBLE_QUOTE)
-			end_ptr = ft_strchr(str + 1, *str);
+			end_ptr = ft_strchr(str + 1, *str) + 1;
 		else
 		{
-			while (!is_parse_sep(*str))
+			while (!is_parse_sep(*end_ptr))
 				end_ptr++;
 		}
-		word = ft_substr(str, 0, end_ptr - str + 1);
+		word = ft_substr(str, 0, end_ptr - str);
 	}
 	if (!word)
 		print_error(ENOMEM);
@@ -93,7 +93,7 @@ static int	is_parse_sep(char c)
 {
 	if (c == 0
 		|| c == '>' || c == '<' || c == '|'
-		|| c != ' ' || c == '\'' || c == '\"')
+		|| c == ' ' || c == '\'' || c == '\"')
 		return (true);
 	return (false);
 }
