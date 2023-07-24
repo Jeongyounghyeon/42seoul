@@ -5,15 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/07 17:30:25 by youjeong          #+#    #+#             */
-/*   Updated: 2023/07/16 17:21:29 by youjeong         ###   ########.fr       */
+/*   Created: 2023/07/20 19:16:46 by youjeong          #+#    #+#             */
+/*   Updated: 2023/07/20 22:41:55 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_H
 # define PARSE_H
 
-# include "type.h"
+# include "data/data.h"
 
 // get_ast_tree
 void	parse(char *str, t_tree *ast);
@@ -26,3 +26,4 @@ void	parse_tree(t_token_list *lst_token, t_tree *ast);
 void	valid_syntax(t_token_list *lst);
 
 #endif
+

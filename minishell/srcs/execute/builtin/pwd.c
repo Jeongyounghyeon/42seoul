@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jy_23 <jy_23@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/14 12:09:18 by youjeong          #+#    #+#             */
-/*   Updated: 2023/07/14 15:29:05 by youjeong         ###   ########.fr       */
+/*   Created: 2023/07/13 19:42:26 by jy_23             #+#    #+#             */
+/*   Updated: 2023/07/13 19:42:55 by jy_23            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
-#include "../../libft/includes/libft.h"
-#include <string.h>
+void	ft_pwd(void);
 
-void	print_error(int errno_type)
+void	ft_pwd(void)
 {
-	char	*error_message;
-
-	error_message = strerror(errno_type);
-	write(2, error_message, ft_strlen(error_message));
-	exit(errno_type);
+	return ;
 }

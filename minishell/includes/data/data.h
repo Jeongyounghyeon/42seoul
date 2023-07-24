@@ -1,53 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type.h                                             :+:      :+:    :+:   */
+/*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/04 20:16:07 by youjeong          #+#    #+#             */
-/*   Updated: 2023/07/16 22:09:14 by youjeong         ###   ########.fr       */
+/*   Created: 2023/07/20 19:06:25 by youjeong          #+#    #+#             */
+/*   Updated: 2023/07/20 22:57:15 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPE_H
-# define TYPE_H
+#ifndef DATA_H
+# define DATA_H
 
-# include <stdlib.h>
-# include <stdio.h>
 # include <stdbool.h>
-# include "error.h"
-
-typedef enum e_type {
-	COMMAND,
-	PIPELINE,
-	REDIRECT,
-	SPACE,
-	WORD,
-	SINGLE_QUOTE,
-	DOUBLE_QUOTE,
-}t_type;
-
-typedef struct s_token {
-	char			*word;
-	t_type			type;
-}t_token;
-
-typedef struct s_node {
-	t_token			*data;
-	struct s_node	*parent;
-	struct s_node	*left;
-	struct s_node	*right;
-}t_node;
-
-typedef struct s_token_list {
-	t_node	*front;
-	t_node	*rear;
-}t_token_list;
-
-typedef struct s_tree {
-	t_node	*root;
-}t_tree;
+# include <stdlib.h>
+# include "type_parse.h"
 
 // token
 t_token	*get_token(void);

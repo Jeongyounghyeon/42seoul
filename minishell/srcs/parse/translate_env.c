@@ -6,11 +6,11 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 17:19:39 by youjeong          #+#    #+#             */
-/*   Updated: 2023/07/16 17:18:40 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/07/20 22:50:23 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "type.h"
+#include "../../includes/parse.h"
 #include "../../libft/includes/libft.h"
 
 void		translate_env_in_node(t_node *node);
@@ -39,7 +39,7 @@ static void	translate_env(t_token *token, char *str)
 
 	token->word = ft_strdup("");
 	if (!token->word)
-		print_error(ENOMEM);
+		crash("", errno);
 	while (*str)
 	{
 		del_str = token->word;
@@ -53,7 +53,7 @@ static void	translate_env(t_token *token, char *str)
 			joining_str = get_word_string(str);
 			token->word = ft_strjoin(token->word, joining_str);
 			if (!token->word)
-				print_error(ENOMEM);
+				crash("", errno);
 		}
 		str += ft_strlen(joining_str);
 		free(joining_str);
@@ -72,7 +72,7 @@ static char	*strjoin_env(char *str, char *env_key)
 	else
 		new_str = ft_strjoin(str, env_val);
 	if (!new_str)
-		print_error(ENOMEM);
+		crash("", errno);
 	return (new_str);
 }
 
@@ -88,7 +88,7 @@ static char	*get_env_string(const char *str)
 		pstr++;
 	env_key = ft_substr(str, 0, pstr - str);
 	if (!env_key)
-		print_error(ENOMEM);
+		crash("", errno);
 	return (env_key);
 }
 

@@ -6,11 +6,11 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 20:16:17 by youjeong          #+#    #+#             */
-/*   Updated: 2023/07/16 22:05:55 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/07/20 22:43:27 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/type.h"
+#include "../../includes/data/data.h"
 
 void		init_tree(t_tree *tree);
 void		clear_tree(t_tree *tree);

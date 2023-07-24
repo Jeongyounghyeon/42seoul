@@ -6,11 +6,11 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 17:22:52 by youjeong          #+#    #+#             */
-/*   Updated: 2023/07/07 17:23:17 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/07/20 22:43:19 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/type.h"
+#include "../../includes/data/type_parse.h"
 
 void	add_lchild(t_node *parent, t_node *child);
 void	add_rchild(t_node *parent, t_node *child);

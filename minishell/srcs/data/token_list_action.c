@@ -6,11 +6,11 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 17:20:32 by youjeong          #+#    #+#             */
-/*   Updated: 2023/07/12 15:51:15 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/07/20 22:42:53 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/type.h"
+#include "../../includes/data/data.h"
 
 void	push_front(t_token_list *lst, t_node *node);
 void	push_back(t_token_list *lst, t_node *node);

@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jy_23 <jy_23@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/07 17:29:40 by youjeong          #+#    #+#             */
-/*   Updated: 2023/07/20 18:56:25 by jy_23            ###   ########.fr       */
+/*   Created: 2023/07/20 18:51:04 by jy_23             #+#    #+#             */
+/*   Updated: 2023/07/20 18:59:43 by jy_23            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef BUILTIN_H
+# define BUILTIN_H
 
-# include "common.h"
+# include "type_execute.h"
 
-void	execute(t_node *parsed, char ***p_envirion);
-
-void	crash(char *message, int errnum);
+# define ERROR -1
 
 #endif

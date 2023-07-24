@@ -6,11 +6,11 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 16:54:24 by youjeong          #+#    #+#             */
-/*   Updated: 2023/07/16 22:09:06 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/07/20 22:42:57 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/type.h"
+#include "../../includes/data/data.h"
 
 void	init_token_list(t_token_list *lst);
 bool	isempty_token_list(t_token_list *lst);

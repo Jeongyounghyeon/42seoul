@@ -85,7 +85,7 @@ static char	*get_frist_word_by_type(const char *str, t_type type)
 		word = ft_substr(str, 0, end_ptr - str);
 	}
 	if (!word)
-		print_error(ENOMEM);
+		crash("", errno);
 	return (word);
 }
 

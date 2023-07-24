@@ -64,7 +64,7 @@ static void	merge_push_to_lex(t_token_list *lst, t_node *node)
 	pre_node = pop_back(lst);
 	new_str = ft_strjoin(pre_node->data->word, node->data->word);
 	if (!new_str)
-		print_error(errno);
+		crash("", errno);
 	res_node = getnode(get_token_with_data(new_str, WORD));
 	free(new_str);
 	free_node(pre_node);
@@ -83,7 +83,7 @@ static int	trim_quote_in_node(t_node *node)
 	else
 		update_word = ft_strtrim(pre_word, "\"");
 	if (!update_word)
-		print_error(ENOMEM);
+		crash("", errno);
 	node->data->word = update_word;
 	node->data->type = WORD;
 	free(pre_word);
