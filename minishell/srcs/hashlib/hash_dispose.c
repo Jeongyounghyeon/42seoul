@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   hash_dispose.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jy_23 <jy_23@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/07 17:29:40 by youjeong          #+#    #+#             */
-/*   Updated: 2023/08/25 16:29:35 by jy_23            ###   ########.fr       */
+/*   Created: 2023/08/06 16:50:46 by jy_23             #+#    #+#             */
+/*   Updated: 2023/08/09 04:02:47 by jy_23            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include <stdlib.h>
 
-# include "variables.h"
+#include "hashlib.h"
 
-t_sh_variable	g_sh_variable;
+void	hash_dispose(t_hash_table *table);
 
-#endif
+void	hash_dispose(t_hash_table *table)
+{
+	free(table->bucket_array);
+	free(table);
+}

@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   standardize.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jy_23 <jy_23@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/07 17:29:40 by youjeong          #+#    #+#             */
-/*   Updated: 2023/08/25 16:29:35 by jy_23            ###   ########.fr       */
+/*   Created: 2023/08/24 17:31:20 by youjeong          #+#    #+#             */
+/*   Updated: 2023/08/27 19:56:27 by jy_23            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef STANDARDIZE_H
+# define STANDARDIZE_H
 
+# include "parse/lex_list.h"
 # include "variables.h"
 
-t_sh_variable	g_sh_variable;
+int	standardize(t_lex_list *list);
 
 #endif

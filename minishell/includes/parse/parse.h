@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jy_23 <jy_23@student.42.fr>                +#+  +:+       +#+        */
+/*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/07 17:29:40 by youjeong          #+#    #+#             */
-/*   Updated: 2023/08/25 16:29:35 by jy_23            ###   ########.fr       */
+/*   Created: 2023/08/01 18:07:38 by youjeong          #+#    #+#             */
+/*   Updated: 2023/08/25 18:17:28 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef PARSE_H
+# define PARSE_H
 
+# include "stdbool.h"
+# include "command.h"
 # include "variables.h"
 
-t_sh_variable	g_sh_variable;
+t_command	*parse(char *str);
 
 #endif

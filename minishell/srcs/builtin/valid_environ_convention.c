@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   valid_environ_convention.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jy_23 <jy_23@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/26 18:29:14 by juyyang           #+#    #+#             */
-/*   Updated: 2023/08/25 21:04:16 by jy_23            ###   ########.fr       */
+/*   Created: 2023/08/26 16:47:05 by jy_23             #+#    #+#             */
+/*   Updated: 2023/08/27 20:53:28 by jy_23            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "libft.h"
 
-size_t	ft_strlen(const char *str)
+#include "status.h"
+
+int	valid_environ_convention(char *cmd, char *key);
+
+int	valid_environ_convention(char *cmd, char *key)
 {
-	size_t	len;
-
-	len = 0;
-	while (str[len])
-		len++;
-	return (len);
+	if (*key == '=')
+		return (exception_handler(EGENRAL, cmd, key, INVARG));
+	while (*key)
+	{
+		if (*key == '=')
+			break ;
+		else if (!(ft_isalnum(*key) || *key == '_'))
+			return (exception_handler(EGENRAL, cmd, key, INVARG));
+		key++;
+	}
+	return (SUCCESS);
 }

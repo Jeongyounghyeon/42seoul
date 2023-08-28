@@ -1,20 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   hash_str_equal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jy_23 <jy_23@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/07 17:29:40 by youjeong          #+#    #+#             */
-/*   Updated: 2023/08/25 16:29:35 by jy_23            ###   ########.fr       */
+/*   Created: 2023/08/06 17:44:41 by jy_23             #+#    #+#             */
+/*   Updated: 2023/08/27 20:59:08 by jy_23            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include <unistd.h>
+#include <stdbool.h>
 
-# include "variables.h"
+#include "libft.h"
 
-t_sh_variable	g_sh_variable;
+#include "command.h"
 
-#endif
+bool	hash_str_equal(const char *key, const char *string);
+
+bool	hash_str_equal(const char *key, const char *string)
+{
+	size_t	key_len;
+	size_t	string_len;
+
+	key_len = ft_strlen(key);
+	string_len = ft_strlen(string);
+	if (key_len == string_len
+		&& !ft_strncmp(key, string, key_len))
+		return (true);
+	else
+		return (false);
+}

@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jy_23 <jy_23@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/07 17:29:40 by youjeong          #+#    #+#             */
-/*   Updated: 2023/08/25 16:29:35 by jy_23            ###   ########.fr       */
+/*   Created: 2023/08/09 05:51:46 by jy_23             #+#    #+#             */
+/*   Updated: 2023/08/27 20:52:54 by jy_23            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
 
-# include "variables.h"
+#include "minishell.h"
 
-t_sh_variable	g_sh_variable;
+int	ft_pwd(void)
+{
+	char	*pwd;
 
-#endif
+	pwd = getcwd(0, 0);
+	printf("%s\n", pwd);
+	free(pwd);
+	return (0);
+}

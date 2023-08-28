@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jy_23 <jy_23@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/07 17:29:40 by youjeong          #+#    #+#             */
-/*   Updated: 2023/08/25 16:29:35 by jy_23            ###   ########.fr       */
+/*   Created: 2023/08/21 19:47:38 by youjeong          #+#    #+#             */
+/*   Updated: 2023/08/27 17:01:49 by jy_23            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "prompt.h"
 
-# include "variables.h"
+void	initialize(char **environment);
 
-t_sh_variable	g_sh_variable;
-
-#endif
+void	initialize(char **environment)
+{
+	set_tty();
+	initialize_shell_signals(0);
+	set_sh_variable(environment);
+}

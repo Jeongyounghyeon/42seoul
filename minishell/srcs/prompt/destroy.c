@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   destroy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jy_23 <jy_23@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/07 17:29:40 by youjeong          #+#    #+#             */
-/*   Updated: 2023/08/25 16:29:35 by jy_23            ###   ########.fr       */
+/*   Created: 2023/08/27 19:45:59 by jy_23             #+#    #+#             */
+/*   Updated: 2023/08/28 15:00:19 by jy_23            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
+#include "prompt.h"
+#include "variables.h"
 
-# include "variables.h"
+/* leaks check */
+#include <stdlib.h>
+void	check_leaks(void)
+{
+	system("leaks minishell");
+}
 
-t_sh_variable	g_sh_variable;
-
-#endif
+void	destroy(void)
+{
+	clear_tmp(g_sh_variable.temp_dir_path);
+	clear_sh_variable();
+	
+	//atexit(check_leaks);
+}

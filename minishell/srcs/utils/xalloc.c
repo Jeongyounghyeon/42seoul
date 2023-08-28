@@ -1,20 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   xalloc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jy_23 <jy_23@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/07 17:29:40 by youjeong          #+#    #+#             */
-/*   Updated: 2023/08/25 16:29:35 by jy_23            ###   ########.fr       */
+/*   Created: 2023/08/14 02:01:11 by youjeong          #+#    #+#             */
+/*   Updated: 2023/08/27 21:00:45 by jy_23            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include <stdio.h>
 
-# include "variables.h"
+#include "libft.h"
 
-t_sh_variable	g_sh_variable;
+#include "status.h"
 
-#endif
+void	*xmalloc(size_t bytes);
+void	*xrealloc(void *ptr, size_t bytes);
+
+void	*xmalloc(size_t bytes)
+{
+	void	*temp;
+
+	temp = malloc(bytes);
+	if (temp == 0)
+		crash(EGENRAL, "xalloc()", 0, 0);
+	return (temp);
+}
+
+void	*xrealloc(void *ptr, size_t bytes)
+{
+	void	*temp;
+
+	temp = xmalloc(bytes);
+	ft_memmove(temp, ptr, bytes);
+	free(ptr);
+	return (temp);
+}

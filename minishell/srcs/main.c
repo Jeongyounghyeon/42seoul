@@ -5,24 +5,49 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jy_23 <jy_23@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/07 17:31:36 by youjeong          #+#    #+#             */
-/*   Updated: 2023/07/20 18:54:17 by jy_23            ###   ########.fr       */
+/*   Created: 2023/08/14 19:50:40 by jy_23             #+#    #+#             */
+/*   Updated: 2023/08/27 21:06:02 by jy_23            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdlib.h>
-#include "../includes/minishell.h"
 
-extern char	**environ;
+#include "minishell.h"
+#include "prompt.h"
+#include "parse/parse.h"
+#include "execute.h"
+#include "command.h"
 
-void	crash(char *message, int errnum)
+int			main(int argc, char *args[], char **init_environ);
+static void	reader_loop(void);
+
+int	main(int argc, char *args[], char **init_environ)
 {
-	perror(message);
-	exit(errnum);
+	(void)argc;
+	(void)args;
+	initialize(init_environ);
+	reader_loop();
+	destroy();
+	return (0);
 }
 
-int	main(void)
+static void	reader_loop(void)
 {
-	return (0);
+	char		*str;
+	t_command	*command;
+
+	while (1)
+	{
+		initialize_shell_signals(0);
+		str = sh_readline();
+		initialize_shell_signals(1);
+		if (!str)
+			return ;
+		command = parse(str);
+		execute_command(command);
+		clear_tmp(g_sh_variable.temp_dir_path);
+		free(str);
+		if (command)
+			free_command(command);
+	}
 }

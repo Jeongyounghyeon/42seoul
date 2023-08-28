@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   hash_shouldgrow.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jy_23 <jy_23@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/07 17:29:40 by youjeong          #+#    #+#             */
-/*   Updated: 2023/08/25 16:29:35 by jy_23            ###   ########.fr       */
+/*   Created: 2023/08/06 16:54:21 by jy_23             #+#    #+#             */
+/*   Updated: 2023/08/20 20:25:28 by jy_23            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "hashlib.h"
 
-# include "variables.h"
+bool	hash_shouldgrow(t_hash_table *table);
 
-t_sh_variable	g_sh_variable;
-
-#endif
+bool	hash_shouldgrow(t_hash_table *table)
+{
+	if (table->nentries >= table->nbuckets * HASH_REHASH_FACTOR)
+		return (true);
+	else
+		return (false);
+}

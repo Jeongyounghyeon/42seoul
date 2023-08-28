@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   init_sh_variable.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jy_23 <jy_23@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/07 17:29:40 by youjeong          #+#    #+#             */
-/*   Updated: 2023/08/25 16:29:35 by jy_23            ###   ########.fr       */
+/*   Created: 2023/08/23 18:34:07 by youjeong          #+#    #+#             */
+/*   Updated: 2023/08/26 19:39:39 by jy_23            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
+#include "variables.h"
 
-# include "variables.h"
+void	init_sh_variable(void);
 
-t_sh_variable	g_sh_variable;
-
-#endif
+void	init_sh_variable(void)
+{
+	g_sh_variable.environment = 0;
+	g_sh_variable.temp_dir_path = 0;
+	g_sh_variable.status = 0;
+}
