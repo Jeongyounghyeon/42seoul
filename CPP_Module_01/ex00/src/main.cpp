@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 20:04:04 by youjeong          #+#    #+#             */
-/*   Updated: 2023/09/12 00:37:52 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/09/14 20:18:01 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(void) {
 	randomChump("stack_randomChump");
 	stack.announce();
 	heap->announce();
-	// delete heap;
+	delete heap;
 	heap = 0;
-	return (0);
+	return 0;
 }

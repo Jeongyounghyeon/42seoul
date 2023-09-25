@@ -6,12 +6,11 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 19:22:04 by youjeong          #+#    #+#             */
-/*   Updated: 2023/09/11 20:02:06 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/09/25 23:16:59 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP
+#pragma once
 
 # include <string>
 
@@ -32,5 +31,3 @@ public:
 
 Zombie *newZombie(std::string name);
 void randomChump(std::string name);
-
-#endif

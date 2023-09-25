@@ -6,11 +6,13 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:59:05 by youjeong          #+#    #+#             */
-/*   Updated: 2023/09/22 20:59:14 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/09/25 23:18:01 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string>
+#pragma once
+
+# include <string>
 
 class Harl
 {

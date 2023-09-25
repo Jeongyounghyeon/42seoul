@@ -6,13 +6,13 @@
 #    By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 22:47:39 by youjeong          #+#    #+#              #
-#    Updated: 2023/09/12 18:25:02 by youjeong         ###   ########.fr        #
+#    Updated: 2023/09/14 20:30:45 by youjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = Moar_brainz
 
-CXX = c++ -g3
+CXX = c++
 RM = rm -f
 
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98

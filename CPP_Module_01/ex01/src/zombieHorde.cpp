@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 18:25:51 by youjeong          #+#    #+#             */
-/*   Updated: 2023/09/13 23:33:22 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/09/14 20:17:51 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 Zombie	*zombieHorde(int N, std::string name) {
 	if (N < 1)
-		return (NULL);
+		return NULL;
 
 	Zombie*	zombies = new Zombie[N];
 	
@@ -28,5 +28,5 @@ Zombie	*zombieHorde(int N, std::string name) {
 		zombies[i].setName(name + ss.str());
 	}
 
-	return (zombies);
+	return zombies;
 }

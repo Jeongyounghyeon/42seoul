@@ -6,11 +6,9 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 20:04:04 by youjeong          #+#    #+#             */
-/*   Updated: 2023/09/13 23:17:58 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/09/18 12:40:10 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <iostream>
 
 #include "Zombie.hpp"
 

@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 19:30:15 by youjeong          #+#    #+#             */
-/*   Updated: 2023/09/12 18:41:39 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/09/18 12:42:26 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 #include "Zombie.hpp"
 
-Zombie::Zombie(void) {
-	std::cout << "noname" << ": " << "I am created!!!" << std::endl;
+Zombie::Zombie(void) : name("noname") {
+	std::cout << this->name << ": " << "I am created!!!" << std::endl;
 }
 
 Zombie::Zombie(std::string name) : name(name) {
@@ -31,7 +31,7 @@ void	Zombie::announce(void) const {
 }
 
 std::string	Zombie::getName(void) const {
-	return (this->name);
+	return this->name;
 }
 
 void	Zombie::setName(std::string name) {

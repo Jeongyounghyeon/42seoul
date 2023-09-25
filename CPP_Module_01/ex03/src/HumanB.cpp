@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 23:51:59 by youjeong          #+#    #+#             */
-/*   Updated: 2023/09/14 20:28:32 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/09/25 23:20:02 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ HumanB::HumanB(std::string name) : name(name) {}
 HumanB::~HumanB(void) {}
 
 std::string	HumanB::getName(void) const {
-	return (this->name);
+	return this->name;
 }
 
 Weapon*	HumanB::getWeapon(void) const {
-	return (this->weapon);
+	return this->weapon;
 }
 
 void HumanB::setName(std::string name) {

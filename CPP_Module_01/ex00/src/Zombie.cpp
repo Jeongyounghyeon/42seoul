@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 19:30:15 by youjeong          #+#    #+#             */
-/*   Updated: 2023/09/11 20:06:46 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/09/25 23:19:17 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	Zombie::announce(void) const {
 }
 
 std::string	Zombie::getName(void) const {
-	return (this->name);
+	return this->name;
 }
 
 void	Zombie::setName(std::string name) {

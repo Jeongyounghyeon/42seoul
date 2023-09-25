@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 16:53:58 by youjeong          #+#    #+#             */
-/*   Updated: 2023/09/22 16:44:36 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/09/25 23:20:31 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 FileStreamController::FileStreamController(
 	std::ifstream& ifs, 
-	std::ofstream& ofs) 
-		: ifs(ifs),
+	std::ofstream& ofs) : 
+		ifs(ifs),
 		ofs(ofs) { };
 
 FileStreamController::~FileStreamController(void) { };
 
 std::ifstream&	FileStreamController::getIfs(void) const {
-	return (this->ifs);
+	return this->ifs;
 };
 
 std::ofstream&	FileStreamController::getOfs(void) const {
-	return (this->ofs);
+	return this->ofs;
 };
 
 int	FileStreamController::openIfile(std::string filename) {

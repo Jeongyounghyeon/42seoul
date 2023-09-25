@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 20:35:05 by youjeong          #+#    #+#             */
-/*   Updated: 2023/09/22 16:44:06 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/09/25 23:20:50 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ bool	validArgument(int argc, char **argv);
 int main(int argc, char **argv) {
 	if (!validArgument(argc, argv))
 		return -1;
-	return (service(argv[1], argv[2], argv[3]));
+	return service(argv[1], argv[2], argv[3]);
 }
 
 int	service(std::string filename, std::string s1, std::string s2) {
@@ -41,7 +41,7 @@ int	service(std::string filename, std::string s1, std::string s2) {
 	
 	fileStreamController.replaceInToOut(s1, s2);
 
-	return (0);
+	return 0;
 }
 
 bool validArgument(int argc, char **argv) {

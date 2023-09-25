@@ -6,13 +6,13 @@
 #    By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/13 23:36:20 by youjeong          #+#    #+#              #
-#    Updated: 2023/09/13 23:36:36 by youjeong         ###   ########.fr        #
+#    Updated: 2023/09/14 20:30:41 by youjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = HI_THIS_IS_BRAIN
 
-CXX = c++ -g3
+CXX = c++
 RM = rm -f
 
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98

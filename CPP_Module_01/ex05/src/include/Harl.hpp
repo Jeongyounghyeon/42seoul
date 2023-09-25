@@ -6,12 +6,14 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 19:14:05 by youjeong          #+#    #+#             */
-/*   Updated: 2023/09/22 19:52:36 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/09/25 23:16:55 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <map>
-#include <string>
+#pragma once 
+
+# include <map>
+# include <string>
 
 class Harl
 {
