@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 19:14:05 by youjeong          #+#    #+#             */
-/*   Updated: 2023/09/25 23:16:55 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/10/02 16:09:34 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 class Harl
 {
 private:
-	std::map<std::string, void (Harl::*)(void) const> complains;
-
 	void	debug(void) const;
 	void	info(void) const;
 	void	warning(void) const;
@@ -29,5 +27,5 @@ public:
 	Harl(void);
 	~Harl(void);
 
-	void	complain(std::string level) const;
+	void	complain(std::string level);
 };

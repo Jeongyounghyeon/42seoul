@@ -6,30 +6,27 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 19:18:40 by youjeong          #+#    #+#             */
-/*   Updated: 2023/09/22 19:49:23 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/10/02 16:10:13 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
-#include <map>
 
 #include "Harl.hpp"
 
-Harl::Harl(void) {
-	this->complains["DEBUG"] = &Harl::debug;
-	this->complains["INFO"] = &Harl::info;
-	this->complains["WARNING"] = &Harl::warning;
-	this->complains["ERROR"] = &Harl::error;
-};
+Harl::Harl(void) {};
 
 Harl::~Harl(void) {};
 
-void	Harl::complain(std::string level) const {
-	if (complains.find(level) != complains.end())
-		(this->*(complains.at(level)))();
-	else
-		std::cout << "Harl::complain: " << level << " is invalid complaint level" << std::endl;
+void	Harl::complain(std::string level) {
+	std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+	void (Harl::*f[4])(void) const = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
+
+	for (int i = 0; i < 4; i++) {
+		if (levels[i] == level) 
+			(this->*f[i])();
+	}
 }
 
 void	Harl::debug(void) const {
