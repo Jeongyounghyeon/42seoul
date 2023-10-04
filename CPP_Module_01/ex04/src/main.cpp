@@ -6,12 +6,13 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 20:35:05 by youjeong          #+#    #+#             */
-/*   Updated: 2023/09/25 23:20:50 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/10/04 13:14:20 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <fstream>
+#include <cstring>
 
 #include "FileStreamController.hpp"
 
@@ -49,10 +50,10 @@ bool validArgument(int argc, char **argv) {
 		std::cout << "Please enter 3 arguments." << std::endl 
 				<< "[filename] [what to change], [what to changed]" << std::endl;
 		return false;
-	} else if (std::strlen(argv[1]) == 0) {
+	} else if (strlen(argv[1]) == 0) {
 		std::cout << "[filname]: This augment cannot be empty." << std::endl;
 		return false;
-	} else if (std::strlen(argv[2]) == 0) {
+	} else if (strlen(argv[2]) == 0) {
 		std::cout << "[what to change]: This augment cannot be empty." << std::endl;
 		return false;
 	}
