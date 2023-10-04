@@ -6,11 +6,11 @@
 #    By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/13 23:36:20 by youjeong          #+#    #+#              #
-#    Updated: 2023/09/14 20:33:56 by youjeong         ###   ########.fr        #
+#    Updated: 2023/10/04 12:57:04 by youjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = HI_THIS_IS_BRAIN
+NAME = Unnecessary_violence
 
 CXX = c++
 RM = rm -f
