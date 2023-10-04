@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 16:53:58 by youjeong          #+#    #+#             */
-/*   Updated: 2023/09/25 23:20:31 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/10/04 13:06:23 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ std::ofstream&	FileStreamController::getOfs(void) const {
 };
 
 int	FileStreamController::openIfile(std::string filename) {
-	ifs.open(filename);
+	ifs.open(filename.c_str());
 	if (ifs.fail())
 		return 1;
 	return 0;
 }
 
 int	FileStreamController::openOfile(std::string filename) {
-	ofs.open(filename);
+	ofs.open(filename.c_str());
 	if (ofs.fail())
 		return 1;
 	return 0;
