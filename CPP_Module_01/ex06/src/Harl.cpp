@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:59:34 by youjeong          #+#    #+#             */
-/*   Updated: 2023/09/22 21:10:56 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:23:14 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,13 @@ void	Harl::complain(std::string level) const {
 	switch (idx_level) {
 		case 0:
 			this->debug();
+			__attribute__((fallthrough));
 		case 1:
 			this->info();
+			__attribute__((fallthrough));
 		case 2:
 			this->warning();
+			__attribute__((fallthrough));
 		case 3:
 			this->error();
 			break ;
