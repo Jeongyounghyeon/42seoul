@@ -6,9 +6,11 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 15:41:23 by youjeong          #+#    #+#             */
-/*   Updated: 2023/10/07 17:31:47 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/10/09 17:51:08 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#pragma once
 
 #include <iostream>
 
