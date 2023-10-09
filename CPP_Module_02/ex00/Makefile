@@ -6,11 +6,11 @@
 #    By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 22:47:39 by youjeong          #+#    #+#              #
-#    Updated: 2023/10/04 15:58:50 by youjeong         ###   ########.fr        #
+#    Updated: 2023/10/09 15:42:54 by youjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = OCCF
+NAME = ex00
 
 CXX = c++
 RM = rm -f

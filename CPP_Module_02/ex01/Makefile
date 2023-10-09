@@ -6,11 +6,11 @@
 #    By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 22:47:39 by youjeong          #+#    #+#              #
-#    Updated: 2023/10/04 22:26:32 by youjeong         ###   ########.fr        #
+#    Updated: 2023/10/09 15:43:03 by youjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fixedPointNumber
+NAME = ex01
 
 CXX = c++
 RM = rm -f

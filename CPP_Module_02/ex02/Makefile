@@ -6,11 +6,11 @@
 #    By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 22:47:39 by youjeong          #+#    #+#              #
-#    Updated: 2023/10/07 16:28:02 by youjeong         ###   ########.fr        #
+#    Updated: 2023/10/09 15:43:12 by youjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = operators
+NAME = ex02
 
 CXX = c++
 RM = rm -f
