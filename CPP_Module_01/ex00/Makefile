@@ -6,11 +6,11 @@
 #    By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 22:47:39 by youjeong          #+#    #+#              #
-#    Updated: 2023/09/14 20:30:49 by youjeong         ###   ########.fr        #
+#    Updated: 2023/10/12 13:34:43 by youjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = BraiiiiiiinnnzzzZ
+NAME = ex00
 
 CXX = c++
 RM = rm -f

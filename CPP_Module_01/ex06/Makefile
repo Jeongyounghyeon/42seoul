@@ -6,11 +6,11 @@
 #    By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/22 20:04:52 by youjeong          #+#    #+#              #
-#    Updated: 2023/10/04 14:23:18 by youjeong         ###   ########.fr        #
+#    Updated: 2023/10/12 14:28:41 by youjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = harlFilter
+NAME = ex06
 
 CXX = c++
 RM = rm -f

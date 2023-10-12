@@ -6,11 +6,11 @@
 #    By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/14 20:33:23 by youjeong          #+#    #+#              #
-#    Updated: 2023/09/14 20:33:39 by youjeong         ###   ########.fr        #
+#    Updated: 2023/10/12 13:40:56 by youjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Sed_is_for_losers
+NAME = ex04
 
 CXX = c++
 RM = rm -f

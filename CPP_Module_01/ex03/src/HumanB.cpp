@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 23:51:59 by youjeong          #+#    #+#             */
-/*   Updated: 2023/09/25 23:20:02 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/10/12 13:40:06 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 #include "HumanB.hpp"
 
-HumanB::HumanB(std::string name) : name(name) {}
+HumanB::HumanB(std::string name) : name(name),
+									weapon(NULL) {}
 
 HumanB::~HumanB(void) {}
 
@@ -35,5 +36,7 @@ void HumanB::setWeapon(Weapon& weapon) {
 }
 
 void	HumanB::attack() const {
+	if (this->weapon == NULL)
+		std::cout << this->name << " can't attack" << std::endl;
 	std::cout << this->name << " attacks with their " << this->weapon->getType() << std::endl;
 }

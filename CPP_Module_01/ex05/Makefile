@@ -6,11 +6,11 @@
 #    By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/14 20:33:23 by youjeong          #+#    #+#              #
-#    Updated: 2023/09/22 19:09:45 by youjeong         ###   ########.fr        #
+#    Updated: 2023/10/12 13:46:09 by youjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Harl2.0
+NAME = ex05
 
 CXX = c++
 RM = rm -f

@@ -6,11 +6,11 @@
 #    By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/13 23:36:20 by youjeong          #+#    #+#              #
-#    Updated: 2023/10/04 12:57:04 by youjeong         ###   ########.fr        #
+#    Updated: 2023/10/12 13:40:49 by youjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Unnecessary_violence
+NAME = ex03
 
 CXX = c++
 RM = rm -f
