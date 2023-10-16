@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 15:56:25 by youjeong          #+#    #+#             */
-/*   Updated: 2023/10/04 20:08:05 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/10/13 18:22:44 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ Fixed::Fixed() : rawBits(0) {
 
 Fixed::Fixed(const Fixed& ref) {
 	std::cout << "Copy constructor called" << std::endl;
-	Fixed::operator=(ref);
+	*this=(ref);
 }
 
 Fixed::~Fixed() {

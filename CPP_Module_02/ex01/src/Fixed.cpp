@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 15:56:25 by youjeong          #+#    #+#             */
-/*   Updated: 2023/10/07 16:25:28 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/10/16 17:20:48 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ Fixed::Fixed(const float num) : rawBits(roundf(num * (1 << this->fractionalBits)
 
 Fixed::Fixed(const Fixed& ref) {
 	std::cout << "Copy constructor called" << std::endl;
-	Fixed::operator=(ref);
+	*this=(ref);
 }
 
 Fixed::~Fixed() {

@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 16:40:30 by youjeong          #+#    #+#             */
-/*   Updated: 2023/10/07 17:33:36 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/10/16 17:22:41 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ Fixed::Fixed(const int num) : rawBits(num << this->fractionalBits) {}
 
 Fixed::Fixed(const float num) : rawBits(roundf(num * (1 << this->fractionalBits))) {}
 
-Fixed::Fixed(const Fixed& ref) : rawBits(ref.getRawBits()) {}
+Fixed::Fixed(const Fixed& ref) {
+	*this=(ref);
+}
 
 Fixed::~Fixed(void) {}
 
