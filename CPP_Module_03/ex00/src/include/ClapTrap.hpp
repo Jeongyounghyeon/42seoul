@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 18:01:15 by youjeong          #+#    #+#             */
-/*   Updated: 2023/10/17 18:59:43 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/10/17 21:48:36 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 class ClapTrap
 {	
-protected:
+private:
 	std::string name;
 	unsigned int hitPoints;
 	unsigned int energyPoints;

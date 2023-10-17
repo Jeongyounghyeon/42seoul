@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 19:58:27 by youjeong          #+#    #+#             */
-/*   Updated: 2023/10/17 18:33:27 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/10/17 21:48:26 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ std::string DiamondTrap::getName() const {
 void DiamondTrap::setName(std::string name) {
 	std::cout << "DiamondTrap " << this->name << "'s setName called (set " << name << ")" << std::endl;
 	this->name = name;
-	this->name = name + "_clap_name";
+	ClapTrap::name = name + "_clap_name";
 }
 
 void DiamondTrap::toString() const {
