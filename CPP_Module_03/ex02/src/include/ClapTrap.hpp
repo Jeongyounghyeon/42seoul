@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 18:01:15 by youjeong          #+#    #+#             */
-/*   Updated: 2023/10/17 19:23:18 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/10/20 00:26:45 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ protected:
 public:
 	ClapTrap(const std::string name);
 	ClapTrap(const ClapTrap &ref);
-	~ClapTrap();
+	virtual ~ClapTrap();
 
 	virtual ClapTrap& operator=(const ClapTrap& ref);
 

@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 17:38:43 by youjeong          #+#    #+#             */
-/*   Updated: 2023/10/17 18:40:17 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/10/20 00:27:24 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ protected:
 public:
 	ScavTrap(const std::string name);
 	ScavTrap(const ScavTrap &ref);
-	~ScavTrap();
+	virtual ~ScavTrap();
 
 	virtual ScavTrap& operator=(const ScavTrap& ref);
 
