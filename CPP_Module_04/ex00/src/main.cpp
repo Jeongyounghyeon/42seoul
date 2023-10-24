@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 21:00:23 by youjeong          #+#    #+#             */
-/*   Updated: 2023/10/18 13:32:39 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:56:46 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,11 @@ int main()
 		const WrongAnimal* meta = new WrongAnimal();
 		const WrongAnimal* i = new WrongCat();
 		
-		std::cout << i->getType() << " " << std::endl;
 		i->makeSound();
 		meta->makeSound();
+
+		delete meta;
+		delete i;
 	}
 	
 	return 0;

@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 23:21:06 by youjeong          #+#    #+#             */
-/*   Updated: 2023/10/23 16:36:15 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:38:36 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,16 @@
 Cure::Cure() : AMateria("cure") {}
 
 Cure::Cure(const Cure& ref) : AMateria(ref) {
+	*this = Cure();
 	*this = ref;
 }
 
 Cure::~Cure() {}
 
 Cure& Cure::operator=(const Cure& ref) {
-	if (this == &ref)
+	if (this == &ref) {
 		return *this;
+	}
 
 	AMateria::operator=(ref);
 	
@@ -33,16 +35,16 @@ Cure& Cure::operator=(const Cure& ref) {
 }
 
 AMateria* Cure::clone() const {
-	Cure* ice;
+	Cure* cure;
 	
 	try {
-		ice = new Cure(*this);
+		cure = new Cure(*this);
 	} catch (std::bad_alloc& eba) {
 		std::cout << "Not enough memroy" << std::endl;
 		std::exit(1);
 	}
 
-	return ice;
+	return cure;
 }
 
 void Cure::use(ICharacter& target) {

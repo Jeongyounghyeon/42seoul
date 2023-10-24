@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 23:06:27 by youjeong          #+#    #+#             */
-/*   Updated: 2023/10/22 01:02:33 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:38:11 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 #include "AMateria.hpp"
 
-AMateria::AMateria(std::string const &type) : type(type) {}
+AMateria::AMateria(std::string const &type) {
+	this->type = type;
+}
 
 AMateria::AMateria(const AMateria &ref) {
 	*this = ref;
@@ -23,8 +25,9 @@ AMateria::AMateria(const AMateria &ref) {
 AMateria::~AMateria() {}
 
 AMateria& AMateria::operator=(const AMateria& ref) {
-	if (this == &ref)
+	if (this == &ref) {
 		return *this;
+	}
 	
 	this->type = ref.getType();
 	return *this;

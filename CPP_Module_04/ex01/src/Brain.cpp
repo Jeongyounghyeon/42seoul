@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 13:42:26 by youjeong          #+#    #+#             */
-/*   Updated: 2023/10/20 00:33:54 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:35:51 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 Brain::Brain() {
 	std::cout << "Brain's defualt constructor called." << std::endl;
-	for (int i = 0; i < LENGHT_IDEAS; i++)
+	
+	for (int i = 0; i < LENGHT_IDEAS; i++) {
 		ideas[i] = "";
+	}
 }
 
 Brain::Brain(const Brain& ref) {
 	std::cout << "Brain's copy constructor called." << std::endl;
+
 	*this = ref;
 }
 

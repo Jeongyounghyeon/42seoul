@@ -6,7 +6,7 @@
 #    By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/18 13:33:56 by youjeong          #+#    #+#              #
-#    Updated: 2023/10/22 19:44:11 by youjeong         ###   ########.fr        #
+#    Updated: 2023/10/24 18:05:09 by youjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = ex03
 CXX = c++
 RM = rm -f
 
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 INCLUDE = -Isrc/include
 
 SRC_DIR = src

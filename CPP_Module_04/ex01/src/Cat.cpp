@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 13:06:06 by youjeong          #+#    #+#             */
-/*   Updated: 2023/10/23 16:36:01 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:36:09 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,19 @@
 
 Cat::Cat() : Animal() {
 	std::cout << "Cat's defualt constructor called." << std::endl;
-	setType("Cat");
+	
 	try {
 		setBrain(new Brain());
 	} catch (std::bad_alloc& eba) {
 		std::cout << "Not enough memroy" << std::endl;
 		std::exit(1);
 	}
+	setType("Cat");
 }
 
 Cat::Cat(const Cat& ref) : Animal(ref) {
 	std::cout << "Cat's copy constructor called." << std::endl;
-	setType("Cat");
+	
 	try {
 		setBrain(new Brain());
 	} catch (std::bad_alloc& eba) {
@@ -40,15 +41,19 @@ Cat::Cat(const Cat& ref) : Animal(ref) {
 
 Cat::~Cat() {
 	std::cout << "Cat's destructor called." << std::endl;
-	if (this->brain != NULL)
+	
+	if (this->brain != 0) {
 		delete this->brain;
+	}
 }
 
 Cat& Cat::operator=(const Cat &ref) {
-	if (this == &ref)
+	if (this == &ref) {
 		return *this;
+	}
+		
 	Animal::operator=(ref);
-	*(this->brain) = *ref.brain;
+	*(this->brain) = *ref.getBrain();
 
 	return *this;
 }

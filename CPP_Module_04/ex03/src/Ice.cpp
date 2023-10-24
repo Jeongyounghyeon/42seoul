@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 23:10:32 by youjeong          #+#    #+#             */
-/*   Updated: 2023/10/23 16:36:20 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:38:43 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,16 @@
 Ice::Ice() : AMateria("ice") {}
 
 Ice::Ice(const Ice& ref) : AMateria(ref) {
+	*this = Ice();
 	*this = ref;
 }
 
 Ice::~Ice() {}
 
 Ice& Ice::operator=(const Ice& ref) {
-	if (this == &ref)
+	if (this == &ref) {
 		return *this;
+	}
 
 	AMateria::operator=(ref);
 	

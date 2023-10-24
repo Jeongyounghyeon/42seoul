@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 21:13:25 by youjeong          #+#    #+#             */
-/*   Updated: 2023/10/18 13:47:53 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:35:44 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,15 @@
 
 #include "Animal.hpp"
 
-Animal::Animal() : type("") {
+Animal::Animal() {
 	std::cout << "Aniaml's defualt constructor called." << std::endl;
+
+	type = "";
 }
 
 Animal::Animal(const Animal& ref) {
 	std::cout << "Animal's copy constructor called." << std::endl;
+	
 	*this = ref;
 }
 
@@ -29,10 +32,12 @@ Animal::~Animal() {
 }
 
 Animal& Animal::operator=(const Animal &ref) {
-	if (this == &ref)
+	if (this == &ref) {
 		return *this;
+	}
+
 	setType(ref.getType());
-	
+
 	return *this;
 }
 
