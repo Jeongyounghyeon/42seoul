@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 16:25:51 by youjeong          #+#    #+#             */
-/*   Updated: 2023/10/21 23:05:02 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/10/25 21:14:43 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ public:
 
 	Cure& operator=(const Cure& ref);
 	
-	AMateria* clone() const;
+	Cure* clone() const;
 	void use(ICharacter& target);
 };

@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 23:21:06 by youjeong          #+#    #+#             */
-/*   Updated: 2023/10/24 19:38:36 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/10/25 21:14:34 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ Cure& Cure::operator=(const Cure& ref) {
 	return *this;
 }
 
-AMateria* Cure::clone() const {
+Cure* Cure::clone() const {
 	Cure* cure;
 	
 	try {

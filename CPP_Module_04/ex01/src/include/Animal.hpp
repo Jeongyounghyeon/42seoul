@@ -6,13 +6,13 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 21:00:21 by youjeong          #+#    #+#             */
-/*   Updated: 2023/10/18 16:34:09 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/10/25 22:02:04 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "string"
+#include <string>
 
 class Animal
 {

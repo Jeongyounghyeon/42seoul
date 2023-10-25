@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 23:10:32 by youjeong          #+#    #+#             */
-/*   Updated: 2023/10/24 19:38:43 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/10/25 21:14:40 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ Ice& Ice::operator=(const Ice& ref) {
 	return *this;
 }
 
-AMateria* Ice::clone() const {
+Ice* Ice::clone() const {
 	Ice* ice;
 	
 	try {
