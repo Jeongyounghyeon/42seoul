@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 18:55:41 by youjeong          #+#    #+#             */
-/*   Updated: 2023/10/30 18:22:37 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/11/16 16:20:33 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int RobotomyRequestForm::execute(Bureaucrat const& executor) const {
 	}
 
 	std::cout << "rizzz~ rizzz~" << std::endl;
-	if (rand() % 2) {
+	std::srand(time(0));
+	if (std::rand() % 2) {
 		std::cout << executor.getName() << " is successfully robotomized." << std::endl;
 	} else {
 		std::cout << executor.getName() << " is failed to robotomized." << std::endl;

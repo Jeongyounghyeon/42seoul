@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 22:46:30 by youjeong          #+#    #+#             */
-/*   Updated: 2023/10/26 15:47:53 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/11/16 15:55:28 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void test0() {
 
 /* Sign success Test */
 void test1() {
-	std::cout << "[ Succesful Sign Test]" << std::endl;
+	std::cout << "[ Sign Success Test]" << std::endl;
 	
 	Bureaucrat bureaucrat("test1", 1);
 	Form form("form", 100, 100);
@@ -49,7 +49,7 @@ void test1() {
 
 /* Sign fail Test */
 void test2() {
-	std::cout << "[ Succesful Sign Test]" << std::endl;
+	std::cout << "[ Sign Fail Test]" << std::endl;
 	
 	Bureaucrat bureaucrat("test1", 101);
 	Form form("form", 100, 100);

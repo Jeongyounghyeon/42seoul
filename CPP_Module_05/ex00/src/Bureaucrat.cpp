@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:30:52 by youjeong          #+#    #+#             */
-/*   Updated: 2023/10/31 15:03:30 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/11/16 16:14:38 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ Bureaucrat::Bureaucrat() : name("") {
 
 Bureaucrat::Bureaucrat(const std::string name, const int grade) : name(name) {
 	*this = Bureaucrat();
+	validGradeRange(grade);
 	setGrade(grade);
 }
 
@@ -27,6 +28,14 @@ Bureaucrat::Bureaucrat(const Bureaucrat& ref) : name(ref.getName()) {
 }
 
 Bureaucrat::~Bureaucrat() {}
+
+const char* Bureaucrat::GradeTooHighException::what(void) const throw() {
+	return "grade is too high.";
+}
+
+const char* Bureaucrat::GradeTooLowException::what(void) const throw() {
+	return "grade is too low.";
+}
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& ref) {
 	if (this == &ref)
@@ -52,25 +61,22 @@ int Bureaucrat::getGrade() const {
 }
 
 void Bureaucrat::setGrade(int grade) {
-	if (grade < HIGHST_GRADE)
-		throw GradeTooHighException();
-	if (grade > LOWEST_GRADE)
-		throw GradeTooLowException();
 	this->grade = grade;
 }
 
 void Bureaucrat::decrementGrade() {
+	validGradeRange(grade - 1);
 	setGrade(grade - 1);
 }
 
 void Bureaucrat::incrementGrade() {
+	validGradeRange(grade + 1);
 	setGrade(grade + 1);
 }
 
-const char* Bureaucrat::GradeTooHighException::what(void) const throw() {
-	return "grade is too high.";
-}
-
-const char* Bureaucrat::GradeTooLowException::what(void) const throw() {
-	return "grade is too low.";
+void Bureaucrat::validGradeRange(const int grade) const {
+	if (grade < HIGHST_GRADE)
+		throw GradeTooHighException();
+	if (grade > LOWEST_GRADE)
+		throw GradeTooLowException();
 }

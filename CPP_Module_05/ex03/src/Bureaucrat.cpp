@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:30:52 by youjeong          #+#    #+#             */
-/*   Updated: 2023/10/31 15:03:30 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/11/16 16:16:41 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ Bureaucrat::Bureaucrat() : name("") {
 
 Bureaucrat::Bureaucrat(const std::string name, const int grade) : name(name) {
 	*this = Bureaucrat();
+	validGradeRange(grade);
 	setGrade(grade);
 }
 
@@ -54,18 +55,16 @@ int Bureaucrat::getGrade() const {
 }
 
 void Bureaucrat::setGrade(int grade) {
-	if (grade < HIGHST_GRADE)
-		throw GradeTooHighException();
-	if (grade > LOWEST_GRADE)
-		throw GradeTooLowException();
 	this->grade = grade;
 }
 
 void Bureaucrat::decrementGrade() {
+	validGradeRange(grade - 1);
 	setGrade(grade - 1);
 }
 
 void Bureaucrat::incrementGrade() {
+	validGradeRange(grade + 1);
 	setGrade(grade + 1);
 }
 
@@ -89,4 +88,11 @@ void Bureaucrat::executeForm(Form const& form) const {
 	if (form.execute(*this)) {
 		std::cout << this->name << " executed " << form.getName() << std::cout;
 	}
+}
+
+void Bureaucrat::validGradeRange(const int grade) const {
+	if (grade < HIGHST_GRADE)
+		throw GradeTooHighException();
+	if (grade > LOWEST_GRADE)
+		throw GradeTooLowException();
 }

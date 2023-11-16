@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:27:37 by youjeong          #+#    #+#             */
-/*   Updated: 2023/10/31 15:03:30 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/11/16 15:49:16 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ class Bureaucrat {
 			public:
 				const char* what(void) const throw();
 		};
+
+		void validGradeRange(const int grade) const;
+
 
 	public:
 		Bureaucrat(const std::string name, const int grade);
