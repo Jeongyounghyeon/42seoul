@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 20:17:31 by youjeong          #+#    #+#             */
-/*   Updated: 2023/11/01 21:20:27 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/11/18 17:18:48 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,15 @@
 bool validArgument(int argc, char **argv);
 
 int main(int argc, char **argv) {
+	std::string str;
+
 	std::cout << "I have to rename execute file name" << std::endl;
 
 	if (!validArgument(argc, argv))
 		return 1;
 
-	ScalarConvertor::convert(argv[1]);
+	str = std::string(argv[1]);
+	ScalarConvertor::convert(str);
 
 	return 0;
 }
