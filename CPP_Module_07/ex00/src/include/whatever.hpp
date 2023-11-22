@@ -6,7 +6,7 @@
 /*   By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 21:15:36 by youjeong          #+#    #+#             */
-/*   Updated: 2023/11/16 17:52:06 by youjeong         ###   ########.fr       */
+/*   Updated: 2023/11/22 14:09:16 by youjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ void swap(T& a, T& b) {
 }
 
 template <typename T>
-T min(const T a, const T b) {
+T min(const T& a, const T& b) {
 	if (a < b)
 		return a;
 	return b;
 }
 
 template <typename T>
-T max(const T a, const T b) {
+T max(const T& a, const T& b) {
 	if (a > b)
 		return a;
 	return b;
