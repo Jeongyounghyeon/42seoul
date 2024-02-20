@@ -28,12 +28,12 @@ int main(int argc, char* argv[]) {
 
 void vaildArgument(int argc) {
 	if (argc != 2)
-		throw std::runtime_error("Error: Please input one argument");
+		throw std::runtime_error("Please input one argument");
 }
 
 void openFile(char* filePath, std::ifstream& ifs) {
 	ifs.open(filePath, std::ifstream::in);
 
 	if (!ifs.is_open())
-		throw std::runtime_error("Error: Could not open file");
+		throw std::runtime_error("Could not open file");
 }

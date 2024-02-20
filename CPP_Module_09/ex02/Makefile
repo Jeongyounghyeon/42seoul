@@ -6,7 +6,7 @@
 #    By: youjeong <youjeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/20 18:29:21 by youjeong          #+#    #+#              #
-#    Updated: 2024/02/17 19:04:58 by youjeong         ###   ########.fr        #
+#    Updated: 2024/02/21 17:49:09 by youjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,6 @@ CXX = c++
 RM = rm -f
 
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-# CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3
-# CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 -DLOG
-# CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 -DDEBUG
-# CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 -DDEBUG -DLOG
 INCLUDE = -I $(HEADER_DIR) 
 
 SRC_DIR = src
@@ -37,7 +33,7 @@ $(NAME): $(OBJS)
 
 $(OBJ_DIR):
 	mkdir obj
-	find $(SRC_DIR) -mindepth 1 -type d ! -path "$(HEADER_DIR)" \
+	@find $(SRC_DIR) -mindepth 1 -type d ! -path "$(HEADER_DIR)" \
 	-exec sh -c 'mkdir -p ${OBJ_DIR}/$${0#${SRC_DIR}/}' {} \;
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp

@@ -19,7 +19,6 @@ int main(int argc, char* argv[]) {
 }
 
 void vaildArgument(int argc) {
-	if (argc != 2) {
+	if (argc != 2)
 		throw std::runtime_error("Error: Please input one argument");
-	}
 }

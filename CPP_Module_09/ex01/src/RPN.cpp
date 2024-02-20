@@ -22,9 +22,7 @@ void RPN::calculate(std::string expression) {
 		if (c >= '0' && c <= '9') {
 			st.push(c - '0');
 		} else {
-			if (st.size() < 1) {
-				throw std::runtime_error("Error: expression error1");
-			}
+			if (st.size() < 1) { throw std::runtime_error("Error: expression error"); }
 		
 			int b = st.top();
 			st.pop();
@@ -36,6 +34,7 @@ void RPN::calculate(std::string expression) {
 			} else if (c == '-') {
 				st.push(a - b);
 			} else if (c == '/') {
+				if (b == 0) { throw std::runtime_error("Error: none"); }
 				st.push(a / b);
 			} else if (c == '*') {
 				st.push(a * b);
@@ -43,27 +42,23 @@ void RPN::calculate(std::string expression) {
 		}
 	}
 
-	if (st.size() != 1) {
-		throw std::runtime_error("Error: expression error2");
-	}
+	if (st.size() != 1) { throw std::runtime_error("Error: expression error"); }
 	
 	std::cout << st.top() << std::endl;
 }
 
 void RPN::validExpression(std::string expression) {
-	if (expression.length() % 2 == 0) {
-		throw std::runtime_error("Error");
-	}
+	if (expression.length() % 2 == 0) { throw std::runtime_error("Error"); }
+
 	for (size_t idx = 0; idx < expression.length(); idx++) {
 		char c = expression[idx];
 
 		if (idx % 2 != 0) {
-			if (c != ' ') {
-				throw std::runtime_error("Error");
-			}
+			if (c != ' ') { throw std::runtime_error("Error"); }
 		} else {
 			if (!((c >= '0' && c <= '9')
-				|| c == '+' || c == '-' || c == '/' || c == '*')) {
+				|| c == '+' || c == '-' || c == '/' || c == '*')
+			) {
 				throw std::runtime_error("Error");
 			}
 		}

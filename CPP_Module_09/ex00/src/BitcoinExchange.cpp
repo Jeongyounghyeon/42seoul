@@ -20,8 +20,7 @@ std::map<std::string, std::string> BitcoinExchange::parseData(std::ifstream& ifs
 
 	std::string line;
 
-	if (!std::getline(ifs, line))
-		throw std::runtime_error("data file is Empty.");
+	if (!std::getline(ifs, line)) { throw std::runtime_error("data file is Empty."); }
 
 	validDataFirstLine(line);
 
@@ -52,14 +51,12 @@ std::vector<std::string> BitcoinExchange::getInputContents(std::ifstream& ifs) {
 
 	std::string line;
 
-	if (!std::getline(ifs, line)) {
-		throw std::runtime_error("Input file is Empty.");
-	}
+	if (!std::getline(ifs, line)) { throw std::runtime_error("Input file is Empty."); }
+
 	validInputFirstLine(line);
 
-	while (std::getline(ifs, line)) {
+	while (std::getline(ifs, line))
 		inputContents.push_back(line);
-	}
 
 	return inputContents;
 }
@@ -85,10 +82,11 @@ std::vector<std::string> BitcoinExchange::parseInputOneLine(const std::string& l
 	std::vector<std::string> date_value;
 
 	date_value = split(line, " | ");
+
 	if (date_value.size() != 2) {
 		std::stringstream errorMessageStream;
-			errorMessageStream << "Bad input => " << line;
-			throw std::runtime_error(errorMessageStream.str());
+		errorMessageStream << "Bad input => " << line;
+		throw std::runtime_error(errorMessageStream.str());
 	}
 
 	std::vector<std::string> date = split(date_value.at(0), "-");\
@@ -105,10 +103,9 @@ void BitcoinExchange::exchangeOneLine(
 
 	std::map<std::string, std::string>::iterator iter;
 	iter = data.find(inputOneLine.at(0));
-	if (iter == data.end()) {
-		iter = data.upper_bound(inputOneLine.at(0));
-		iter--;
-	}
+	if (iter == data.end())
+		--iter = data.upper_bound(inputOneLine.at(0));
+
 	double rate = strtod(iter->second.c_str(), &tmp);
 	double value = strtod(inputOneLine.at(1).c_str(), &tmp) * rate;
 	std::cout << inputOneLine.at(0) << " => " << inputOneLine.at(1) << " = " << value << std::endl;
@@ -120,9 +117,8 @@ void BitcoinExchange::validDataFirstLine(const std::string& line) {
 }
 
 void BitcoinExchange::validInputFirstLine(const std::string& line) {
-	if (line.compare("date | value") != 0) {
+	if (line.compare("date | value") != 0)
 		throw std::runtime_error("An exception occurred in the first line of input file");
-	}
 }
 
 void BitcoinExchange::validDateVector(const std::vector<std::string> date) {
@@ -169,7 +165,8 @@ void BitcoinExchange::validRate(const std::string& rate) {
 	
 	rateOfDouble = strtod(rate.c_str(), &restOfNumber);
 	if (std::string(restOfNumber).length() > 0
-		|| rateOfDouble < 0) {
+		|| rateOfDouble < 0
+	) {
 		throw std::runtime_error("not a positive rate in data file.");
 	}
 
@@ -183,11 +180,12 @@ void BitcoinExchange::validValue(const std::string& value) {
 	
 	valueOfDouble = strtod(value.c_str(), &restOfNumber);
 	if (std::string(restOfNumber).length() > 0
-		|| valueOfDouble < 0) {
+		|| valueOfDouble < 0
+	) {
 		throw std::runtime_error("not a positive number.");
 	}
 
-	if (valueOfDouble > 2147483647)
+	if (valueOfDouble > 1000)
 		throw std::runtime_error("too large a number.");
 }
 
@@ -222,7 +220,8 @@ void BitcoinExchange::validDate(const int year, const int month, const int day) 
 
 	if (year > timeNow->tm_year + 1900
 		|| (year == timeNow->tm_year + 1900 && month > timeNow->tm_mon + 1)
-		|| (year == timeNow->tm_year + 1900 && month == timeNow->tm_mon + 1 && day > timeNow->tm_mday)) {
+		|| (year == timeNow->tm_year + 1900 && month == timeNow->tm_mon + 1 && day > timeNow->tm_mday)
+	) {
 		throw std::runtime_error("The date must be earlier than the present.");
 	}
 }
