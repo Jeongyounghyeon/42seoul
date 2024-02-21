@@ -9,6 +9,8 @@
 #include <iostream>
 #include <ctime>
 
+const int PmergeMe::jacobsthalNumber[33] = {0, 1, 3, 5, 11, 21, 43, 85, 171, 341, 683, 1365, 2731, 5461, 10923, 21845, 43691, 87381, 174763, 349525, 699051, 1398101, 2796203, 5592405, 11184811, 22369621, 44739243, 89478485, 178956971, 357913941, 715827883, 1431655765, 2147483647};
+
 template<typename T>
 T &listAt(std::list<T>& myList, size_t index);
 
@@ -178,10 +180,10 @@ void PmergeMe::sortByFordJohnson(
 	}
 
 	int n = 0;
-	int jsNumStart = jacobsthalNumber(n);
+	int jsNumStart = jacobsthalNumber[n];
 	int jsNumEnd;
 	do {
-		jsNumEnd = std::min(jacobsthalNumber(n + 1), sortSize / 2);
+		jsNumEnd = std::min(jacobsthalNumber[n + 1], sortSize / 2);
 
 		for (int idx = jsNumEnd - 1; idx >= jsNumStart; idx--) {
 			t_listSortStruct* structSorting
@@ -258,10 +260,10 @@ void PmergeMe::sortByFordJohnson(
 	}
 
 	int n = 0;
-	int jsNumStart = jacobsthalNumber(n);
+	int jsNumStart = jacobsthalNumber[n];
 	int jsNumEnd;
 	do {
-		jsNumEnd = std::min(jacobsthalNumber(n + 1), sortSize / 2);
+		jsNumEnd = std::min(jacobsthalNumber[n + 1], sortSize / 2);
 
 		for (int idx = jsNumEnd - 1; idx >= jsNumStart; idx--) {
 			t_dequeSortStruct* structSorting
@@ -404,18 +406,6 @@ std::string PmergeMe::toString(const std::deque<int> &dq) {
     }
 
 	return ss.str();
-}
-
-int PmergeMe::jacobsthalNumber(int n) {
-    int a = 0, b = 1;
-
-    for (int i = 2; i <= n; ++i) {
-        int temp = b;
-        b = a + 2 * b;
-        a = temp;
-    }
-    
-	return n == 0 ? a : b;
 }
 
 template<typename T>

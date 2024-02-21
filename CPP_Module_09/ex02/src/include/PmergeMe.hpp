@@ -16,6 +16,8 @@ typedef struct s_dequeSortStruct {
 
 class PmergeMe {
 	private:
+		static const int jacobsthalNumber[33];
+
 		PmergeMe();
 		PmergeMe(const PmergeMe& ref);
 		virtual ~PmergeMe();
@@ -50,7 +52,6 @@ class PmergeMe {
 		static std::string toString(const int* arr, size_t size);
 		static std::string toString(const std::list<int> &lst);
 		static std::string toString(const std::deque<int> &deque);
-		static int jacobsthalNumber(int n);
 
 	public:
 		static void pmergeMe(int argc, char* argv[]);
