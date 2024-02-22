@@ -103,8 +103,15 @@ void BitcoinExchange::exchangeOneLine(
 
 	std::map<std::string, std::string>::iterator iter;
 	iter = data.find(inputOneLine.at(0));
-	if (iter == data.end())
-		--iter = data.upper_bound(inputOneLine.at(0));
+	if (iter == data.end()) {
+		iter = data.lower_bound(inputOneLine.at(0));
+		if (iter == data.begin()) {
+			std::stringstream errorMessageStream;
+			errorMessageStream << "Bad input => " << inputOneLine.at(0);
+			throw std::runtime_error(errorMessageStream.str());
+		}
+		iter-- = data.upper_bound(inputOneLine.at(0));
+	}
 
 	double rate = strtod(iter->second.c_str(), &tmp);
 	double value = strtod(inputOneLine.at(1).c_str(), &tmp) * rate;
@@ -197,7 +204,7 @@ void BitcoinExchange::validDate(const int year, const int month, const int day) 
 		throw std::runtime_error("The month should be 1 ~ 12.");
 
 	if (month == 2) {
-		if (year % 4 == 0) {
+		if (year % 4 == 0 && year % 400 != 0) {
 			if (day > 29)
 				throw std::runtime_error("February of a leap year cannot exceed 29 days.");
 		} else {

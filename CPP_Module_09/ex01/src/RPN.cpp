@@ -16,13 +16,15 @@ void RPN::active(std::string expression) {
 void RPN::calculate(std::string expression) {
 	std::stack<int> st;
 
-	for (size_t idx = 0; idx < expression.length(); idx += 2) {
+	for (size_t idx = 0; idx < expression.length(); idx++) {
 		char c = expression[idx];
 
-		if (c >= '0' && c <= '9') {
+		if (idx % 2 == 1) {
+			if (c != ' ') { throw std::runtime_error("Error"); }
+		} else if (c >= '0' && c <= '9') {
 			st.push(c - '0');
 		} else {
-			if (st.size() < 1) { throw std::runtime_error("Error: expression error"); }
+			if (st.size() < 2) { throw std::runtime_error("Error: expression error"); }
 		
 			int b = st.top();
 			st.pop();
